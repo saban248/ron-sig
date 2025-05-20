@@ -7,6 +7,7 @@ class ServerMsg(Enum):
 
     access_denied           = "access denied", 1
     complete                = "process completed successfully", 2
+    login_failed            = "Login failed user/password", 3
 
     @property
     def code(self):
@@ -26,7 +27,7 @@ class ServerMsg(Enum):
 
 
 class SJson:
-    msg_json = {"success":None, "title":None, "notice":None}
+    msg_json = {"success":None, "title":None, "notice":None, "code":0}
 
     @staticmethod
     def error(error_content:Union[str, int,ServerMsg]):
@@ -48,11 +49,12 @@ class SJson:
     def __set_notice(msg:dict, notice:Union[str, int,ServerMsg]):
         if isinstance(notice, str):
             msg["notice"] = notice
+            msg["code"] = -1
         elif isinstance(notice, int):
             msg["notice"] = ServerMsg.get(notice).msg
+            msg["code"] = notice
         else:
             msg["notice"] = notice.msg
+            msg["code"] = notice.code
 
 
-
-print(SJson.success(22))

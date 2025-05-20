@@ -1,0 +1,32 @@
+
+
+.tab-menu-home{
+    margin-top: 2em;
+    margin-right: 10%;
+    margin-left: 10%;
+    width: auto;
+    display: flex;
+    justify-content:right;
+    column-gap: 1.75em;
+    padding: 10px;
+    border-bottom: 1px solid #b8b8b8;
+}
+
+.btn-t-home{
+    width: auto!important;
+    padding: 10px;
+    font-weight: light;
+    box-shadow: 0 0 11px #706e6e;
+}
+.btn-new-client{
+    animation: shadow-circle 2s infinite;
+}
+.btn-theme, .btn-refersh{
+    background: #17323a !important;
+}
+.btn-t-home > i{
+    border-left: 2px solid #ded5d5;
+    padding-left: 10px;
+    margin-left: 10px;
+    font-size: large;
+}

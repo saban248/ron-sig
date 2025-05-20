@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="static/style/login.css">
+    <link rel="stylesheet" href="static/style/general.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+     <!-- LOADING & POPUP -->
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+    </div>
+    <div class="popup-overlay" id="popup">
+        <div class="popup-box">
+            <h2 id="popup-title">Title</h2>
+                <p id="popup-message">Message</p>
+            <button onclick="popup(0)">OK</button>
+        </div>
+    </div>
+
+    <div class="login">
+        <div class="login-head">
+            <i class="fas fa-user-circle"></i>
+            <p>כניסה למערכת</p>
+        </div>
+        <form class="login-form" id="loginform" onsubmit="login(event)">
+            <div class="box-input">
+                <div class="box-label">
+                    <i class="fa-solid fa-people-roof"></i>
+                    שם מנהל
+                </div>
+                <div class="user-input">
+                    <input type="text" id="user" class="general-input login-input" placeholder="שם מנהל..." required>
+                </div>
+            </div>
+            <div class="box-input">
+                <div class="box-label">
+                    <i class="fa-solid fa-house-lock"></i>
+                    סיסמת מנהל
+                </div>
+                <div class="user-input">
+                    <input type="password" id="password" class="general-input login-input" placeholder="סיסמה..." required>
+                </div>
+            </div>
+            <div class="box-button">
+                <button type="button" onclick="login()" class="general-button login-button">
+                    <p>היכנס</p>
+                </button>
+            </div>
+        </form>
+        <div id="message"></div>
+        <span id="n0nce" style="display:none;">{{ nonce }}</span>
+    </div>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/inputmask/dist/jquery.inputmask.min.js"></script>
+
+<script src="static/js/general.js"> </script>
+<script src="static/js/login.js"> </script>
+<script src="static/js/consts.js"> </script>
+
+
+</html>

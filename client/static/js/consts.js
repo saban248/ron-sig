@@ -1,0 +1,6 @@
+
+
+const RouteApi = {
+    auth: "/auth"
+
+}

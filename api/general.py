@@ -1,4 +1,6 @@
+import os.path
 from copy import deepcopy
+from enum import Enum
 
 from flask import Request
 
@@ -20,3 +22,12 @@ def get_dictionary_http(req:Request) -> dict:
 
     # else return empty dictionary
     return dict()
+
+
+class Pages(Enum):
+    login = "login.html"
+    home = "home.html"
+
+    @property
+    def val(self):
+        return super().value
