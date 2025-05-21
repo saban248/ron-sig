@@ -4,6 +4,7 @@ from datetime import timedelta
 from enum import Enum
 from flask import Flask
 from flask_cors import CORS
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -18,3 +19,4 @@ ron_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # // default
 ron_app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
 ron_app.secret_key = binascii.hexlify(os.urandom(8)).decode()
 ron_db = SQLAlchemy(ron_app)
+migrate = Migrate(ron_app, ron_db)

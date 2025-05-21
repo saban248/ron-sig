@@ -8,6 +8,8 @@ class ServerMsg(Enum):
     access_denied           = "access denied", 1
     complete                = "process completed successfully", 2
     login_failed            = "Login failed user/password", 3
+    add_client_failed       = "Customer addition failed", 4
+    user_exist              = "This user already exist", 5
 
     @property
     def code(self):

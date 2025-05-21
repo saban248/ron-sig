@@ -51,8 +51,10 @@ function select_tab(tab_index){
     document.getElementById("tab"+index).classList.add(_clist);
     // set html content
     loadTabContent(index)
+    showMenuTabs()
     // update cache
     ManagerCache.setTab(index);
+
 }
 
 function loadTabContent(tab_index){
@@ -65,11 +67,27 @@ function loadTabContent(tab_index){
 }
 
 
+function showMenuTabs(mode=undefined){
+    if (mode !=undefined){
+        document.getElementById("menutabs").classList.add("show");
+    }else{
+        document.getElementById("menutabs").classList.remove("show");
+    }
+
+}
 
 const CacheData = {
     exist:true,
     current_tab: 0
 
+}
+
+const NewClientData = {
+    name:"",
+    phone:"",
+    cid:"",
+    email:"",
+    address:"",
 }
 
 class ManagerCache{
@@ -93,8 +111,51 @@ class ManagerCache{
     static exist(){
         return Boolean(localStorage.getItem("exist"));
     }
+
+    static newClient(data=undefined){
+        let copy = !data?{...NewClientData}:data
+        localStorage.setItem("newClient", JSON.stringify(copy))
+    }
+    /**
+     * 
+     * @returns NewClientData
+     */
+    static newClientExist(){
+        const client = localStorage.getItem("newClient")
+        if (!client)return null
+        return JSON.parse(client)
+    }
+
+    static addStepClient(key, value){
+        let cache = localStorage.getItem("newClient")
+        if (!cache)return
+        let json = JSON.parse(cache)
+        json[key] = value
+        ManagerCache.newClient(json);
+
+    }
+
+    static deleteNewClient(){
+        if (!ManagerCache.newClientExist())return
+
+        localStorage.removeItem("newClient");
+    }
 }
 
+
+function isValidIsraeliID(id) {
+  if (!/^\d{9}$/.test(id)) return false;
+
+  const digits = id.split("").map(Number);
+
+  const sum = digits.reduce((acc, digit, i) => {
+    let val = digit * (i % 2 === 0 ? 1 : 2);
+    if (val > 9) val -= 9;
+    return acc + val;
+  }, 0);
+
+  return sum % 10 === 0;
+}
 
 ManagerCache.create_cache()
 

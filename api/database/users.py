@@ -1,3 +1,5 @@
+import secrets
+
 from api.ptc import ron_db
 
 
@@ -48,3 +50,46 @@ class ApiManager:
     def login(name, password):
         return Manager.query.filter_by(name=name, password=password).first()
 
+
+
+class Client(ron_db.Model):
+    __tablename__ = "Client"
+    xid = ron_db.Column(ron_db.Integer, primary_key=True)
+    cid = ron_db.Column(ron_db.String, nullable=False)
+    phone = ron_db.Column(ron_db.String, nullable=False)
+    fullname = ron_db.Column(ron_db.String, nullable=False)
+    identify = ron_db.Column(ron_db.String, nullable=False)
+    address = ron_db.Column(ron_db.String, nullable=True)
+    email = ron_db.Column(ron_db.String, nullable=True)
+
+
+
+class ApiClient:
+
+    @staticmethod
+    def add_client(phone:str, fullname:str, email:str, address:str, identify:str, ) -> bool:
+        if ApiClient.exist(phone, identify):return False
+
+        client = Client()
+        client.cid = secrets.token_hex(16)
+        client.phone = phone
+        client.fullname = fullname
+        client.email = email
+        client.address = address
+        client.identify = identify
+        ron_db.session.add(client)
+        ron_db.session.commit()
+        return True
+
+    @staticmethod
+    def remove_client(phone:str, cid:str):
+        client = ApiClient.exist(phone, cid=cid)
+        if not client:return False
+
+        ron_db.session.delete(client)
+        ron_db.session.commit()
+        return True
+
+    @staticmethod
+    def exist(phone:str, identify:str, **kwargs):
+        return Client.query.filter_by(phone=phone, **kwargs).first()

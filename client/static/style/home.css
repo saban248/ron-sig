@@ -15,6 +15,7 @@ body {
     color: white;
 }
 .header .logo {
+
     font-size: 1.5rem;
     font-weight: bold;
     color: rgb(65, 165, 222);
@@ -66,10 +67,31 @@ body {
     display: none;
     font-size: 1.4rem;
     cursor: pointer;
+    transform: scale(1.4);
 }
 
 /* Mobile */
 @media (max-width: 768px) {
+    .header-menu {
+        display: none;
+        flex-direction: column;
+        background: #222;
+        width: 100%;
+        border-top: 1px solid #444444;
+        position: absolute;
+        top: 50px;
+        left: 0;
+    }
+    .menu-button {
+        display: block;
+    }
+
+    .header-menu.show {
+        display: flex;
+    }
+    .header{
+        justify-content: space-between;
+    }
     .header-menu {
     display: none;
     }
@@ -77,4 +99,5 @@ body {
     .menu-button {
     display: block;
     }
+
 }

@@ -11,8 +11,20 @@
 
 </head>
 <body>
+         <!-- LOADING & POPUP -->
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+    </div>
+    <div class="popup-overlay" id="popup">
+        <div class="popup-box">
+            <h2 id="popup-title">Title</h2>
+                <p id="popup-message">Message</p>
+            <button onclick="popup(0)">OK</button>
+        </div>
+    </div>
+    
     <div class="header">
-        <div class="header-menu">
+        <div class="header-menu" id="menutabs">
             <a  onclick="select_tab(0)" id="tab0" >
                 <i class="fa-solid fa-house"></i>
                 ראשי
@@ -27,7 +39,7 @@
             </a>
         </div>
         <div class="menu-button">
-            <i class="fa-solid fa-bars"></i>
+            <i onclick="showMenuTabs(1)" class="fa-solid fa-bars"></i>
         </div>
         <div class="logo">רוני הגברות</div>
     </div>
@@ -46,5 +58,6 @@
 <script src="static/js/general.js"> </script>
 <script src="static/js/home.js"> </script>
 <script src="static/js/consts.js"> </script>
+<script src="static/js/t_home.js"> </script>
 
 </html>
