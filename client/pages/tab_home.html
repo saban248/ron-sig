@@ -1,0 +1,135 @@
+
+
+<div class="tab-menu-home">
+    <div class="menu-item">
+        <button type="button" class="general-button btn-t-home btn-new-client" onclick="startNewClient()">
+            <i class="fa-solid fa-person-circle-plus"></i>
+            <span>לקוח חדש</span>
+        </button>
+    </div>
+    <div class="menu-item">
+        <button type="button" class="general-button btn-t-home btn-theme">
+            <i class="fa-solid fa-list-ol"></i>
+            <span>תצוגה</span>
+        </button>
+    </div>
+    <div class="menu-item">
+        <button type="button" class="general-button btn-t-home btn-refersh">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <span>עדכון</span>
+        </button>
+    </div>
+    <div class="sidebar" id="newclient">
+        <div class="sidebar-title">
+            <i class="fa-solid fa-circle-xmark" onclick="cancelNewClient()"></i>
+            <span>לקוח חדש</span>
+        </div>
+        <div class="sidebar-items" id="newclient_items">
+            <!-- item1-->
+            <div class="sidebar-item" id="item1">
+                <div class="item-title">
+                    <i class="fa-regular fa-square" id="iconstep1" onclick="tuggleSidebarItem(1)"></i>    
+                    <span>שם לקוח</span>
+                </div>
+                <div class="item-inpus show" id="step1">
+                    <div class="inp-step">
+                        <label class="label-inp">
+                            <i class="fa-solid fa-user"></i>
+                            שם מלא של הלקוח
+                        </label>
+                        <input type="text" id="cname" placeholder="..." class="general-input input-step" required oninput="completeStep(1)">
+                    </div>
+                    <button type="button" class="general-button item-button-step" onclick="showNextStep(1)">
+                        <span>לשלב הבא</span>
+                    </button>
+                </div>
+            </div>
+            <!--item2-->
+            <div class="sidebar-item" id="item2">
+                <div class="item-title">
+                    <i class="fa-regular fa-square" id="iconstep2" onclick="tuggleSidebarItem(2)"></i>    
+                    <span>מספר פאלפון</span>
+                </div>
+                <div class="item-inpus show" id="step2">
+                    <div class="inp-step">
+                        <label class="label-inp">
+                            <i class="fa-solid fa-square-phone"></i>
+                            פאלפון
+                        </label>
+                        <input type="tel" id="cphone" placeholder="..." class="general-input input-step" required oninput="completeStep(2)">
+                    </div>
+                    <button type="button" class="general-button item-button-step" onclick="showNextStep(2)">
+                        <span>לשלב הבא</span>
+                    </button>
+                </div>
+            </div>
+            <!--item3-->
+            <div class="sidebar-item" id="item3">
+                <div class="item-title">
+                    <i class="fa-regular fa-square" id="iconstep3" onclick="tuggleSidebarItem(3)"></i>    
+                    <span>תעודת זהות</span>
+                </div>
+                <div class="item-inpus show" id="step3">
+                    <div class="inp-step">
+                        <label class="label-inp">
+                            <i class="fa-solid fa-id-card"></i>
+                            ת.ז
+                        </label>
+                        <input type="tel" id="cid" placeholder="..." class="general-input input-step" required oninput="completeStep(3)">
+                    </div>
+                    <button type="button" class="general-button item-button-step" onclick="showNextStep(3)">
+                        <span>לשלב הבא</span>
+                    </button>
+                </div>
+            </div>
+            <!--item4-->
+            <div class="sidebar-item" id="item4">
+                <div class="item-title">
+                    <i class="fa-regular fa-square" id="iconstep4" onclick="tuggleSidebarItem(4)"></i>    
+                    <span>כתובת הלקוח (אופציונלי)</span>
+                </div>
+                <div class="item-inpus show" id="step4">
+                    <div class="inp-step">
+                        <label class="label-inp">
+                            <i class="fa-solid fa-house-user"></i>
+                            כתובת בית
+                        </label>
+                        <input type="text" id="caddress" placeholder="..." class="general-input input-step" required oninput="completeStep(4)">
+                    </div>
+                    <button type="button" class="general-button item-button-step" onclick="showNextStep(4)">
+                        <span>לשלב הבא</span>
+                    </button>
+                </div>
+            </div>
+            <div class="sidebar-item" id="item5">
+                <div class="item-title">
+                    <i class="fa-regular fa-square" id="iconstep5" onclick="tuggleSidebarItem(5)"></i>    
+                    <span> כתובת מייל (אופציונלי)</span>
+                </div>
+                <div class="item-inpus show" id="step5">
+                    <div class="inp-step">
+                        <label class="label-inp">
+                            <i class="fa-solid fa-at"></i>
+                            כתובת מייל
+                        </label>
+                        <input type="text" id="cemail" placeholder="..." class="general-input input-step" required oninput="completeStep(5)">
+                    </div>
+                    <button type="button" class="general-button item-button-step" onclick="showNextStep(5)">
+                        <span>לשלב הבא</span>
+                    </button>
+                </div>
+            </div>
+            <div class="addclient" id="addclient">
+                <button type="button" class="general-button btn-add-client" onclick="addNewClient()">
+                    <span>הוסף לקוח</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="tab-list-home">
+        <div class="main-client">
+
+        </div>
+    </div>
+    
+</div>
