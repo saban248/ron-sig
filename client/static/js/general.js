@@ -173,8 +173,9 @@ function toggleSearch(search_id){
 }
 
 
-function toggleGeneralMenu(event){
+function toggleGeneralMenu(event, title){
     event.stopPropagation(); 
+    document.getElementById('mtitle').textContent = title;
     const menu = document.getElementById("generalmenu");
 
     const trigger = event.currentTarget;
