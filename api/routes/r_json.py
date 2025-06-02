@@ -6,7 +6,7 @@ from api.database.users import ApiManager, ApiClient
 from api.general import get_dictionary_http
 from api.msgs import ServerMsg, SJson
 from api.ptc import ron_app
-from api.res_struct import ResAuth, ResAddClient
+from api.res_struct import ReqAuth, ReqAddClient, ResListClients
 from api.routes.ptc import RouteApi, ShortSession
 
 
@@ -14,7 +14,7 @@ from api.routes.ptc import RouteApi, ShortSession
 def auth():
     breq = get_dictionary_http(request)
 
-    res = ResAuth()
+    res = ReqAuth()
     if not res.build(breq):
         return SJson.error(ServerMsg.access_denied)
     if not ApiManager.login(res.user, res.password):
@@ -29,7 +29,7 @@ def auth():
 @ron_app.route(RouteApi.add_client.path, methods=RouteApi.add_client.methods)
 def add_client():
     breq = get_dictionary_http(request)
-    res = ResAddClient()
+    res = ReqAddClient()
     if not ShortSession.is_admin(session):
         return SJson.error(ServerMsg.access_denied)
     if not res.build(breq):
@@ -40,3 +40,13 @@ def add_client():
 
     ApiClient.add_client(res.phone, res.name, res.email, res.address, res.identify)
     return SJson.success(ServerMsg.complete)
+
+
+@ron_app.route(RouteApi.list_clients.path, methods=RouteApi.list_clients.methods)
+def list_clients():
+    breq = get_dictionary_http(request)
+    res = ResListClients()
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    return SJson.success(ServerMsg.complete, clients=ApiClient.get_clients())

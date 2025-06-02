@@ -93,3 +93,14 @@ class ApiClient:
     @staticmethod
     def exist(phone:str, identify:str, **kwargs):
         return Client.query.filter_by(phone=phone, **kwargs).first()
+
+    @staticmethod
+    def get_clients(**kwargs):
+        _client = []
+        for client in Client.query.filter_by(**kwargs):
+            __data__ = client.__dict__
+            del __data__["_sa_instance_state"]
+            _client.append(client.__dict__)
+
+        return _client
+

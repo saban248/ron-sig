@@ -140,6 +140,14 @@ class ManagerCache{
 
         localStorage.removeItem("newClient");
     }
+
+    static setListClients(clients){
+        localStorage.setItem("list_client", JSON.stringify(clients));
+    }
+    static getListClients(){
+        const clients = localStorage.getItem("list_clients");
+        return clients;
+    }
 }
 
 

@@ -32,16 +32,16 @@ class SJson:
     msg_json = {"success":None, "title":None, "notice":None, "code":0}
 
     @staticmethod
-    def error(error_content:Union[str, int,ServerMsg]):
-        msg = dict(SJson.msg_json)
+    def error(error_content:Union[str, int,ServerMsg], **errors):
+        msg = dict(SJson.msg_json, **errors)
         msg["success"] = False
         msg["title"] = "Error caused"
         SJson.__set_notice(msg, error_content)
         return msg
 
     @staticmethod
-    def success(success_content:Union[str, int, ServerMsg]):
-        msg = dict(SJson.msg_json)
+    def success(success_content:Union[str, int, ServerMsg], **success):
+        msg = dict(SJson.msg_json, **success)
         msg["success"] = True
         msg["title"] = "Done successfully"
         SJson.__set_notice(msg, success_content)

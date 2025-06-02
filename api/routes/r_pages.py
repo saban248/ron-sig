@@ -3,6 +3,7 @@ import os
 
 from flask import session, request, jsonify, render_template, redirect, url_for
 
+from api.database.users import ApiClient
 from api.general import get_dictionary_http, Pages
 from api.msgs import SJson, ServerMsg
 from api.ptc import ron_app
@@ -17,7 +18,7 @@ def main():
         return redirect(url_for("login"))
 
 
-    return render_template(Pages.home.val)
+    return render_template(Pages.home.val, clients=ApiClient.get_clients())
 
 
 @ron_app.route(RoutePages.login.path, methods=RoutePages.login.methods)

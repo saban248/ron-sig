@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class ResAuth:
+class ReqAuth:
     user:str        = None
     password:str    = None
     nonce:str       = None
@@ -21,7 +21,7 @@ class ResAuth:
 
 
 @dataclass
-class ResAddClient:
+class ReqAddClient:
 
     name:str        = None
     phone:str       = None
@@ -46,3 +46,11 @@ class ResAddClient:
 
 
         return True
+
+
+@dataclass
+class ResListClients:
+
+    clients:list        = None
+
+

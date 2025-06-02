@@ -29,6 +29,7 @@ class RouteApi(RoutePagesBase):
 
     auth = ["POST"], 1
     add_client = ["POST"], 2
+    list_clients = ["POST"], 3
 
 
 class ShortSession:

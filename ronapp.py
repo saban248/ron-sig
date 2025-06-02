@@ -7,7 +7,6 @@ from api.ptc import *
 if __name__ == "__main__":
     with ron_app.app_context():
         ron_db.create_all()
-
         # ApiManager.add_manager("roni",
         #                        "Roni Moshvich",
         #                        "QWaszxR0",

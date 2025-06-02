@@ -19,23 +19,33 @@
     </div>
 
     <div class="list-clients">
-        <div class="client-box">
-            <div class="client-header">
-                <span>א</span>
+        {% for client in clients %}
+            <div class="client-box">
+                <div class="client-header">
+                    <span>א</span>
+                </div>
+                <div class="client-body">
+                    <div class="client-view-info">
+
+                        <div class="client-item">
+                            <i><i class="fa-regular fa-user" style="color: #62bcba;"></i></i>
+                            <span>{{ client.fullname }}</span>
+                        </div>
+                        <div class="client-item">
+                            <i><i class="fa-solid fa-phone-flip" style="color: #62bcba;"></i></i>
+                            <span>{{ client.phone }}</span>
+                        </div>
+                        <div class="client-item">
+                            <i><i class="fa-solid fa-id-card" style="color: #62bcba;"></i></i>
+                            <span>{{client.identify}}</span>
+                        </div>
+                    </div>
+                    <div class="client-item menu">
+                        <i class="fa-solid fa-ellipsis" style="color: #62bcba;"></i>
+                    </div>
+                </div>
             </div>
-            <div class="client-view-info">
-            <div class="client-item">
-                <i class="fa-regular fa-user" style="color: #62bcba;"></i>
-                <span>שלמה משה</span>
-            </div>
-            <div class="client-item">
-                <i class="fa-solid fa-phone-flip" style="color: #62bcba;"></i>
-                <span>0585005617</span>
-            </div>
-            <div class="client-item">
-                <i class="fa-solid fa-id-card" style="color: #62bcba;"></i>
-                <span>258963147</span>
-            </div>
-        </div>
+        {% endfor %}
+
     </div>
 </div>

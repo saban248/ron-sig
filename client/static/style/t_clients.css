@@ -14,6 +14,7 @@
     border-radius: 5px;
     box-shadow: 0 0 11px #bababa5d;
     column-gap: 10px;
+    padding: 10px;
 }
 .client-header{
     font-size: 2em;
@@ -22,23 +23,52 @@
     border-left: 1px solid #bababa5d;
     margin: 10px 0px;
 }
+.client-body{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
 .client-item{
     padding: 5px;
     font-size: 0.9em;
     display: grid;
     grid-template-rows: 1fr 1fr;
+    row-gap: 10px;
 
 }
-.client-item > i{
-    font-size: 80%;
-    padding: 0;
+.client-view-info{
+    display: flex;
+    column-gap: 2em;
+}
+.client-item > i>i{
+    background: rgb(19, 56, 59);
+    border-radius: 5px;
+    padding: 5px;
     margin: 0;
     
 }
 .client-item > span{
-    opacity: 0.8;
+    opacity: 0.6;
+    text-decoration: underline dotted rgb(31, 44, 45);
 }
 
+.client-item.menu{
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #bababa5d;
+}
+.client-item.menu > i{
+    font-size: large;
+    border-radius: 6px;
+    background: rgb(19, 56, 59);
+    padding: 10px;
+
+}
+.client-item.menu > i:hover,
+.client-item.menu > i:active{
+    box-shadow: 0 0 11px #9191915d;
+    cursor: pointer;
+}
 
 
 /* Mobile */
@@ -53,6 +83,11 @@
     }
     .client-header{
         font-size: 1.50em;
+    }
+
+    .client-view-info{
+        display: flex;
+        column-gap: 0px;
     }
 
 

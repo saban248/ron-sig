@@ -4,7 +4,8 @@ const idRegex = /^\d{9}$/;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RouteApi = {
     auth: "/auth",
-    addClient: "/add_client"
+    addClient: "/add_client",
+    ListClients:"/list_clients"
 
 }
 
