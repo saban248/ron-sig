@@ -173,6 +173,33 @@ function toggleSearch(search_id){
 }
 
 
+function toggleGeneralMenu(event){
+    event.stopPropagation(); 
+    const menu = document.getElementById("generalmenu");
+
+    const trigger = event.currentTarget;
+    const rect = trigger.getBoundingClientRect();
+    const menuHeight = menu.offsetHeight;
+    console.log(menuHeight)
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+
+    // Decide whether to show below or above
+    if (spaceBelow < menuHeight && spaceAbove > menuHeight) {
+        // Show above
+        menu.style.top = (window.scrollY + rect.top - menuHeight) + "px";
+    } else {
+        // Show below
+        menu.style.top = (window.scrollY + rect.bottom) + "px";
+    }
+
+    menu.style.left = (window.scrollX + rect.left) + "px";
+    menu.classList.toggle("menu-visible");
+}
+
+window.addEventListener("click", () => {
+  document.getElementById("generalmenu").classList.remove("menu-visible");
+});
 
 
 

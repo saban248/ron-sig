@@ -22,7 +22,7 @@
         {% for client in clients %}
             <div class="client-box">
                 <div class="client-header">
-                    <span>א</span>
+                    <span>{{get_first_word_fullname(client.fullname)}}</span>
                 </div>
                 <div class="client-body">
                     <div class="client-view-info">
@@ -34,14 +34,29 @@
                         <div class="client-item">
                             <i><i class="fa-solid fa-phone-flip" style="color: #62bcba;"></i></i>
                             <span>{{ client.phone }}</span>
-                        </div>
-                        <div class="client-item">
+                        </div> 
+                        <div class="client-item no-mobile">
                             <i><i class="fa-solid fa-id-card" style="color: #62bcba;"></i></i>
                             <span>{{client.identify}}</span>
                         </div>
                     </div>
-                    <div class="client-item menu">
+                    <div class="client-item menu" onclick="toggleGeneralMenu(event)">
                         <i class="fa-solid fa-ellipsis" style="color: #62bcba;"></i>
+                    </div>
+                    <div id="generalmenu" class="general-menu">
+                        <div class="general-menu-item">
+                            <i class="fa-solid fa-square-plus" style="color: #50cac8;"></i>
+                            <span>השכרת ציוד</span>
+                        </div>
+                        <div class="general-menu-item">
+                            <i class="fa-solid fa-id-card" style="color: #62bcba;"></i>
+                            <span>פרטי לקוח</span>
+                        </div>
+                        <div class="menu-seperate"></div>
+                        <div class="general-menu-item">
+                            <i class="fa-solid fa-trash" style="color: #d64f37;"></i>
+                            <span>מחיקה</span>
+                        </div>
                     </div>
                 </div>
             </div>

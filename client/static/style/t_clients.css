@@ -6,6 +6,9 @@
     margin-right: 10%;
     margin-left: 10%;
     width: auto;
+    display: flex;
+    row-gap: 10px;
+    flex-direction: column;
 }
 
 
@@ -15,6 +18,7 @@
     box-shadow: 0 0 11px #bababa5d;
     column-gap: 10px;
     padding: 10px;
+    align-items: center;
 }
 .client-header{
     font-size: 2em;
@@ -86,8 +90,18 @@
     }
 
     .client-view-info{
-        display: flex;
-        column-gap: 0px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 15px;
+        flex:1;
+    }
+
+    .client-item.menu{
+        border-right: none;
+    }
+    .client-item.menu > i{
+        font-size:medium;
+        background: transparent;
     }
 
 
