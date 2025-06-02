@@ -60,9 +60,9 @@ function select_tab(tab_index){
 function loadTabContent(tab_index){
     const old_tab_content = ManagerCache.currentTab()
     const _tcid = "tcontent"
-    console.log(_tcid+old_tab_content)
-    document.getElementById(_tcid+old_tab_content).hidden = true;
-    document.getElementById(_tcid+tab_index).hidden = false;
+
+    document.getElementById(_tcid+old_tab_content).style.display = "none";
+    document.getElementById(_tcid+tab_index).style.display = "block";
     
 }
 
@@ -156,6 +156,33 @@ function isValidIsraeliID(id) {
 
   return sum % 10 === 0;
 }
+
+
+
+function toggleSearch(search_id){
+    document.getElementById(search_id).classList.toggle("search-input-closed")
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ManagerCache.create_cache()
 

@@ -38,6 +38,9 @@ body {
     cursor: pointer;
 }
 
+.tab_at_home{
+    display: none;
+}
 .tab-selected{
     color: cyan !important;
 }
