@@ -90,6 +90,12 @@ const NewClientData = {
     address:"",
 }
 
+const NewClientRentData = {
+    address: "",
+    time_start:"",
+    time_end:""
+}
+
 class ManagerCache{
 
     static create_cache(){
@@ -139,6 +145,28 @@ class ManagerCache{
         if (!ManagerCache.newClientExist())return
 
         localStorage.removeItem("newClient");
+    }
+    static newRent(data=undefined){       
+        let copy = !data?{...NewClientRentData}:data
+        localStorage.setItem("newRent", JSON.stringify(copy))
+    }
+    static newRentExist(){
+        const rent = localStorage.getItem("newRent")
+        if (!rent)return null
+        return JSON.parse(rent)
+    }
+    static addStepRent(key, value){
+        let cache = ManagerCache.newRentExist()
+        if (!cache)return
+        let json = JSON.parse(cache)
+        json[key] = value
+        ManagerCache.newRent(json);
+
+    }
+    static deleteNewRent(){
+        if (!ManagerCache.newRentExist())return
+
+        localStorage.removeItem("newRent");
     }
 
     static setListClients(clients){

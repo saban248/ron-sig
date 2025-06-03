@@ -4,7 +4,7 @@ function startNewClient(){
 
     const sidebar = document.getElementById('newclient');
     sidebar.classList.add('show');
-    showNextStep(NewClientSteps.step1.code-1);
+    NewClientShowNextStep(NewClientSteps.step1.code-1);
     // cache
     const client = ManagerCache.newClientExist()
     if (client){
@@ -15,7 +15,7 @@ function startNewClient(){
         document.getElementById("cemail").value = client.email;
         const checkAll = () =>{
             for (const [key, value] of Object.entries(NewClientSteps)){
-                value.code != 6?completeStep(value.code):null
+                value.code != 6?NewClientCompleteStep(value.code):null
             }
         }
         setTimeout(checkAll, 500)
@@ -53,7 +53,7 @@ function addNewClient(){
 }
 
 
-function showNextStep(index){
+function NewClientShowNextStep(index){
     
     document.getElementById("step"+index)?.classList.remove("show");
     document.getElementById("item"+(index+1))?.classList.add("show");
@@ -69,7 +69,7 @@ function tuggleSidebarItem(index){
     document.getElementById("step"+index).classList.toggle("show");
 }
 
-function completeStep(step){
+function NewClientCompleteStep(step){
     const icon = document.getElementById("iconstep"+step);
     let valid = false
     let v = "Unknown"

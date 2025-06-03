@@ -51,7 +51,7 @@
             <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
                 <span id="mtitle" style="opacity: 0.6;"></span>
             </div>
-            <div class="general-menu-item">
+            <div class="general-menu-item" onclick="startRentEquipment()">
                 <i class="fa-solid fa-square-plus" style="color: #50cac8;"></i>
                 <span>השכרת ציוד</span>
             </div>
@@ -72,6 +72,33 @@
             <div class="general-menu-item">
                 <i class="fa-solid fa-trash" style="color: #d64f37;"></i>
                 <span>מחיקה</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sidebar" id="newrent">
+    <div class="sidebar-title">
+        <i class="fa-solid fa-circle-xmark" onclick="cancelNewRent()"></i>
+        <span>השכרה חדשה</span>
+    </div>
+    <div class="sidebar-items" id="newclient_items">
+        <div class="sidebar-item" id="nritem1">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="nriconstep1" onclick="toggleSidebarItem(1)"></i>    
+                <span>כתובת האירוע</span>
+            </div>
+            <div class="item-inpus show" id="nrstep1">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        כתובת האירוע (אופציונלי)
+                    </label>
+                    <input type="text" id="raddress" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(1)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewRentShowNextStep(1)">
+                    <span>לשלב הבא</span>
+                </button>
             </div>
         </div>
     </div>

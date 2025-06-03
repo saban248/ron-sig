@@ -19,3 +19,8 @@ const NewClientSteps = {
     step5: {title:"כתובת חשבון מייל", code:5},
     step6: {code:6}
 }
+
+const NewRentSteps = {
+    step1: {title:"כתובת האירוע", code:1},
+    step2: {title:"זמן ההשכרה", code:2}
+}
