@@ -1,8 +1,7 @@
 
-
-
 function getAllClients(){
     var clients = ManagerCache.getListClients();
+
     if (clients)return clients;
 
     on_success = (res) =>{
@@ -25,24 +24,30 @@ function startRentEquipment(){
     sidebar.classList.add('show');
     NewRentShowNextStep(NewRentSteps.step1.code-1);
     // cache
-    return
-    const client = ManagerCache.newClientExist()
-    if (client){
-        document.getElementById("cname").value = client.name;
-        document.getElementById("cphone").value = client.phone;
-        document.getElementById("cid").value = client.cid;
-        document.getElementById("caddress").value = client.address;
-        document.getElementById("cemail").value = client.email;
+    const rent = ManagerCache.newRentExist()
+    if (rent){
+        document.getElementById("raddress").value = rent.address;
         const checkAll = () =>{
-            for (const [key, value] of Object.entries(NewClientSteps)){
-                value.code != 6?completeStep(value.code):null
+            for (const [key, value] of Object.entries(NewRentSteps)){
+                value.code != NewRentSteps.done.code?NewRentCompleteStep(value.code):null
             }
         }
         setTimeout(checkAll, 500)
     }
     else{
-        ManagerCache.newClient()
+        ManagerCache.newRent()
     }
+
+    flatpickr("#rstarttime", {
+      enableTime: true,
+      dateFormat: "Y.m.d H:i",
+      time_24hr: true
+    });
+    flatpickr("#rendtime", {
+      enableTime: true,
+      dateFormat: "Y.m.d H:i",
+      time_24hr: true
+    });
 }
 
 function NewRentShowNextStep(index){
@@ -70,7 +75,6 @@ function cancelNewRent(){
     
 }
 
-
 function NewRentCompleteStep(step){
     const icon = document.getElementById("nriconstep"+step);
     var valid= true;
@@ -82,7 +86,7 @@ function NewRentCompleteStep(step){
         valid = v.length>5
     }
     if (valid){
-        ManagerCache.addStepRent()
+        ManagerCache.addStepRent(key, v)
         icon.classList.add("done");
         icon.classList.add("fa-square-check")
         icon.classList.remove("fa-square"); 
@@ -94,8 +98,34 @@ function NewRentCompleteStep(step){
 }
 
 
-
-
-function ShowClientDetails(){
-
+function toggleClienMenu(event, title, client_id){
+    toggleGeneralMenu(event, title);
+    CLIENT_INFO_INDEX = client_id
+    
 }
+
+
+async function showClientDetails(){
+    let clients = ManagerCache.getListClients()
+    if (!clients){popup(1, ErrorCode.cache.msg, ErrorCode.cache.code)}
+
+    const client = clients[CLIENT_INFO_INDEX]
+    const sidebar = document.getElementById('clientinfo');
+    const title = document.getElementById("clientinfoname")
+    title.textContent = client.fullname;
+    if (sidebar.classList.contains("show"))return
+    sidebar.classList.add('show');
+}
+
+
+function closeClientDetails(){
+    const sidebar = document.getElementById("clientinfo");
+    sidebar.classList.remove("show")
+}
+
+
+
+
+/* GLOBAL */
+
+getAllClients()

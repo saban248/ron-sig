@@ -40,7 +40,7 @@
                             <span>{{client.identify}}</span>
                         </div>
                     </div>
-                    <div class="client-item menu" onclick="toggleGeneralMenu(event, '{{client.fullname}}')">
+                    <div class="client-item menu" onclick="toggleClienMenu(event, '{{client.fullname}}', '{{client.xid}}')">
                         <i class="fa-solid fa-ellipsis" style="color: #62bcba;"></i>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 <i class="fa-solid fa-square-plus" style="color: #50cac8;"></i>
                 <span>השכרת ציוד</span>
             </div>
-            <div class="general-menu-item">
+            <div class="general-menu-item" onclick="showClientDetails()">
                 <i class="fa-solid fa-id-card" style="color: #62bcba;"></i>
                 <span>פרטי לקוח</span>
             </div>
@@ -82,7 +82,7 @@
         <i class="fa-solid fa-circle-xmark" onclick="cancelNewRent()"></i>
         <span>השכרה חדשה</span>
     </div>
-    <div class="sidebar-items" id="newclient_items">
+    <div class="sidebar-items" id="newrent_items">
         <div class="sidebar-item" id="nritem1">
             <div class="item-title">
                 <i class="fa-regular fa-square" id="nriconstep1" onclick="toggleSidebarItem(1)"></i>    
@@ -101,5 +101,49 @@
                 </button>
             </div>
         </div>
+        <div class="sidebar-item" id="nritem2">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="nriconstep2" onclick="toggleSidebarItem(2)"></i>    
+                <span>תאריך תחילת השכרה</span>
+            </div>
+            <div class="item-inpus show" id="nrstep2">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        תאריך מלא
+                    </label>
+                    <input type="text" id="rstarttime" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(2)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewRentShowNextStep(2)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="nritem3">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="nriconstep3" onclick="toggleSidebarItem(3)"></i>    
+                <span>תאריך סיום השכרה</span>
+            </div>
+            <div class="item-inpus show" id="nrstep3">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        תאריך מלא
+                    </label>
+                    <input type="text" id="rendtime" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(3)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewRentShowNextStep(3)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="sidebar" id="clientinfo">
+        <div class="sidebar-title">
+        <i class="fa-solid fa-circle-xmark" onclick="closeClientDetails()"></i>
+        <span id="clientinfoname"></span>
+    </div>
+    <div></div>
 </div>

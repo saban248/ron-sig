@@ -1,3 +1,6 @@
+var CLIENT_INFO_INDEX = -1
+
+
 function loading(mode, timeout){
     if (mode == 1){
         document.getElementById('loader-overlay').style.display = 'flex';
@@ -156,11 +159,10 @@ class ManagerCache{
         return JSON.parse(rent)
     }
     static addStepRent(key, value){
-        let cache = ManagerCache.newRentExist()
-        if (!cache)return
-        let json = JSON.parse(cache)
-        json[key] = value
-        ManagerCache.newRent(json);
+        let rent = ManagerCache.newRentExist()
+        if (!rent)return
+        rent[key] = value
+        ManagerCache.newRent(rent);
 
     }
     static deleteNewRent(){
@@ -170,11 +172,11 @@ class ManagerCache{
     }
 
     static setListClients(clients){
-        localStorage.setItem("list_client", JSON.stringify(clients));
+        localStorage.setItem("list_clients", JSON.stringify(clients));
     }
     static getListClients(){
         const clients = localStorage.getItem("list_clients");
-        return clients;
+        return JSON.parse(clients);
     }
 }
 

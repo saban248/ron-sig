@@ -22,5 +22,10 @@ const NewClientSteps = {
 
 const NewRentSteps = {
     step1: {title:"כתובת האירוע", code:1},
-    step2: {title:"זמן ההשכרה", code:2}
+    step2: {title:"זמן ההשכרה", code:2},
+    done:{code:10}
+}
+
+const ErrorCode = {
+    cache:{code:1, msg:"LocalStorage no avalible"}
 }

@@ -48,5 +48,6 @@ def list_clients():
     res = ResListClients()
     if not ShortSession.is_admin(session):
         return SJson.error(ServerMsg.access_denied)
+    sleep(3)
 
     return SJson.success(ServerMsg.complete, clients=ApiClient.get_clients())
