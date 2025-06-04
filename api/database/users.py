@@ -63,7 +63,6 @@ class Client(ron_db.Model):
     email = ron_db.Column(ron_db.String, nullable=True)
 
 
-
 class ApiClient:
 
     @staticmethod
