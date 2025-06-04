@@ -100,7 +100,7 @@ function NewRentCompleteStep(step){
 
 function toggleClienMenu(event, title, client_id){
     toggleGeneralMenu(event, title);
-    CLIENT_INFO_INDEX = client_id
+    CLIENT_INFO_INDEX = parseInt(client_id)-1
     
 }
 
@@ -114,9 +114,16 @@ async function showClientDetails(){
     const title = document.getElementById("clientinfoname")
     const fullname = document.getElementById('ci-fullname')
     const phone = document.getElementById('ci-phone')
+    const identify = document.getElementById('ci-identify')
+    const address = document.getElementById('ci-address')
+    const email = document.getElementById('ci-email')
     title.textContent = client.fullname.split(" ")[0];
     fullname.textContent = client.fullname
     phone.textContent = client.phone;
+    identify.textContent = client.identify;
+    address.textContent = !client.address?"Unknwon":client.address;
+    email.textContent = !client.email?"Unknwon":client.email;
+
     if (sidebar.classList.contains("show"))return
     sidebar.classList.add('show');
 }

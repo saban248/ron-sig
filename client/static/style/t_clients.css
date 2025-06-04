@@ -75,6 +75,34 @@
 }
 
 
+.client-info-items{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    row-gap: 20px;
+
+}
+.client-info-seperator{
+    text-align: center;
+    background:#91919132;
+    margin: 15px 0px;
+}
+.client-info-item{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    border: 1px solid #91919132;
+}
+.client-info-item > *{
+    padding: 10px;
+}
+.client-info-item > i{
+    text-align: center;
+   background: rgb(31, 44, 45);
+   color: #62bcba;
+   transform: scaleY(1.2);
+   box-shadow: 0 0 11px #62bcba8f;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
     .list-clients{
