@@ -112,7 +112,11 @@ async function showClientDetails(){
     const client = clients[CLIENT_INFO_INDEX]
     const sidebar = document.getElementById('clientinfo');
     const title = document.getElementById("clientinfoname")
-    title.textContent = client.fullname;
+    const fullname = document.getElementById('ci-fullname')
+    const phone = document.getElementById('ci-phone')
+    title.textContent = client.fullname.split(" ")[0];
+    fullname.textContent = client.fullname
+    phone.textContent = client.phone;
     if (sidebar.classList.contains("show"))return
     sidebar.classList.add('show');
 }
