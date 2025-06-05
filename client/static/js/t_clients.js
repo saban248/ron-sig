@@ -1,8 +1,8 @@
 
-function getAllClients(){
+function getAllClients(force){
     var clients = ManagerCache.getListClients();
 
-    if (clients)return clients;
+    if (!force && clients)return clients;
 
     on_success = (res) =>{
         if (!res.success){
@@ -100,7 +100,7 @@ function NewRentCompleteStep(step){
 
 function toggleClienMenu(event, title, client_id){
     toggleGeneralMenu(event, title);
-    CLIENT_INFO_INDEX = parseInt(client_id)-1
+    CLIENT_INFO_INDEX = client_id;
     
 }
 
@@ -123,6 +123,31 @@ async function showClientDetails(){
 
     if (sidebar.classList.contains("show"))return
     sidebar.classList.add('show');
+}
+
+
+function searchClient(){
+    const input = document.getElementById('inputsclient')
+    csid = input.value
+    
+    clients = ManagerCache.getListClients();
+    for (const [index, client] of Object.entries(clients)){
+        if ((client.fullname.includes(csid) || 
+            client.phone.includes(csid)    ||
+            client.address.includes(csid)  ||
+            client.identify.includes(csid))){
+                document.getElementById(client.cid).style.display='flex';
+
+        }
+        else{
+            document.getElementById(client.cid).style.display='none';
+        }
+    }
+}
+
+function clearSearchClient(){
+    document.getElementById('inputsclient').value = ''
+    searchClient()
 }
 
 
@@ -152,12 +177,13 @@ function deleteClient(){
         }
         const box = document.getElementById(client.cid)
         box?.classList.add("client-box-deleted")
-        setTimeout(()=>{box?.remove()}, 500)
+        setTimeout(()=>{box?.remove();getAllClients(true)}, 500)
         
     }
     do_api(RouteApi.deleteClient, data, on_success)
+    
 }
 
 /* GLOBAL */
 
-getAllClients()
+getAllClients(true)

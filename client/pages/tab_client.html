@@ -3,16 +3,16 @@
 <div class="tab-clients-home">
     <div class="tab-menu-clients">
         <div class="menu-item">
-            <div class="search-box" ondblclick="toggleSearch(this.id)" id="searchclients">
-                <input type="text" class="search-input search-input-closed" placeholder="חפש..." maxlength="25">
+            <div class="search-box" id="searchclients">
+                <input type="text" id="inputsclient" class="search-input" placeholder="חפש..." maxlength="25" oninput="searchClient()">
                 <button type="button" class="close-search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-circle-xmark" style="font-size:16px;color: #50cac8;" onclick="clearSearchClient()"></i>
                 </button>
             </div>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" id="reloadlistclients">
             <button type="button" class="general-button btn-t-home btn-refersh">
-                <i class="fa-solid fa-arrows-rotate"></i>
+                <i class="fa-solid fa-arrows-rotate" onclick="location.reload()"></i>
                 <span>עדכון</span>
             </button>
         </div>
@@ -40,7 +40,7 @@
                             <span>{{client.identify}}</span>
                         </div>
                     </div>
-                    <div class="client-item menu" onclick="toggleClienMenu(event, '{{client.fullname}}', '{{client.xid}}')">
+                    <div class="client-item menu" onclick="toggleClienMenu(event, '{{client.fullname}}', '{{client.cid}}')">
                         <i class="fa-solid fa-ellipsis" style="color: #62bcba;"></i>
                     </div>
                 </div>

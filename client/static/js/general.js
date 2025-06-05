@@ -183,7 +183,7 @@ class ManagerCache{
 function getCurrentClientIndex(){
     const clients = ManagerCache.getListClients()
     if (!clients){popup(1, ErrorCode.cache.msg, ErrorCode.cache.code)}
-    const client = clients[CLIENT_INFO_INDEX]
+    const client = clients.find(item => item.cid === CLIENT_INFO_INDEX);
     return client
 }
 

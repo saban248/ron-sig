@@ -41,6 +41,7 @@ function addNewClient(){
         }
 
         loading(0)
+        getAllClients(true)
         popup(1, data.title, data.notice);
     }
     const data = ManagerCache.newClientExist();

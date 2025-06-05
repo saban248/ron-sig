@@ -1,5 +1,9 @@
 
-
+input,
+textarea,
+select {
+  font-size: 16px;
+}
 
 .list-clients{
     margin-top: 2em;
@@ -105,6 +109,15 @@
    transform: scaleY(1.2);
    box-shadow: 0 0 11px #62bcba8f;
 }
+
+.search-box-lclient-open{
+    flex: 1;
+}
+.search-box-lclient-close{
+    flex:0;
+}
+
+
 
 @keyframes fadeScaleOut {
   to {
