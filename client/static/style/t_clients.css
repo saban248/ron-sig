@@ -20,6 +20,9 @@
     padding: 10px;
     align-items: center;
 }
+.client-box-deleted{
+    animation: fadeScaleOut 0.4s ease forwards;
+}
 .client-header{
     font-size: 2em;
     width: 50px;
@@ -101,6 +104,13 @@
    color: #62bcba;
    transform: scaleY(1.2);
    box-shadow: 0 0 11px #62bcba8f;
+}
+
+@keyframes fadeScaleOut {
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
 }
 
 /* Mobile */

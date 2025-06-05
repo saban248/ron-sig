@@ -106,10 +106,7 @@ function toggleClienMenu(event, title, client_id){
 
 
 async function showClientDetails(){
-    let clients = ManagerCache.getListClients()
-    if (!clients){popup(1, ErrorCode.cache.msg, ErrorCode.cache.code)}
-
-    const client = clients[CLIENT_INFO_INDEX]
+    let client = getCurrentClientIndex();
     const sidebar = document.getElementById('clientinfo');
     const title = document.getElementById("clientinfoname")
     const fullname = document.getElementById('ci-fullname')
@@ -134,8 +131,32 @@ function closeClientDetails(){
     sidebar.classList.remove("show")
 }
 
+function callClient(){
+    const client = getCurrentClientIndex()
+    window.location.href = "tel:"+client.phone;
+}
 
+function openWhatsApp(){
+    const client = getCurrentClientIndex();
+    window.location.href = "https://wa.me/+972"+client.phone;
+}
 
+function deleteClient(){
+    const client = getCurrentClientIndex()
+    
+    const data = {"cid":client.cid}
+    const on_success = (res)=>{
+        if (!res.success){
+            popup(1, res.title, res.notice)
+            return
+        }
+        const box = document.getElementById(client.cid)
+        box?.classList.add("client-box-deleted")
+        setTimeout(()=>{box?.remove()}, 500)
+        
+    }
+    do_api(RouteApi.deleteClient, data, on_success)
+}
 
 /* GLOBAL */
 

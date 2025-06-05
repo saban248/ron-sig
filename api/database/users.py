@@ -94,12 +94,23 @@ class ApiClient:
         return Client.query.filter_by(phone=phone, **kwargs).first()
 
     @staticmethod
-    def get_clients(**kwargs):
+    def delete_client(cid:str) -> bool:
+        clients = ApiClient.get_clients(True, cid=cid)
+        if not clients:return False
+        ron_db.session.delete(clients[0])
+        ron_db.session.commit()
+        return True
+
+    @staticmethod
+    def get_clients(source:bool = False, **kwargs):
         _client = []
         for client in Client.query.filter_by(**kwargs):
-            __data__ = client.__dict__
-            del __data__["_sa_instance_state"]
-            _client.append(client.__dict__)
+            if not source:
+                __data__ = client.__dict__
+                del __data__["_sa_instance_state"]
+                _client.append(client.__dict__)
+                continue
+            _client.append(client)
 
         return _client
 

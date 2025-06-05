@@ -180,6 +180,13 @@ class ManagerCache{
     }
 }
 
+function getCurrentClientIndex(){
+    const clients = ManagerCache.getListClients()
+    if (!clients){popup(1, ErrorCode.cache.msg, ErrorCode.cache.code)}
+    const client = clients[CLIENT_INFO_INDEX]
+    return client
+}
+
 
 function isValidIsraeliID(id) {
   if (!/^\d{9}$/.test(id)) return false;

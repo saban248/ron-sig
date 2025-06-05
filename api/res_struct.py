@@ -53,4 +53,13 @@ class ResListClients:
 
     clients:list        = None
 
+@dataclass
+class ResDeleteClient:
+    client_id:str       = None
+
+    def build(self, breq:dict):
+        cid = breq.get("cid", str())
+        if cid.__len__()!=32:return False
+        self.client_id = cid
+        return True
 

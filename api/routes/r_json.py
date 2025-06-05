@@ -6,7 +6,7 @@ from api.database.users import ApiManager, ApiClient
 from api.general import get_dictionary_http
 from api.msgs import ServerMsg, SJson
 from api.ptc import ron_app
-from api.res_struct import ReqAuth, ReqAddClient, ResListClients
+from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient
 from api.routes.ptc import RouteApi, ShortSession
 
 
@@ -41,13 +41,27 @@ def add_client():
     ApiClient.add_client(res.phone, res.name, res.email, res.address, res.identify)
     return SJson.success(ServerMsg.complete)
 
-
 @ron_app.route(RouteApi.list_clients.path, methods=RouteApi.list_clients.methods)
 def list_clients():
     breq = get_dictionary_http(request)
     res = ResListClients()
     if not ShortSession.is_admin(session):
         return SJson.error(ServerMsg.access_denied)
-    sleep(3)
 
     return SJson.success(ServerMsg.complete, clients=ApiClient.get_clients())
+
+@ron_app.route(RouteApi.delete_client.path, methods=RouteApi.delete_client.methods)
+def delete_client():
+    breq = get_dictionary_http(request)
+    res = ResDeleteClient()
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    if not res.build(breq):
+        return SJson.error(ServerMsg.input_invalid)
+
+    deleted = ApiClient.delete_client(res.client_id)
+    if not deleted:
+        return SJson.success(ServerMsg.input_invalid)
+
+    return SJson.success(ServerMsg.user_deleted)

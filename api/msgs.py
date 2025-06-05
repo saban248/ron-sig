@@ -10,6 +10,8 @@ class ServerMsg(Enum):
     login_failed            = "Login failed user/password", 3
     add_client_failed       = "Customer addition failed", 4
     user_exist              = "This user already exist", 5
+    input_invalid            = "Input invalid", 6
+    user_deleted            = "User deleted successfully", 7
 
     @property
     def code(self):
@@ -43,7 +45,7 @@ class SJson:
     def success(success_content:Union[str, int, ServerMsg], **success):
         msg = dict(SJson.msg_json, **success)
         msg["success"] = True
-        msg["title"] = "Done successfully"
+        msg["title"] = "Done"
         SJson.__set_notice(msg, success_content)
         return msg
 

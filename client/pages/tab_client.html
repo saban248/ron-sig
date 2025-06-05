@@ -20,7 +20,7 @@
 
     <div class="list-clients">
         {% for client in clients %}
-            <div class="client-box">
+            <div class="client-box" id="{{client.cid}}">
                 <div class="client-header">
                     <span>{{get_first_word_fullname(client.fullname)}}</span>
                 </div>
@@ -60,16 +60,16 @@
                 <span>פרטי לקוח</span>
             </div>
             <div class="menu-seperate"></div>
-            <div class="general-menu-item">
-                <i class="fa-solid fa-phone-flip" style="color: #7dbc62;"></i>
+            <div class="general-menu-item" onclick="callClient()">
+                <i  class="fa-solid fa-phone-flip" style="color: #7dbc62;"></i>
                 <span>חייג</span>
             </div>
-            <div class="general-menu-item">
+            <div class="general-menu-item" onclick="openWhatsApp()">
                 <i class="fa-solid fa-comment-dots" style="color: #59cb6c;"></i>
                 <span>WhatsApp</span>
             </div>
             <div class="menu-seperate"></div>
-            <div class="general-menu-item">
+            <div class="general-menu-item" onclick="deleteClient()">
                 <i class="fa-solid fa-trash" style="color: #d64f37;"></i>
                 <span>מחיקה</span>
             </div>

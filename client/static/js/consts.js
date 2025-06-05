@@ -5,7 +5,8 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RouteApi = {
     auth: "/auth",
     addClient: "/add_client",
-    ListClients:"/list_clients"
+    ListClients:"/list_clients",
+    deleteClient:"/delete_client"
 
 }
 
