@@ -172,7 +172,9 @@ class ManagerCache{
     }
 
     static setListClients(clients){
-        localStorage.setItem("list_clients", JSON.stringify(clients));
+        const data = JSON.stringify(clients)
+        if (!data || data == undefined){return}
+        localStorage.setItem("list_clients", data);
     }
     static getListClients(){
         const clients = localStorage.getItem("list_clients");

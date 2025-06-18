@@ -31,3 +31,20 @@ class Pages(Enum):
     @property
     def val(self):
         return super().value
+
+
+
+def verify_is_image(filepath) -> int:
+    try:
+        with open(filepath, "rb") as f:
+            data = f.read()
+
+        data = data[120::]
+        for i, b in enumerate(data):
+            if not (0 <= b <= 255):
+                return 8
+    except Exception as e:
+        return 8
+
+    return 0
+

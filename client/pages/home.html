@@ -8,9 +8,13 @@
     <link rel="stylesheet" href="static/style/t_home.css">
     <link rel="stylesheet" href="static/style/general.css">
     <link rel="stylesheet" href="static/style/t_clients.css">
+    <link rel="stylesheet" href="static/style/t_equip.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
          <!-- LOADING & POPUP -->
@@ -35,7 +39,11 @@
                 <i class="fa-solid fa-people-group"></i>
                 לקוחות
             </a>
-            <a onclick="select_tab(2)" id="tab2" >
+            <a onclick="select_tab(2)" id="tab2">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                ציודים
+            </a>
+            <a onclick="select_tab(3)" id="tab3" >
                 <i class="fa-solid fa-sliders"></i>
                 הגדרות
             </a>
@@ -52,7 +60,10 @@
         <div class="tab_at_home" id="tcontent1">
             {% include "tab_client.html" %}
         </div>
-        <div class="tab_at_home" id="tcontent2"></div>
+        <div class="tab_at_home" id="tcontent2">
+            {% include "tab_equip.html" %}
+        </div>
+        <div class="tab_at_home" id="tcontent3"></div>
     </div>
 
 </body>
@@ -65,6 +76,7 @@
 <script src="static/js/consts.js"> </script>
 <script src="static/js/t_home.js"> </script>
 <script src="static/js/t_clients.js"> </script>
+<script src="static/js/t_equip.js"> </script>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 

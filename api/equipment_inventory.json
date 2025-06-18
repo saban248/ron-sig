@@ -1,0 +1,369 @@
+[
+  {
+    "category": "מערכות פאסיביות",
+    "items": [
+      {
+        "name": "Turbosound Floodlight",
+        "type": "מערכת שופרית",
+        "count": 3,
+        "crowd": 1800,
+        "company": "Turbosound"
+      },
+      {
+        "name": "Line array TLA-101 + BETA3",
+        "type": "מערכת פרונטלית",
+        "count": 3,
+        "crowd": 1800,
+        "company": "TLA / BETA3"
+      },
+      {
+        "name": "TLA / BNC + BETA3",
+        "type": "מערכת פרונטלית",
+        "count": 1,
+        "crowd": 300,
+        "company": "TLA / BETA3"
+      },
+      {
+        "name": "Turbosound TSE",
+        "type": "מערכת שופרית",
+        "count": 1,
+        "crowd": 150,
+        "company": "Turbosound"
+      }
+    ]
+  },
+  {
+    "category": "רמקולים פאסיביים בודדים",
+    "items": [
+      {
+        "name": "EAW SB250",
+        "type": "סאב דאבל 15\"",
+        "count": 2,
+        "company": "EAW / RCF"
+      },
+      {
+        "name": "Turbosound TMW-212",
+        "type": "טופים/מוניטורים דאבל 12\"",
+        "count": 2,
+        "company": "Turbosound"
+      }
+    ]
+  },
+  {
+    "category": "מערכות אקטיביות",
+    "items": [
+      {
+        "name": "Turbosound IQ-15",
+        "count": 4,
+        "company": "Turbosound"
+      },
+      {
+        "name": "Turbosound NUK118B",
+        "count": 2,
+        "company": "Turbosound"
+      },
+      {
+        "name": "Turbosound Milan-15",
+        "count": 1,
+        "company": "Turbosound"
+      },
+      {
+        "name": "Protech 500A",
+        "count": 4,
+        "company": "Protech"
+      },
+      {
+        "name": "Protech 400A",
+        "count": 2,
+        "company": "Protech"
+      },
+      {
+        "name": "RCF ART-915A",
+        "count": 1,
+        "company": "RCF"
+      },
+      {
+        "name": "Turbosound TFX122M-AN",
+        "count": 1,
+        "company": "Turbosound"
+      },
+      {
+        "name": "Beta3 MU21BA",
+        "count": 4,
+        "company": "Beta3"
+      }
+    ]
+  },
+  {
+    "category": "פלטות",
+    "items": [
+      {
+        "name": "Pioneer XDJ-XZ",
+        "count": 1,
+        "company": "Pioneer"
+      },
+      {
+        "name": "Pioneer XDJ-AZ",
+        "count": 1,
+        "company": "Pioneer"
+      },
+      {
+        "name": "CDJ-100 + DJM-600",
+        "count": 1,
+        "company": "Pioneer"
+      },
+      {
+        "name": "CDJ-350 + DJM-600",
+        "count": 1,
+        "company": "Pioneer"
+      }
+    ]
+  },
+  {
+    "category": "קונטרולרים",
+    "items": [
+      {
+        "name": "NI Traktor S4 Mk1",
+        "count": 1,
+        "company": "Native Instruments"
+      },
+      {
+        "name": "Numark PartyMix2",
+        "count": 1,
+        "company": "Numark"
+      }
+    ]
+  },
+  {
+    "category": "תאורה",
+    "items": [
+      {
+        "name": "Pro Light RGB Movers",
+        "count": 4
+      },
+      {
+        "name": "Mini RGB Movers",
+        "count": 3
+      },
+      {
+        "name": "Laser dual head",
+        "power_watt": 0.5,
+        "count": 1
+      },
+      {
+        "name": "Laser single head",
+        "power_watt": 0.5,
+        "count": 1
+      },
+      {
+        "name": "UV Projectors",
+        "count": "various"
+      },
+      {
+        "name": "RGB Wash Projectors",
+        "count": 4
+      },
+      {
+        "name": "Lighting stand with lasers and RGB washes",
+        "count": 1
+      },
+      {
+        "name": "Waterfall Effect Projector",
+        "count": 1
+      },
+      {
+        "name": "RGB Roboscan",
+        "count": 1
+      },
+      {
+        "name": "LED strings/grids",
+        "count": "multiple"
+      }
+    ]
+  },
+  {
+    "category": "הקרנה",
+    "items": [
+      {
+        "name": "NEC P420x",
+        "type": "מקרן",
+        "lumens": 4200,
+        "count": 1,
+        "company": "NEC"
+      },
+      {
+        "name": "מסך הקרנה",
+        "size_m": "3x4",
+        "type": "מסך קולנוע",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "category": "צליות",
+    "items": [
+      {
+        "name": "צליית רשת בז'",
+        "size_m": "10x15",
+        "area_m2": 150,
+        "count": 1
+      },
+      {
+        "name": "צליית רשת בז'",
+        "size_m": "10x10",
+        "area_m2": 100,
+        "count": 1
+      },
+      {
+        "name": "צליית רשת כחולה",
+        "size_m": "6x6",
+        "area_m2": 36,
+        "count": 1
+      },
+      {
+        "name": "צליית לייקרה זוהרת",
+        "size_m": "11x11",
+        "crowd": 300,
+        "count": 1
+      },
+      {
+        "name": "צליית גשם שמשונית",
+        "size_m": "12x10.5",
+        "area_m2": 120,
+        "count": 1
+      }
+    ]
+  },
+  {
+    "category": "תפאורה",
+    "items": [
+      {
+        "name": "פרונט במה ירח",
+        "count": 3
+      },
+      {
+        "name": "מייצגי String Art",
+        "count": 5,
+        "company": "Psyworks"
+      },
+      {
+        "name": "לייקרות זוהרות",
+        "count": 5,
+        "company": "Psyworks"
+      },
+      {
+        "name": "פטריות תלויות זוהרות",
+        "count": 2
+      },
+      {
+        "name": "בד ינשוף זוהר",
+        "count": 1,
+        "company": "Psyworks"
+      },
+      {
+        "name": "מסיכות שבטיות",
+        "count": 8
+      },
+      {
+        "name": "לייקרות צבעוניות",
+        "count": "multiple"
+      },
+      {
+        "name": "לונגים",
+        "count": "various"
+      },
+      {
+        "name": "במבוקים",
+        "count": "various",
+        "types": [
+          "צרים",
+          "עבים",
+          "עבים מאוד"
+        ]
+      },
+      {
+        "name": "תפאורה טכנואידית/רובוטית",
+        "count": 1
+      },
+      {
+        "name": "תפאורת עצי אשוח",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "category": "מתנפחים",
+    "items": [
+      {
+        "name": "מתנפחים לילדים",
+        "age_range": "3-10",
+        "count": 2,
+        "includes": [
+          "מפוחים"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "גנרטורים",
+    "items": [
+      {
+        "name": "גנרטורים שונים",
+        "range_watt": "800-14000",
+        "types": [
+          "חד פאזי",
+          "תלת פאזי"
+        ],
+        "count": "multiple",
+        "includes": [
+          "כבילה",
+          "לוחות חשמל"
+        ]
+      }
+    ]
+  },
+  {
+    "category": "לוגיסטיקה נוספת",
+    "items": [
+      {
+        "name": "מזגנים ניידים",
+        "purpose": "עמדת DJ או אחר",
+        "count": "multiple"
+      },
+      {
+        "name": "ציוד לבר אקטיבי",
+        "items": [
+          "מקררים",
+          "צידניות",
+          "שולחנות"
+        ],
+        "count": "multiple"
+      }
+    ]
+  },
+  {
+    "category": "עגלות נגררות",
+    "items": [
+      {
+        "name": "עגלה סגורה 750 ק\"ג",
+        "axles": 1,
+        "features": [
+          "מיטה זוגית",
+          "חשמל 12-220V",
+          "מטבח צד",
+          "מקלחת שטח",
+          "שירותים כימיים",
+          "מיכל מים 120 ליטר"
+        ],
+        "count": 1
+      },
+      {
+        "name": "עגלה סגורה 2 טון",
+        "axles": 2,
+        "self_weight_kg": 700,
+        "brakes": true,
+        "count": 1
+      }
+    ]
+  }
+]

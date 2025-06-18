@@ -1,6 +1,6 @@
 from api.routes.r_json import *
 from api.routes.r_pages import *
-from api.routes.jijna_def import *
+from api.routes.jinja_def import *
 from api.ptc import *
 
 

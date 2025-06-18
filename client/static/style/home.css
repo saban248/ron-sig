@@ -3,7 +3,7 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Consolas, sans-serif;
     direction: rtl;
 }
 
@@ -84,6 +84,7 @@ body {
         position: absolute;
         top: 50px;
         left: 0;
+        z-index: 1000;
     }
     .menu-button {
         display: block;

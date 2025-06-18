@@ -5,13 +5,13 @@ from typing import Union
 
 class ServerMsg(Enum):
 
-    access_denied           = "access denied", 1
-    complete                = "process completed successfully", 2
-    login_failed            = "Login failed user/password", 3
-    add_client_failed       = "Customer addition failed", 4
-    user_exist              = "This user already exist", 5
+    access_denied           = "גישה נאסרה", 1
+    complete                = "התהליך הושלם בהצלחה", 2
+    login_failed            = "ההתחברות נכשלה", 3
+    add_client_failed       = "הוספת הלקוח נכלשה", 4
+    user_exist              = "הלקוח כבר קיים במערכת", 5
     input_invalid            = "Input invalid", 6
-    user_deleted            = "User deleted successfully", 7
+    user_deleted            = "הלקוח נמחק", 7
 
     @property
     def code(self):
@@ -37,7 +37,7 @@ class SJson:
     def error(error_content:Union[str, int,ServerMsg], **errors):
         msg = dict(SJson.msg_json, **errors)
         msg["success"] = False
-        msg["title"] = "Error caused"
+        msg["title"] = "התרחשה שגיאה"
         SJson.__set_notice(msg, error_content)
         return msg
 
@@ -45,7 +45,7 @@ class SJson:
     def success(success_content:Union[str, int, ServerMsg], **success):
         msg = dict(SJson.msg_json, **success)
         msg["success"] = True
-        msg["title"] = "Done"
+        msg["title"] = "הושלם"
         SJson.__set_notice(msg, success_content)
         return msg
 

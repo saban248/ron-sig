@@ -1,0 +1,112 @@
+
+
+
+.btn-t-eq-new{
+    background: rgb(23, 50, 58);
+    color:#50cac8;
+}
+.btn-t-eq-new:hover,
+.btn-t-eq-new:active{
+    background: rgb(11, 24, 27);
+}
+.list-equips{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+.box-equipment{
+    font-family: 'Arial';
+    max-width: 400px;
+    max-height: 400px;
+    border-radius: 7px 7px 0 0;
+    min-height: 100px;
+    display: grid;
+    background-repeat: no-repeat;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid #2f504c6f;
+    background-size: 400px 100%;
+
+}
+
+.box-equipment:hover,
+.box-equipment:active{
+    box-shadow: 0 0 11px rgb(205, 234, 234)
+}
+
+.box-equip-header{
+    background-position: center;
+    z-index: 1;
+    position: relative;
+    
+}
+.box-equip-body{
+    display: flex;
+    flex-direction: column;
+    background: rgb(21, 30, 30);
+    box-shadow: 0 2px 11px rgba(174, 220, 220, 0.304);
+    z-index: 2;
+    padding: 10px;
+    row-gap: 15px;
+    position: relative;
+    border-radius: 20px 20px 0 0;
+    margin: 0 !important;
+}
+
+.body-equip-info{
+    padding: 10px;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.box-eq-title{
+
+    color:white;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #d2d5d929;
+    border-top: 1px solid #d2d5d929;
+}
+
+.box-eq-info{
+    flex:1;
+    display:grid;
+    row-gap: 15px;
+
+}
+
+.equip-info{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    
+}
+.equip-info > *{
+    padding: 5px;
+    color: gray;
+    font-size: small;
+}
+
+.equip-info > i{
+    color: rgb(54, 225, 225);
+    border-radius: 4px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.171);
+    border-bottom:1px solid rgba(255, 255, 255, 0.171);
+}
+
+
+@media (max-width: 768px) {
+    .list-equips{
+        flex-direction: column;
+        row-gap: 3rem;
+    }
+    .box-equipment{
+        width: auto;
+        max-height: 600px;
+    }
+}

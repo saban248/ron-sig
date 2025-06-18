@@ -1,0 +1,183 @@
+
+<div class="tab-equip-home">
+    <div class="tab-menu-equip">
+        <div class="menu-item" onclick="startNewEquipment()">
+            <button type="button" class="general-button btn-t-home btn-t-eq-new">
+                <i class="fa-solid fa-square-plus"></i>
+                חדש
+            </button>
+        </div>
+    </div>
+
+    <div class="list-equips">
+        {% for equipment in equipments %}
+        <div class="box-equipment" style='background-image: url("/static/images/x1.jpg");'>
+           <div class="box-equip-header">
+                <div class="equip-img">
+                </div>
+           </div> 
+           <div class="box-equip-body">
+                <!-- name-->
+                <div class="box-eq-title">
+                    Turbosound Floodlight
+                </div>
+                <div class="body-equip-info">
+                    <div class="box-eq-info">
+                        <!-- crowd -->
+                        <div class="equip-info">
+                            <i class="fa-solid fa-people-group"></i>
+                            <span>1980</span>
+                        </div>
+                        <!-- count -->
+                        <div class="equip-info">
+                            <i class="fa-solid fa-box"></i>
+                            <span>3</span>
+                        </div>
+                        <!-- company -->
+                        <div class="equip-info">
+                            <i class="fa-solid fa-crown"></i>
+                            <span>Turbosound</span>
+                        </div>
+                    </div>
+                    <div class="box-eq-info">
+                        <!-- crowd -->
+                        <div class="equip-info">
+                            <i class="fa-solid fa-people-group"></i>
+                            <span>1980</span>
+                        </div>
+                        <!-- count -->
+                        <div class="equip-info">
+                            <i class="fa-solid fa-box"></i>
+                            <span>3</span>
+                        </div>
+                        <!-- company -->
+                        <div class="equip-info">
+                            <i class="fa-solid fa-crown"></i>
+                            <span>Turbosound</span>
+                        </div>
+                    </div>
+                </div>
+           </div>
+           
+        </div>
+        {% endfor %}
+    </div>
+
+
+<div class="sidebar" id="newequip">
+    <div class="sidebar-title">
+        <i class="fa-solid fa-circle-xmark" onclick="cancelNewEquipment()"></i>
+        <span>ציוד חדש</span>
+    </div>
+    <div class="sidebar-items" id="newequip_items">
+        <div class="sidebar-item" id="eqitem1">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="eqiconstep1" onclick="toggleSidebarItemEquip(1)"></i>    
+                <span>שם מלא</span>
+            </div>
+            <div class="item-inpus show" id="eqstep1">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        שם הציוד
+                    </label>
+                    <input type="text" id="eqname" placeholder="..." class="general-input input-step" required oninput="NewEquipmentCompleteStep(1)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewEquipShowNextStep(1)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="eqitem2">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="eqiconstep2" onclick="toggleSidebarItemEquip(2)"></i>    
+                <span>סוג</span>
+            </div>
+            <div class="item-inpus show" id="eqstep2">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        סוג הציוד 
+                    </label>
+                    <input type="text" id="eqtype" placeholder="..." class="general-input input-step" required oninput="NewEquipmentCompleteStep(2)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewEquipShowNextStep(2)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="eqitem3">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="eqiconstep3" onclick="toggleSidebarItemEquip(3)"></i>    
+                <span>פריטים במלאי</span>
+            </div>
+            <div class="item-inpus show" id="eqstep3">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        מספר פריטים במלאי
+                    </label>
+                    <input type="text" id="eqcount" placeholder="..." class="general-input input-step" required oninput="NewEquipmentCompleteStep(3)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewEquipShowNextStep(3)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="eqitem4">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="eqiconstep4" onclick="toggleSidebarItemEquip(4)"></i>    
+                <span>קהל</span>
+            </div>
+            <div class="item-inpus show" id="eqstep4">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        התאמה לכמות קהל
+                    </label>
+                    <input type="text" id="eqcrowd" placeholder="..." class="general-input input-step" required oninput="NewEquipmentCompleteStep(4)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewEquipShowNextStep(4)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="eqitem5">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="eqiconstep5" onclick="toggleSidebarItemEquip(5)"></i>    
+                <span>שם דגם</span>
+            </div>
+            <div class="item-inpus show" id="eqstep5">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        שם חברת הציוד
+                    </label>
+                    <input type="text" id="eqcompany" placeholder="..." class="general-input input-step" required oninput="NewEquipmentCompleteStep(5)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewEquipShowNextStep(5)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+                <div class="sidebar-item" id="eqitem6">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="eqiconstep6" onclick="toggleSidebarItemEquip(6)"></i>    
+                <span>שם דגם</span>
+            </div>
+            <div class="item-inpus show" id="eqstep6">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        שם חברת הציוד
+                    </label>
+                    <input type="file" id="eqimg" placeholder="..." class="general-input input-step" required oninput="NewEquipmentCompleteStep(6)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewEquipShowNextStep(6)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

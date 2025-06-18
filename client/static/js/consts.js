@@ -30,3 +30,13 @@ const NewRentSteps = {
 const ErrorCode = {
     cache:{code:1, msg:"LocalStorage no avalible"}
 }
+
+
+
+const NewEquipmentStep = {
+    step1:{title:"",code:1},
+    step2:{title:"",code:2},
+    step3:{title:"",code:3},
+    step4:{title:"",code:4},
+    step5:{title:"",code:5}
+}
