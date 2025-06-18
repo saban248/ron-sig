@@ -1,3 +1,4 @@
+import json
 from dataclasses import dataclass
 
 
@@ -63,3 +64,22 @@ class ResDeleteClient:
         self.client_id = cid
         return True
 
+
+
+@dataclass
+class ResAddEquipment:
+    name:str            = None
+    equip_type:str      = None
+    count:str           = None
+    crowd:str           = None
+    company:str         = None
+
+    def build(self, breq:dict) -> bool:
+        if not breq:return False
+        data:dict = json.loads(breq.get("params", "{}"))
+        if not data or data.get("file"):return False
+        for key, value in data.items():
+            self.__setattr__(key, value)
+
+
+        return all(self.__dict__.keys()) and self.crowd.isdigit() and self.count.isdigit()

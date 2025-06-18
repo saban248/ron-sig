@@ -2,11 +2,12 @@ from time import sleep
 
 from flask import request, session
 
+from api.database.equipments import ApiEquipment
 from api.database.users import ApiManager, ApiClient
-from api.general import get_dictionary_http
+from api.general import get_dictionary_http, save_image_equipment
 from api.msgs import ServerMsg, SJson
 from api.ptc import ron_app
-from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient
+from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment
 from api.routes.ptc import RouteApi, ShortSession
 
 
@@ -65,3 +66,21 @@ def delete_client():
         return SJson.success(ServerMsg.input_invalid)
 
     return SJson.success(ServerMsg.user_deleted)
+
+
+@ron_app.route(RouteApi.add_equip.path, methods=RouteApi.add_equip.methods)
+def add_equipment():
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    breq = get_dictionary_http(request)
+    res = ResAddEquipment()
+    if not res.build(breq):
+        return SJson.error(ServerMsg.add_equip_failed)
+
+    filename = save_image_equipment(request)
+    if not filename:
+        return SJson.error(ServerMsg.upload_failed)
+
+    completed = ApiEquipment.add_equipment(res.name, res.equip_type, int(res.count), int(res.crowd),res.company, filename)
+    return SJson.success(ServerMsg.complete)

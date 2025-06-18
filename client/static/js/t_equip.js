@@ -53,6 +53,7 @@ function cancelNewEquipment(){
         document.getElementById("eqstep"+value.code)?.classList.remove("show");
         document.getElementById("eqitem"+value.code)?.classList.remove("show");
     }
+    document.getElementById("addequip").classList.remove("show")
 }
 
 
@@ -61,6 +62,10 @@ function NewEquipShowNextStep(index){
     document.getElementById("eqstep"+index)?.classList.remove("show");
     document.getElementById("eqitem"+(index+1))?.classList.add("show");
     document.getElementById("eqstep"+(index+1))?.classList.add("show");
+    if (index == NewEquipmentStep.step6.code){
+        FinishNewEquipment();
+        return
+    }
 }
 
 function toggleSidebarItemEquip(index){
@@ -98,7 +103,12 @@ function NewEquipmentCompleteStep(step){
         key = 'company'
         v = document.getElementById('eq'+key).value;
         valid = __valid_step1(v)
+    }else if (NewEquipmentStep.step6.code == step){
+        key = 'img'
+        v = document.getElementById('eq'+key)
+        valid = __valid_step6(v)
     }
+    
     if (valid){
         icon.classList.add("done");
         icon.classList.add("fa-square-check")
@@ -111,5 +121,50 @@ function NewEquipmentCompleteStep(step){
 }
 
 
+function FinishNewEquipment(){
+    document.getElementById("addequip").classList.add("show")
+}
+
 function __valid_step1(value){return value.length>3}
 function __valid_step3(value){return !!parseInt(value)}
+function __valid_step6(value){return Boolean(v.files[0])}
+
+
+function addNewEquipment(){
+    loading(1)
+    on_success = (res) =>{
+        if (!res.success){
+            
+        }
+        else{
+            cancelNewEquipment()
+        }
+        loading(0)
+        popup(1, res.title, res.notice)
+    }
+    const data_equip = {
+        name:document.getElementById("eqname").value,
+        equip_type:document.getElementById("eqtype").value,
+        count:document.getElementById("eqcount").value,
+        crowd:document.getElementById("eqcrowd").value,
+        company:document.getElementById("eqcompany").value
+    }
+    const fileinp = document.getElementById("eqimg")
+    const file = fileinp.files[0];
+    const data = new FormData();
+    
+    data.append("file", file);
+    data.append("params", JSON.stringify(data_equip))
+    console.log(data)
+    $.ajax({
+    url: RouteApi.addEquip,
+    type: 'POST',
+    data: data,
+    contentType: false,
+    processData: false,
+    success: on_success,
+    error: function (res){
+        loading(0)
+    }
+    });
+}

@@ -3,15 +3,18 @@ from copy import deepcopy
 from enum import Enum
 
 from flask import Request
+from numpy.ma.core import filled
 
+from api.ptc import ServerConfig
 
+CONTENT_TYPE_DATA = "multipart/form-data"
 CONTENT_TYPE_FORM = "application/x-www-form-urlencoded"
 CONTENT_TYPE_JSON = "application/json"
 CONTENT_TYPE_ARGS = "a"
 
-def get_dictionary_http(req:Request) -> dict:
+def get_dictionary_http(req:Request, content_type:str = str()) -> dict:
     _ctype = req.content_type or str()
-    if CONTENT_TYPE_FORM in _ctype:
+    if CONTENT_TYPE_FORM in _ctype or CONTENT_TYPE_DATA in _ctype:
         return deepcopy(req.form.to_dict())
 
     elif CONTENT_TYPE_JSON in _ctype:
@@ -48,3 +51,15 @@ def verify_is_image(filepath) -> int:
 
     return 0
 
+
+
+def save_image_equipment(request:Request):
+    file = request.files.get('file')
+    if not file or file.filename == '':return ""
+    fullpath = os.path.join(ServerConfig.PATH_UPLOAD.value, file.filename)
+    file.save(fullpath)
+    if verify_is_image(fullpath) != 0:
+        os.remove(fullpath)
+        return ""
+
+    return fullpath

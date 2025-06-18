@@ -11,7 +11,7 @@
 
     <div class="list-equips">
         {% for equipment in equipments %}
-        <div class="box-equipment" style='background-image: url("/static/images/x1.jpg");'>
+        <div class="box-equipment" style='background-image: url("/static/images/{{equipment.img_name}}");' id="{{equipment.eid}}">
            <div class="box-equip-header">
                 <div class="equip-img">
                 </div>
@@ -19,43 +19,27 @@
            <div class="box-equip-body">
                 <!-- name-->
                 <div class="box-eq-title">
-                    Turbosound Floodlight
+                    {{equipment.name}}
                 </div>
                 <div class="body-equip-info">
                     <div class="box-eq-info">
                         <!-- crowd -->
                         <div class="equip-info">
                             <i class="fa-solid fa-people-group"></i>
-                            <span>1980</span>
+                            <span>{{equipment.count_people}}</span>
                         </div>
                         <!-- count -->
                         <div class="equip-info">
                             <i class="fa-solid fa-box"></i>
-                            <span>3</span>
+                            <span>{{equipment.count}}</span>
                         </div>
                         <!-- company -->
                         <div class="equip-info">
                             <i class="fa-solid fa-crown"></i>
-                            <span>Turbosound</span>
+                            <span>{{equipment.company}}</span>
                         </div>
                     </div>
-                    <div class="box-eq-info">
-                        <!-- crowd -->
-                        <div class="equip-info">
-                            <i class="fa-solid fa-people-group"></i>
-                            <span>1980</span>
-                        </div>
-                        <!-- count -->
-                        <div class="equip-info">
-                            <i class="fa-solid fa-box"></i>
-                            <span>3</span>
-                        </div>
-                        <!-- company -->
-                        <div class="equip-info">
-                            <i class="fa-solid fa-crown"></i>
-                            <span>Turbosound</span>
-                        </div>
-                    </div>
+
                 </div>
            </div>
            
@@ -160,16 +144,16 @@
                 </button>
             </div>
         </div>
-                <div class="sidebar-item" id="eqitem6">
+        <div class="sidebar-item" id="eqitem6">
             <div class="item-title">
                 <i class="fa-regular fa-square" id="eqiconstep6" onclick="toggleSidebarItemEquip(6)"></i>    
-                <span>שם דגם</span>
+                <span>תמונה </span>
             </div>
             <div class="item-inpus show" id="eqstep6">
                 <div class="inp-step">
                     <label class="label-inp">
                         <i class="fa-solid fa-map-location"></i>
-                        שם חברת הציוד
+                        תמונה הציוד
                     </label>
                     <input type="file" id="eqimg" placeholder="..." class="general-input input-step" required oninput="NewEquipmentCompleteStep(6)">
                 </div>
@@ -177,6 +161,11 @@
                     <span>לשלב הבא</span>
                 </button>
             </div>
+        </div>
+        <div class="addclient" id="addequip">
+                <button type="button" class="general-button btn-add-client" onclick="addNewEquipment()">
+                    <span>הוסף ציוד</span>
+                </button>
         </div>
     </div>
 

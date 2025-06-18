@@ -12,6 +12,8 @@ class ServerMsg(Enum):
     user_exist              = "הלקוח כבר קיים במערכת", 5
     input_invalid            = "Input invalid", 6
     user_deleted            = "הלקוח נמחק", 7
+    add_equip_failed        = "הוספת הציוד נכשלה, בדוק את הפרטים שהזנת", 8
+    upload_failed           = "העלאת הקובץ נכשלה, לא זוהתה תמונה!", 9
 
     @property
     def code(self):

@@ -6,7 +6,8 @@ const RouteApi = {
     auth: "/auth",
     addClient: "/add_client",
     ListClients:"/list_clients",
-    deleteClient:"/delete_client"
+    deleteClient:"/delete_client",
+    addEquip:"/add_equip"
 
 }
 
@@ -38,5 +39,6 @@ const NewEquipmentStep = {
     step2:{title:"",code:2},
     step3:{title:"",code:3},
     step4:{title:"",code:4},
-    step5:{title:"",code:5}
+    step5:{title:"",code:5},
+    step6:{title:"",code:6}
 }
