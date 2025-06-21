@@ -7,7 +7,9 @@ const RouteApi = {
     addClient: "/add_client",
     ListClients:"/list_clients",
     deleteClient:"/delete_client",
-    addEquip:"/add_equip"
+    addEquip:"/add_equip",
+    deleteEquip:'/delete_equip',
+    getEquip:'/get_equip'
 
 }
 
@@ -25,7 +27,8 @@ const NewClientSteps = {
 const NewRentSteps = {
     step1: {title:"כתובת האירוע", code:1},
     step2: {title:"זמן ההשכרה", code:2},
-    done:{code:10}
+    step3:{code:3},
+    done:{code:0}
 }
 
 const ErrorCode = {
@@ -40,5 +43,27 @@ const NewEquipmentStep = {
     step3:{title:"",code:3},
     step4:{title:"",code:4},
     step5:{title:"",code:5},
-    step6:{title:"",code:6}
+    step6:{title:"",code:6},
+    done:{code:0}
 }
+
+
+
+const equipmentList = [
+    "Turbosound Floodlight",
+    "Line array TLA-101",
+    "Beta3 MU21BA",
+    "Turbosound IQ-15",
+    "Pioneer XDJ-XZ",
+    "NEC P420x",
+    "מקרן",
+    "לייזר 2 ראשים",
+    "מתנפח ילדים",
+    "גנרטור תלת פאזי",
+    "לייקרה זוהרת",
+    "עמוד תאורה",
+    "מסך הקרנה",
+    "RCF ART-915A",
+    "Protech 500A"
+    // תוסיף עוד ככל שצריך
+  ];

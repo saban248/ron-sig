@@ -37,10 +37,24 @@ function createEquipmentBox(data) {
 
 
 
-function startNewEquipment(){
+function startNewEquipment(data=undefined){
     const sidebar = document.getElementById('newequip');
     if (sidebar.classList.contains("show"))return
     sidebar.classList.add('show');
+    if (data){
+        document.getElementById("eqname").value = data.name;
+        document.getElementById("eqtype").value = data.etype;
+        document.getElementById("eqcount").value = data.count;
+        document.getElementById("eqcrowd").value = data.count_people;
+        document.getElementById("eqcompany").value = data.company;
+        document.getElementById('eqimg').src = "/static/images/"+data.img_name;
+        const checkAll = () =>{
+            for (const [key, value] of Object.entries(NewEquipmentStep)){
+                value.code != NewEquipmentStep.done.code?NewEquipmentCompleteStep(value.code):null
+            }
+        }
+        setTimeout(checkAll, 500)
+    }
     NewEquipShowNextStep(NewEquipmentStep.step1.code-1);
 
 }
@@ -167,4 +181,43 @@ function addNewEquipment(){
         loading(0)
     }
     });
+}
+
+
+
+function toggleEquipmentMenu(id, event, title, equip_id){
+    toggleGeneralMenu(id, event, title)
+    EQUIPMENT_INFO_INDEX = equip_id
+}
+
+function EditEquipment(){
+    const eid = EQUIPMENT_INFO_INDEX
+    on_success = (res)=>{
+        if (!res.success){
+            return
+        }
+        startNewEquipment(res.equipment)
+
+        
+    }
+    const data = {eid:eid}
+    do_api(RouteApi.getEquip, data, on_success)
+}
+
+
+function DeleteEquipment(){
+    const eid = EQUIPMENT_INFO_INDEX
+
+    on_success =(res) =>{
+        if (!res.success){
+
+        }else{
+            document.getElementById(eid).remove();
+        }
+        popup(1, res.title, res.notice)
+    }
+    const data = {
+        eid:eid
+    }
+    do_api(RouteApi.deleteEquip, data, on_success)
 }

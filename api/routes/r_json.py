@@ -7,7 +7,7 @@ from api.database.users import ApiManager, ApiClient
 from api.general import get_dictionary_http, save_image_equipment
 from api.msgs import ServerMsg, SJson
 from api.ptc import ron_app
-from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment
+from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment, ResEquip
 from api.routes.ptc import RouteApi, ShortSession
 
 
@@ -84,3 +84,38 @@ def add_equipment():
 
     completed = ApiEquipment.add_equipment(res.name, res.equip_type, int(res.count), int(res.crowd),res.company, filename)
     return SJson.success(ServerMsg.complete)
+
+
+
+@ron_app.route(RouteApi.delete_equip.path, methods=RouteApi.delete_equip.methods)
+def delete_equip():
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    breq = get_dictionary_http(request)
+    res = ResEquip()
+    if not res.build(breq):
+        return SJson.error(ServerMsg.input_invalid)
+
+    deleted = ApiEquipment.remove_equipment(res.eid)
+    if not deleted:
+        return SJson.error(ServerMsg.operation_failed)
+
+    return SJson.success(ServerMsg.complete)
+
+
+@ron_app.route(RouteApi.get_equip.path, methods=RouteApi.get_equip.methods)
+def get_equipment():
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    breq = get_dictionary_http(request)
+    res = ResEquip()
+    if not res.build(breq):
+        return SJson.error(ServerMsg.input_invalid)
+
+    equip = ApiEquipment.get_equipments(False, eid=res.eid)
+    if not equip:
+        return SJson.error(ServerMsg.operation_failed)
+
+    return SJson.success(ServerMsg.complete, **{"equipment":equip[0]})

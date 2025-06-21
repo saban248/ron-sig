@@ -204,6 +204,47 @@
     visibility: visible;
 }
 
+
+
+.suggestions-box {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1001;
+  width: 90%;
+}
+.suggestion-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  column-gap: 13px;
+  border-bottom: 1px solid #eee;
+}
+
+.equipment-name {
+  flex: 1;
+}
+
+.counter-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.count {
+  width: 24px;
+  text-align: center;
+}
+
 @keyframes popup-fade {
     from { transform: scale(0.8); opacity: 0; }
     to   { transform: scale(1); opacity: 1; }

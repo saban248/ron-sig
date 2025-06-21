@@ -1,8 +1,9 @@
+import os
 import secrets
 
 from typing import Union
 
-from api.ptc import ron_db
+from api.ptc import ron_db, ServerConfig
 
 
 class Equipment(ron_db.Model):
@@ -43,6 +44,10 @@ class ApiEquipment:
     def remove_equipment(eid:str):
         equip =  ApiEquipment.exist(eid=eid)
         if not equip:return False
+
+        # remove img
+        if equip.img_name != ServerConfig.DEFAULT_IMAGE:
+            os.remove(os.path.join(ServerConfig.PATH_UPLOAD, equip.img_name))
 
         ron_db.session.delete(equip)
         ron_db.session.commit()

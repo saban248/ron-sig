@@ -55,11 +55,11 @@ def verify_is_image(filepath) -> int:
 
 def save_image_equipment(request:Request):
     file = request.files.get('file')
-    if not file or file.filename == '':return ""
-    fullpath = os.path.join(ServerConfig.PATH_UPLOAD.value, file.filename)
+    if not file or file.filename == '':return ServerConfig.DEFAULT_IMAGE
+    fullpath = os.path.join(ServerConfig.PATH_UPLOAD, file.filename)
     file.save(fullpath)
     if verify_is_image(fullpath) != 0:
         os.remove(fullpath)
         return ""
 
-    return fullpath
+    return os.path.basename(fullpath)

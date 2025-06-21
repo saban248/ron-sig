@@ -1,5 +1,5 @@
 var CLIENT_INFO_INDEX = -1
-
+var EQUIPMENT_INFO_INDEX = -1
 
 function loading(mode, timeout){
     if (mode == 1){
@@ -212,10 +212,10 @@ function toggleSearch(search_id){
 }
 
 
-function toggleGeneralMenu(event, title){
+function toggleGeneralMenu(id, event, title){
     event.stopPropagation(); 
-    document.getElementById('mtitle').textContent = title;
-    const menu = document.getElementById("generalmenu");
+    document.getElementById('mtitle-'+id).textContent = title;
+    const menu = document.getElementById(id);
 
     const trigger = event.currentTarget;
     const rect = trigger.getBoundingClientRect();
@@ -237,9 +237,17 @@ function toggleGeneralMenu(event, title){
     menu.classList.toggle("menu-visible");
 }
 
-window.addEventListener("click", () => {
-  document.getElementById("generalmenu").classList.remove("menu-visible");
+document.addEventListener("click", function(event) {
+  // Check if the click is on any menu or toggle
+  const clickedInsideMenu = event.target.closest('.general-menu');
+  if (!clickedInsideMenu) {
+    // Close all menus with class "menu-visible"
+    document.querySelectorAll('.menu-visible').forEach(menu => {
+      menu.classList.remove('menu-visible');
+    });
+  }
 });
+
 
 
 

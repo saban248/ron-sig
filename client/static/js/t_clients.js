@@ -98,8 +98,8 @@ function NewRentCompleteStep(step){
 }
 
 
-function toggleClienMenu(event, title, client_id){
-    toggleGeneralMenu(event, title);
+function toggleClienMenu(id, event, title, client_id){
+    toggleGeneralMenu(id, event, title);
     CLIENT_INFO_INDEX = client_id;
     
 }
@@ -183,6 +183,85 @@ function deleteClient(){
     do_api(RouteApi.deleteClient, data, on_success)
     
 }
+
+
+function ShowMenuSelectEquipment(){
+    const menu = document.getElementById('menuequip')
+    const input = document.getElementById('requipment')
+    const text = input.value.toLowerCase();
+    menu.innerHTML = "";
+    if (!text) {
+      menu.style.display = "none";
+      return;
+    }
+
+    const matches = equipmentList.filter(item =>
+      item.toLowerCase().includes(text)
+    );
+
+    if (matches.length === 0) {
+      menu.style.display = "none";
+      return;
+    }
+
+    matches.forEach(item => {
+          const wrapper = document.createElement("div");
+    wrapper.classList.add("suggestion-item");
+
+    const label = document.createElement("span");
+    label.textContent = item;
+    label.classList.add("equipment-name");
+
+    const counterWrapper = document.createElement("div");
+    counterWrapper.classList.add("counter-wrapper");
+
+    const minusBtn = document.createElement("button");
+    minusBtn.textContent = "−";
+    minusBtn.classList.add("btn", "btn-minus");
+
+    const countDisplay = document.createElement("span");
+    countDisplay.textContent = "0";
+    countDisplay.classList.add("count");
+
+    const plusBtn = document.createElement("button");
+    plusBtn.textContent = "+";
+    plusBtn.classList.add("btn", "btn-plus");
+
+    let count = 0;
+    plusBtn.onclick = (e) => {
+      e.stopPropagation();
+      count++;
+      countDisplay.textContent = count;
+    };
+
+    minusBtn.onclick = (e) => {
+      e.stopPropagation();
+      if (count > 0) count--;
+      countDisplay.textContent = count;
+    };
+
+    counterWrapper.appendChild(minusBtn);
+    counterWrapper.appendChild(countDisplay);
+    counterWrapper.appendChild(plusBtn);
+
+    wrapper.appendChild(label);
+    wrapper.appendChild(counterWrapper);
+
+    wrapper.addEventListener("click", () => {
+      input.value = item;
+      menu.style.display = "none";
+    });
+
+    menu.appendChild(wrapper);
+  });
+
+    menu.style.display = "block";
+  
+}
+
+
+
+
 
 /* GLOBAL */
 

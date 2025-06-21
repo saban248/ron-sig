@@ -40,7 +40,7 @@
                             <span>{{client.identify}}</span>
                         </div>
                     </div>
-                    <div class="client-item menu" onclick="toggleClienMenu(event, '{{client.fullname}}', '{{client.cid}}')">
+                    <div class="client-item menu" onclick="toggleClienMenu('generalmenu', event, '{{client.fullname}}', '{{client.cid}}')">
                         <i class="fa-solid fa-ellipsis" style="color: #62bcba;"></i>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
 
         <div id="generalmenu" class="general-menu">
             <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
-                <span id="mtitle" style="opacity: 0.6;"></span>
+                <span id="mtitle-generalmenu" style="opacity: 0.6;"></span>
             </div>
             <div class="general-menu-item" onclick="startRentEquipment()">
                 <i class="fa-solid fa-square-plus" style="color: #50cac8;"></i>
@@ -133,6 +133,28 @@
                     <input type="text" id="rendtime" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(3)">
                 </div>
                 <button type="button" class="general-button item-button-step" onclick="NewRentShowNextStep(3)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="nritem4">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="nriconstep4" onclick="toggleSidebarItem(4)"></i>    
+                <span>ציוד</span>
+            </div>
+            <div class="item-inpus show" id="nrstep4">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        ציוד שיושכר
+                    </label>
+                    <div>
+                        <input type="text" id="requipment" placeholder="חפש ציוד" class="general-input input-step" required oninput="ShowMenuSelectEquipment(value);NewRentCompleteStep(4)">
+                        <div id="menuequip" class="suggestions-box"></div>
+                    </div>
+                                     
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewRentShowNextStep(4)">
                     <span>לשלב הבא</span>
                 </button>
             </div>

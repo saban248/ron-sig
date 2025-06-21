@@ -15,8 +15,9 @@
     justify-content:space-around;
 }
 .box-equipment{
+    position: relative;
     font-family: 'Arial';
-    max-width: 400px;
+    max-width: 500px;
     max-height: 400px;
     border-radius: 7px 7px 0 0;
     min-height: 100px;
@@ -27,13 +28,26 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid #2f504c6f;
-    background-size: 400px 100%;
+    background-size: 500px 70%;
+    transition: 150ms box-shadow;
+
+}
+.box-equip-menu{
+    position: absolute;
+    background:rgb(19, 56, 59);
+    font-size: large;
+    left: 5px;
+    top: 5px;
+    cursor: pointer;
+    z-index: 3;
+    padding:3px 7px;
+    border-radius: 5px;
 
 }
 
 .box-equipment:hover,
 .box-equipment:active{
-    box-shadow: 0 0 11px rgb(205, 234, 234)
+    box-shadow: 0 0 40px rgba(38, 77, 83, 0.619)
 }
 
 .box-equip-header{

@@ -83,3 +83,15 @@ class ResAddEquipment:
 
 
         return all(self.__dict__.keys()) and self.crowd.isdigit() and self.count.isdigit()
+
+
+@dataclass
+class ResEquip:
+    eid:str             = None
+
+    def build(self, breq:dict):
+        equip_id =  breq.get("eid")
+        if not equip_id or equip_id.__len__() != 32:return False
+        self.eid = equip_id
+
+        return True

@@ -12,6 +12,9 @@
     <div class="list-equips">
         {% for equipment in equipments %}
         <div class="box-equipment" style='background-image: url("/static/images/{{equipment.img_name}}");' id="{{equipment.eid}}">
+            <div class="box-equip-menu menu" onclick="toggleEquipmentMenu('equipmentmenu', event, '{{equipment.name}}', '{{equipment.eid}}')">
+                <i class="fa-solid fa-ellipsis" style="color: #62bcba;"></i>
+            </div>
            <div class="box-equip-header">
                 <div class="equip-img">
                 </div>
@@ -45,6 +48,21 @@
            
         </div>
         {% endfor %}
+    </div>
+    <div id="equipmentmenu" class="general-menu">
+        <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
+            <span id="mtitle-equipmentmenu" style="opacity: 0.6;"></span>
+        </div>
+
+        <div class="general-menu-item" onclick="EditEquipment()">
+            <i class="fa-solid fa-pencil" style="color: #62bcba;"></i>
+            <span>עריכה</span>
+        </div>
+        <div class="menu-seperate"></div>
+        <div class="general-menu-item" onclick="DeleteEquipment()">
+            <i class="fa-solid fa-trash-can" style="color: #b6354f;"></i>
+            <span>מחיקה</span>
+        </div>
     </div>
 
 
