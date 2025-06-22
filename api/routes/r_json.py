@@ -3,11 +3,12 @@ from time import sleep
 from flask import request, session
 
 from api.database.equipments import ApiEquipment
+from api.database.rents import ApiRentEquipment
 from api.database.users import ApiManager, ApiClient
 from api.general import get_dictionary_http, save_image_equipment
 from api.msgs import ServerMsg, SJson
 from api.ptc import ron_app
-from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment, ResEquip
+from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment, ResEquip, ResNewRent
 from api.routes.ptc import RouteApi, ShortSession
 
 
@@ -122,3 +123,14 @@ def get_equipment():
 
     return SJson.success(ServerMsg.complete, **{"equipment":equip})
 
+
+@ron_app.route(RouteApi.add_rent.path, methods=RouteApi.add_rent.methods)
+def add_rent():
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    breq = get_dictionary_http(request)
+    res = ResNewRent()
+    status = res.build(breq)
+    ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount)
+    return status

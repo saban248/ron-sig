@@ -1,6 +1,9 @@
 import os.path
+import time
 from copy import deepcopy
+from datetime import datetime
 from enum import Enum
+from json import loads
 
 from flask import Request
 from numpy.ma.core import filled
@@ -63,3 +66,21 @@ def save_image_equipment(request:Request):
         return ""
 
     return os.path.basename(fullpath)
+
+
+def get_safe_time_by_picker(_time:str) -> float:
+    try:
+        datetime.strptime(_time, "%Y.%m.%d %H:%M").timestamp()
+    except Exception as error:
+        return time.time()
+
+    return 0.0
+
+
+def loads_equipments_safe(equips:str):
+    try:
+        return loads(equips)
+    except (OSError, Exception) as error:
+        pass
+
+    return {}

@@ -15,6 +15,9 @@ class ServerMsg(Enum):
     add_equip_failed        = "הוספת הציוד נכשלה, בדוק את הפרטים שהזנת", 8
     upload_failed           = "העלאת הקובץ נכשלה, לא זוהתה תמונה!", 9
     operation_failed        = 'הפעולה נכשלה', 10
+    invalid_stime           = "תאריך תחילת האירוע לא תקין", 11
+    invalid_etime           = "תאריך סיום האירוע לא תקין", 12
+    invalid_equipments      = "רשימת ציוד לא תקינה", 13
 
     @property
     def code(self):

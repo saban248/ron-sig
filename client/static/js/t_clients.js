@@ -27,6 +27,8 @@ function startRentEquipment(){
     const rent = ManagerCache.newRentExist()
     if (rent){
         document.getElementById("raddress").value = rent.address;
+        document.getElementById("rstarttime").value = rent.starttime;
+        document.getElementById("rendtime").value = rent.endtime;
         const checkAll = () =>{
             for (const [key, value] of Object.entries(NewRentSteps)){
                 value.code != NewRentSteps.done.code?NewRentCompleteStep(value.code):null
@@ -49,6 +51,30 @@ function startRentEquipment(){
       time_24hr: true
     });
 }
+
+
+function finishNewRent(){
+    on_success = (res) =>{
+        if (!res.success){
+            return
+        }
+        popup(1, res.title, res.notice)
+        cancelNewRent()
+        
+    }
+
+    const data = {
+        address:document.getElementById('raddress').value,
+        stime:document.getElementById('rstarttime').value,
+        etime:document.getElementById('rendtime').value,
+        equipments:JSON.stringify(EQUIPMENTS_SELECTED),
+        amount:document.getElementById('ramount').value
+    }
+
+    do_api(RouteApi.addRent, data, on_success)
+}
+
+
 
 function NewRentShowNextStep(index){
     document.getElementById("nrstep"+index)?.classList.remove("show");
@@ -78,13 +104,31 @@ function cancelNewRent(){
 
 function NewRentCompleteStep(step){
     const icon = document.getElementById("nriconstep"+step);
-    var valid= true;
-    key= null;
-    v= null
+    var valid = false;
+    key = null;
+    v = null
     if (NewRentSteps.step1.code == step){
         key = "address"
         v = document.getElementById("r"+key).value;
         valid = v.length>5
+    }
+    else if (NewRentSteps.step2.code == step){
+        key = 'starttime'
+        v = document.getElementById("r"+key).value
+        valid = __valid_step2(v);
+    }
+    else if (NewRentSteps.step3.code == step){
+        key = 'endtime'
+        v = document.getElementById('r'+key).value
+        valid = __valid_step2(v);
+    }
+    else if (NewRentSteps.step4.code == step){
+        valid = Boolean(EQUIPMENTS_SELECTED.length)
+    }
+    else if (NewRentSteps.step5.code == step){
+        key = "money"
+        v = document.getElementById('r'+key).value
+        valid = !!parseInt(v)
     }
     if (valid){
         ManagerCache.addStepRent(key, v)
@@ -98,6 +142,7 @@ function NewRentCompleteStep(step){
     }
 }
 
+function __valid_step2(value){return value && !isNaN(new Date(value).getTime())}
 
 function toggleClienMenu(id, event, title, client_id){
     toggleGeneralMenu(id, event, title);
@@ -284,6 +329,14 @@ function resetEquipmentSelected(){
     EQUIPMENTS_SELECTED = []
     updateCountEquipSelected()
 }
+
+
+
+
+
+
+
+
 /* GLOBAL */
 
 getAllClients(true)

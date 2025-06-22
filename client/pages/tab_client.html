@@ -155,12 +155,30 @@
                         </div>
                     </label>
                     <div>
-                        <input type="text" id="requipment" placeholder="חפש ציוד" class="general-input input-step" required oninput="ShowMenuSelectEquipment();NewRentCompleteStep(4)">
+                        <input type="text" id="requipment" placeholder="חפש ציוד" class="general-input input-step" required onclick="this.value='';NewRentCompleteStep(4)" oninput="ShowMenuSelectEquipment()">
                         <div id="menuequip" class="suggestions-box"></div>
                     </div>
                                      
                 </div>
                 <button type="button" class="general-button item-button-step" onclick="NewRentShowNextStep(4)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="nritem5">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="nriconstep5" onclick="toggleSidebarItem(5)"></i>    
+                <span>סכום עסקה</span>
+            </div>
+            <div class="item-inpus show" id="nrstep5">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-shekel-sign"></i>
+                        סכום עיסקה סופי
+                    </label>
+                    <input type="tel" id="rmoney" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(5)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewRentShowNextStep(5)">
                     <span>לשלב הבא</span>
                 </button>
             </div>

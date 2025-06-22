@@ -1,5 +1,11 @@
 import json
+import time
 from dataclasses import dataclass
+from datetime import datetime
+from typing import Union
+
+from api.general import get_safe_time_by_picker, loads_equipments_safe
+from api.msgs import ServerMsg
 
 
 @dataclass
@@ -95,3 +101,29 @@ class ResEquip:
         self.eid = equip_id
 
         return True
+
+
+@dataclass
+class ResNewRent:
+    address:str                 = None
+    stime:str                   = None
+    etime:str                   = None
+    equipments:Union[dict, str] = None
+    amount:Union[str, int]      = None
+    cid:str                     = None
+
+    def build(self, breq:dict) -> ServerMsg:
+        if not breq:return ServerMsg.input_invalid
+        [self.__setattr__(key, value) for key, value in breq.items()]
+        if not self.address:return ServerMsg.input_invalid
+
+        start = get_safe_time_by_picker(self.stime)
+        end = get_safe_time_by_picker(self.etime)
+        equips = loads_equipments_safe(self.equipments)
+        if not self.cid:return ServerMsg.input_invalid
+        if not self.stime or not time.time() < start:return ServerMsg.invalid_stime
+        if not self.etime or not start < end:return ServerMsg.invalid_etime
+        if not self.equipments or not equips:return ServerMsg.invalid_equipments
+        if not self.amount or not self.amount.isdigit():return ServerMsg.input_invalid
+        self.amount = int(self.amount)
+        return ServerMsg.complete

@@ -34,6 +34,8 @@ class RouteApi(RoutePagesBase):
     add_equip = ["POST"], 5
     delete_equip = ["POST"], 6
     get_equip = ["POST"],7
+    add_rent = ["POST"], 8
+
 
 
 class ShortSession:

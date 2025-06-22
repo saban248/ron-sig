@@ -9,7 +9,8 @@ const RouteApi = {
     deleteClient:"/delete_client",
     addEquip:"/add_equip",
     deleteEquip:'/delete_equip',
-    getEquip:'/get_equip'
+    getEquip:'/get_equip',
+    addRent:'/add_rent'
 
 }
 
@@ -27,7 +28,9 @@ const NewClientSteps = {
 const NewRentSteps = {
     step1: {title:"כתובת האירוע", code:1},
     step2: {title:"זמן ההשכרה", code:2},
-    step3:{code:3},
+    step3:{title:'סוף השכרה', code:3},
+    step4:{title:"ציוד", code:4},
+    step5:{title:"סכום העסקה", code:5},
     done:{code:0}
 }
 

@@ -100,8 +100,9 @@ const NewClientData = {
 
 const NewClientRentData = {
     address: "",
-    time_start:"",
-    time_end:""
+    starttime:"",
+    endtime:"",
+    money:0
 }
 
 class ManagerCache{
