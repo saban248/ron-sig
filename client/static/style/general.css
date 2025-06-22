@@ -222,6 +222,7 @@
   align-items: center;
   padding: 8px;
   column-gap: 13px;
+  font-size: 16px;
   border-bottom: 1px solid #eee;
 }
 
@@ -236,8 +237,14 @@
 }
 
 .btn {
-  padding: 4px 8px;
+  padding: 4px 10px;
   cursor: pointer;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid rgba(54, 54, 54, 0.156);
+}
+.btn:active{
+    box-shadow:0 0 11px rgba(0, 0, 0, 0.15);
 }
 
 .count {

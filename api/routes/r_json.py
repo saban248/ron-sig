@@ -113,9 +113,12 @@ def get_equipment():
     res = ResEquip()
     if not res.build(breq):
         return SJson.error(ServerMsg.input_invalid)
-
-    equip = ApiEquipment.get_equipments(False, eid=res.eid)
+    if res.eid:
+        equip = ApiEquipment.get_equipments(False, eid=res.eid)
+    else:
+        equip = ApiEquipment.get_equipments(False)
     if not equip:
         return SJson.error(ServerMsg.operation_failed)
 
-    return SJson.success(ServerMsg.complete, **{"equipment":equip[0]})
+    return SJson.success(ServerMsg.complete, **{"equipment":equip})
+

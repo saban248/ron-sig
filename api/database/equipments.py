@@ -47,14 +47,17 @@ class ApiEquipment:
 
         # remove img
         if equip.img_name != ServerConfig.DEFAULT_IMAGE:
-            os.remove(os.path.join(ServerConfig.PATH_UPLOAD, equip.img_name))
+            try:
+                os.remove(os.path.join(ServerConfig.PATH_UPLOAD, equip.img_name))
+            except OSError:
+                pass
 
         ron_db.session.delete(equip)
         ron_db.session.commit()
         return True
 
     @staticmethod
-    def get_equipments(source:bool = False, **kwargs):
+    def get_equipments(source:bool = False, **kwargs) -> Union[list[Equipment], list[dict]]:
         equips = []
         for equipment in Equipment.query.filter_by(**kwargs):
             if not source:
@@ -65,5 +68,6 @@ class ApiEquipment:
             equips.append(equipment)
 
         return equips
+
 
 

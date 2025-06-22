@@ -18,7 +18,6 @@ def main():
     if not ShortSession.is_admin(session):
         return redirect(url_for("login"))
 
-    print(ApiEquipment.remove_equipment("29ece4281d4af609b12dcb71ab62b645"))
     return render_template(Pages.home.val, clients=ApiClient.get_clients(), equipments=ApiEquipment.get_equipments())
 
 

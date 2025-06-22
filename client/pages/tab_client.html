@@ -146,10 +146,16 @@
                 <div class="inp-step">
                     <label class="label-inp">
                         <i class="fa-solid fa-map-location"></i>
-                        ציוד שיושכר
+                         ציוד שיושכר 
+                        <div class="equip-selected">
+                            <div class="equip-selected-body">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="equip-selected-count" id="equipcount">0</span>  
+                            </div>
+                        </div>
                     </label>
                     <div>
-                        <input type="text" id="requipment" placeholder="חפש ציוד" class="general-input input-step" required oninput="ShowMenuSelectEquipment(value);NewRentCompleteStep(4)">
+                        <input type="text" id="requipment" placeholder="חפש ציוד" class="general-input input-step" required oninput="ShowMenuSelectEquipment();NewRentCompleteStep(4)">
                         <div id="menuequip" class="suggestions-box"></div>
                     </div>
                                      

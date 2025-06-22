@@ -72,6 +72,7 @@ function cancelNewRent(){
         document.getElementById("nrstep"+value.code)?.classList.remove("show");
         document.getElementById("nritem"+value.code)?.classList.remove("show");
     }
+    resetEquipmentSelected()
     
 }
 
@@ -195,8 +196,8 @@ function ShowMenuSelectEquipment(){
       return;
     }
 
-    const matches = equipmentList.filter(item =>
-      item.toLowerCase().includes(text)
+    const matches = EQUIPMENTS.filter(item =>
+      item.name.toLowerCase().includes(text)
     );
 
     if (matches.length === 0) {
@@ -209,7 +210,7 @@ function ShowMenuSelectEquipment(){
     wrapper.classList.add("suggestion-item");
 
     const label = document.createElement("span");
-    label.textContent = item;
+    label.textContent = item.name;
     label.classList.add("equipment-name");
 
     const counterWrapper = document.createElement("div");
@@ -220,23 +221,25 @@ function ShowMenuSelectEquipment(){
     minusBtn.classList.add("btn", "btn-minus");
 
     const countDisplay = document.createElement("span");
-    countDisplay.textContent = "0";
+    countDisplay.textContent = EQUIPMENTS_SELECTED.find(si => si.eid == item.eid)?.count??0;
     countDisplay.classList.add("count");
 
     const plusBtn = document.createElement("button");
     plusBtn.textContent = "+";
     plusBtn.classList.add("btn", "btn-plus");
 
-    let count = 0;
+    let count =  EQUIPMENTS_SELECTED.find(si => si.eid == item.eid)?.count??0;
     plusBtn.onclick = (e) => {
       e.stopPropagation();
       count++;
+      setSelectEquip(item.eid, 1)
       countDisplay.textContent = count;
     };
 
     minusBtn.onclick = (e) => {
       e.stopPropagation();
-      if (count > 0) count--;
+      if (count>0)count--;
+      setSelectEquip(item.eid, -1)
       countDisplay.textContent = count;
     };
 
@@ -248,7 +251,6 @@ function ShowMenuSelectEquipment(){
     wrapper.appendChild(counterWrapper);
 
     wrapper.addEventListener("click", () => {
-      input.value = item;
       menu.style.display = "none";
     });
 
@@ -260,9 +262,28 @@ function ShowMenuSelectEquipment(){
 }
 
 
+function setSelectEquip(eid, value){
+    const equipment = EQUIPMENTS_SELECTED.find(item => item.eid === eid)
+    if (!equipment){
+        EQUIPMENTS_SELECTED.push({eid:eid, count:1})
+        return
+    }
+    equipment.count+=value
+    EQUIPMENTS_SELECTED = EQUIPMENTS_SELECTED.filter(item => item.count)
+    updateCountEquipSelected()
+}
 
 
+function updateCountEquipSelected(){
+    const counter = document.getElementById("equipcount")
+    counter.textContent = EQUIPMENTS_SELECTED.reduce((sum, item) => sum + item.count, 0)
+}
 
+
+function resetEquipmentSelected(){
+    EQUIPMENTS_SELECTED = []
+    updateCountEquipSelected()
+}
 /* GLOBAL */
 
 getAllClients(true)

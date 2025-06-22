@@ -193,10 +193,10 @@ function toggleEquipmentMenu(id, event, title, equip_id){
 function EditEquipment(){
     const eid = EQUIPMENT_INFO_INDEX
     on_success = (res)=>{
-        if (!res.success){
+        if (!res.success || !res.equipment){
             return
         }
-        startNewEquipment(res.equipment)
+        startNewEquipment(res.equipment[0])
 
         
     }
@@ -221,3 +221,9 @@ function DeleteEquipment(){
     }
     do_api(RouteApi.deleteEquip, data, on_success)
 }
+
+
+
+
+
+getListEquipmentNames()

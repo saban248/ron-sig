@@ -90,8 +90,8 @@ class ResEquip:
     eid:str             = None
 
     def build(self, breq:dict):
-        equip_id =  breq.get("eid")
-        if not equip_id or equip_id.__len__() != 32:return False
+        equip_id =  breq.get("eid", "")
+        if  equip_id and equip_id.__len__() != 32:return False
         self.eid = equip_id
 
         return True

@@ -1,5 +1,10 @@
 var CLIENT_INFO_INDEX = -1
 var EQUIPMENT_INFO_INDEX = -1
+var EQUIPMENTS = [
+
+]
+var EQUIPMENTS_SELECTED = []
+
 
 function loading(mode, timeout){
     if (mode == 1){
@@ -239,17 +244,33 @@ function toggleGeneralMenu(id, event, title){
 
 document.addEventListener("click", function(event) {
   // Check if the click is on any menu or toggle
-  const clickedInsideMenu = event.target.closest('.general-menu');
-  if (!clickedInsideMenu) {
-    // Close all menus with class "menu-visible"
-    document.querySelectorAll('.menu-visible').forEach(menu => {
-      menu.classList.remove('menu-visible');
-    });
-  }
+    const clickedInsideMenu = event.target.closest('.general-menu');
+    const suggestionsBox = document.getElementById('menuequip')
+    if (!clickedInsideMenu) {
+        // Close all menus with class "menu-visible"
+        document.querySelectorAll('.menu-visible').forEach(menu => {
+            menu.classList.remove('menu-visible');
+        });
+    }
+    
+    if (suggestionsBox){
+        suggestionsBox.style.display = 'none'
+    }
 });
 
 
+function getListEquipmentNames(){
+    on_success = (res) =>{
+        if (!res.success){
+            popup(1, "שגיאה, רענן את העמוד", "המערכת לא טענה את הנתונים")
+            return
+        }
+        EQUIPMENTS = res.equipment
 
+    }
+
+    do_api(RouteApi.getEquip, {}, on_success)
+}
 
 
 

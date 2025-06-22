@@ -35,6 +35,7 @@ class RouteApi(RoutePagesBase):
     delete_equip = ["POST"], 6
     get_equip = ["POST"],7
 
+
 class ShortSession:
 
     @staticmethod

@@ -47,23 +47,3 @@ const NewEquipmentStep = {
     done:{code:0}
 }
 
-
-
-const equipmentList = [
-    "Turbosound Floodlight",
-    "Line array TLA-101",
-    "Beta3 MU21BA",
-    "Turbosound IQ-15",
-    "Pioneer XDJ-XZ",
-    "NEC P420x",
-    "מקרן",
-    "לייזר 2 ראשים",
-    "מתנפח ילדים",
-    "גנרטור תלת פאזי",
-    "לייקרה זוהרת",
-    "עמוד תאורה",
-    "מסך הקרנה",
-    "RCF ART-915A",
-    "Protech 500A"
-    // תוסיף עוד ככל שצריך
-  ];

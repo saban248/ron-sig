@@ -148,8 +148,39 @@
 }
 .label-inp{
     color: #797979;
-    
+    position: relative;
+
 }
+.equip-selected{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+    border: 1px solid rgba(130, 130, 130, 0.356);
+    cursor: pointer;
+
+}
+.equip-selected > .equip-selected-body{
+    position: relative;
+}
+.equip-selected > .equip-selected-body > i{
+    padding: 10px;
+}
+.equip-selected > .equip-selected-body > span{
+    position:absolute;
+    right:0;
+    top: -10px;
+    background: rgb(182, 18, 18);
+    color: white;
+    padding: 0 5px;
+    border-radius: 10px;
+    font-size: small;
+}
+.equip-selected:hover{
+    box-shadow: 0 0 11px rgb(130, 130, 130, 0.356);
+}
+
+
 .item-button-step, .btn-add-client{
     width: 50% !important;
     margin-right: 45%;
