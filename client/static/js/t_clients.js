@@ -29,6 +29,7 @@ function startRentEquipment(){
         document.getElementById("raddress").value = rent.address;
         document.getElementById("rstarttime").value = rent.starttime;
         document.getElementById("rendtime").value = rent.endtime;
+        document.getElementById('rmoney').value = rent.money;
         const checkAll = () =>{
             for (const [key, value] of Object.entries(NewRentSteps)){
                 value.code != NewRentSteps.done.code?NewRentCompleteStep(value.code):null
@@ -54,12 +55,19 @@ function startRentEquipment(){
 
 
 function finishNewRent(){
+    document.getElementById('addrent').classList.add("show")
+}
+
+function addNewRent(){
     on_success = (res) =>{
         if (!res.success){
-            return
+            
+        }
+        else{
+            cancelNewRent()
         }
         popup(1, res.title, res.notice)
-        cancelNewRent()
+        
         
     }
 
@@ -68,7 +76,8 @@ function finishNewRent(){
         stime:document.getElementById('rstarttime').value,
         etime:document.getElementById('rendtime').value,
         equipments:JSON.stringify(EQUIPMENTS_SELECTED),
-        amount:document.getElementById('ramount').value
+        amount:document.getElementById('rmoney').value,
+        cid:CLIENT_INFO_INDEX
     }
 
     do_api(RouteApi.addRent, data, on_success)
@@ -80,8 +89,8 @@ function NewRentShowNextStep(index){
     document.getElementById("nrstep"+index)?.classList.remove("show");
     document.getElementById("nritem"+(index+1))?.classList.add("show");
     document.getElementById("nrstep"+(index+1))?.classList.add("show");
-        if ((index+1) == NewRentShowNextStep){
-        finishNewClient()
+        if ((index+1) == NewRentSteps.done.code){
+        finishNewRent()
         return
     }
 }
@@ -311,10 +320,11 @@ function setSelectEquip(eid, value){
     const equipment = EQUIPMENTS_SELECTED.find(item => item.eid === eid)
     if (!equipment){
         EQUIPMENTS_SELECTED.push({eid:eid, count:1})
-        return
+    }else{
+        equipment.count+=value
+        EQUIPMENTS_SELECTED = EQUIPMENTS_SELECTED.filter(item => item.count)
     }
-    equipment.count+=value
-    EQUIPMENTS_SELECTED = EQUIPMENTS_SELECTED.filter(item => item.count)
+
     updateCountEquipSelected()
 }
 
@@ -333,6 +343,53 @@ function resetEquipmentSelected(){
 
 
 
+function showSelectedEquipments() {
+    const sidebar = document.getElementById('equipments-selected');
+    if (sidebar.classList.contains("show"))return
+    sidebar.classList.add('show');
+
+    document.getElementById("equipslectedtitle").textContent = `${EQUIPMENTS_SELECTED.reduce((sum, item) => sum + item.count, 0)} פריטים`
+    for (const [index, item] of Object.entries(EQUIPMENTS_SELECTED)  ){
+        createEquipmentSelectedRow(item.eid ,item.count)
+    }
+    
+}
+
+function createEquipmentSelectedRow(equip_id, count) {
+  const equip = EQUIPMENTS.find(e => e.eid === equip_id);
+  if (!equip) return null;
+    const parent = document.getElementById('equip-selected-items')
+  const row = document.createElement("div");
+
+  row.className = "client-info-item";
+
+  const icon = document.createElement("i");
+  icon.className = "fa-solid fa-box";
+    const parent_span = document.createElement("div")
+  const nameSpan = document.createElement("span");
+  nameSpan.textContent = equip.name;
+
+  const typeSpan = document.createElement("span");
+  typeSpan.textContent = ` (${equip.etype})`;
+
+  const countSpan = document.createElement("span");
+  countSpan.textContent = ` × ${count}`;
+
+  parent_span.appendChild(nameSpan)
+  parent_span.appendChild(typeSpan)
+  parent_span.appendChild(countSpan)
+  row.appendChild(icon);
+  row.appendChild(parent_span)
+
+  parent.appendChild(row)
+}
+
+
+function closeEquipemtsSelected(){
+    const sidebar = document.getElementById("equipments-selected");
+    sidebar.classList.remove("show")
+    document.getElementById('equip-selected-items').innerHTML = ''
+}
 
 
 

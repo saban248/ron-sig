@@ -117,6 +117,10 @@ select {
     flex:0;
 }
 
+#equipments-selected{
+    z-index: 1010 !important;
+}
+
 
 
 @keyframes fadeScaleOut {

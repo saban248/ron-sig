@@ -148,7 +148,7 @@
                         <i class="fa-solid fa-map-location"></i>
                          ציוד שיושכר 
                         <div class="equip-selected">
-                            <div class="equip-selected-body">
+                            <div class="equip-selected-body" onclick="showSelectedEquipments()">
                                 <i class="fa-solid fa-cart-shopping"></i>
                                 <span class="equip-selected-count" id="equipcount">0</span>  
                             </div>
@@ -182,12 +182,17 @@
                     <span>לשלב הבא</span>
                 </button>
             </div>
+            <div class="addclient" id="addrent">
+                <button type="button" class="general-button btn-add-client" onclick="addNewRent()">
+                    <span>סיים</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="sidebar" id="clientinfo">
-        <div class="sidebar-title">
+    <div class="sidebar-title">
         <i class="fa-solid fa-circle-xmark" onclick="closeClientDetails()"></i>
         <span id="clientinfoname"></span>
     </div>
@@ -218,5 +223,19 @@
         <div class="client-info-seperator">
             <span>השכרות</span>
         </div>
+    </div>
+</div>
+
+
+<div class="sidebar" id="equipments-selected">
+    <div class="sidebar-title">
+        <i class="fa-solid fa-circle-xmark" onclick="closeEquipemtsSelected()"></i>
+        <span id="equipslectedtitle"></span>
+    </div>
+    <div class="client-info-items" id="equip-selected-items">
+        <div class="client-info-seperator">
+            <span>הציוד שיושכר </span>
+        </div>
+
     </div>
 </div>

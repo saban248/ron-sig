@@ -79,14 +79,13 @@ class ResAddEquipment:
     count:str           = None
     crowd:str           = None
     company:str         = None
+    eid:str             = None
 
     def build(self, breq:dict) -> bool:
         if not breq:return False
         data:dict = json.loads(breq.get("params", "{}"))
         if not data or data.get("file"):return False
-        for key, value in data.items():
-            self.__setattr__(key, value)
-
+        for key, value in data.items():self.__setattr__(key, value)
 
         return all(self.__dict__.keys()) and self.crowd.isdigit() and self.count.isdigit()
 
@@ -121,9 +120,10 @@ class ResNewRent:
         end = get_safe_time_by_picker(self.etime)
         equips = loads_equipments_safe(self.equipments)
         if not self.cid:return ServerMsg.input_invalid
-        if not self.stime or not time.time() < start:return ServerMsg.invalid_stime
+        if not self.stime:return ServerMsg.invalid_stime
         if not self.etime or not start < end:return ServerMsg.invalid_etime
         if not self.equipments or not equips:return ServerMsg.invalid_equipments
         if not self.amount or not self.amount.isdigit():return ServerMsg.input_invalid
         self.amount = int(self.amount)
         return ServerMsg.complete
+

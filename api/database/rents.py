@@ -1,5 +1,9 @@
 import secrets
+from typing import Union
 
+from flask_sqlalchemy.query import Query
+
+from api.database.ptc import RentEquipmentStatus
 from api.ptc import ron_db
 
 
@@ -34,18 +38,37 @@ class ApiRentEquipment:
         ron_db.session.commit()
         return True
 
-    def remove_rent(self, rid:str):
-        return 0
+    @staticmethod
+    def remove_rent(rid:str):
+        rent = ApiRentEquipment.get_rents(True, rid=rid).first()
+        if not rent:return False
+
+        ron_db.session.delete(rent)
+        ron_db.session.commit()
+        return True
 
     @staticmethod
-    def get_rents(source: bool = False, **kwargs):
+    def get_rents(source: bool = False, **kwargs) -> Union[list[dict], Query[RentEquipment]]:
+        __columns__ = RentEquipment.query.filter_by(**kwargs)
+        if source:
+
+            return __columns__
+
         rents = []
-        for rent in RentEquipment.query.filter_by(**kwargs):
-            if not source:
-                __data__ = rent.__dict__
-                del __data__["_sa_instance_state"]
-                rents.append(rent.__dict__)
-                continue
-            rents.append(rent)
+        for rent in __columns__:
+            __data__ = rent.__dict__
+            del __data__["_sa_instance_state"]
+            rents.append(rent.__dict__)
 
         return rents
+
+    @staticmethod
+    def set_flag(cid:str, flag:RentEquipmentStatus):
+        rent:RentEquipment = ApiRentEquipment.get_rents(True, cid=cid).first()
+        if not rent:return False
+        rent.status = flag.code
+
+        ron_db.session.commit()
+        return True
+
+

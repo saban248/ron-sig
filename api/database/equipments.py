@@ -21,8 +21,13 @@ class Equipment(ron_db.Model):
 class ApiEquipment:
 
     @staticmethod
-    def add_equipment(name:str, equip_type:str, count_equip:int, count_people:int, company:str, filename:str):
-        equip = Equipment()
+    def add_equipment(name:str, equip_type:str, count_equip:int, count_people:int, company:str, filename:str, eid:str = None) -> bool:
+        if not eid:
+            equip = Equipment()
+        else:
+            equip = ApiEquipment.get_equipments(True, eid=eid)
+            if not equip:return False
+            equip = equip[0]
         equip.name = name
         equip.etype = equip_type
         equip.count = count_equip
@@ -30,8 +35,10 @@ class ApiEquipment:
         equip.company = company
         equip.img_name = filename
         equip.eid = secrets.token_hex(16)
-        ron_db.session.add(equip)
+        not eid and ron_db.session.add(equip)
         ron_db.session.commit()
+
+        return True
 
     @staticmethod
     def exist(**kwargs) -> Union[bool, Equipment]:

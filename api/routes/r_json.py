@@ -82,8 +82,8 @@ def add_equipment():
     filename = save_image_equipment(request)
     if not filename:
         return SJson.error(ServerMsg.upload_failed)
-
-    completed = ApiEquipment.add_equipment(res.name, res.equip_type, int(res.count), int(res.crowd),res.company, filename)
+    completed = ApiEquipment.add_equipment(res.name, res.equip_type, int(res.count),
+                                           int(res.crowd),res.company, filename, eid=res.eid)
     return SJson.success(ServerMsg.complete)
 
 
@@ -132,5 +132,8 @@ def add_rent():
     breq = get_dictionary_http(request)
     res = ResNewRent()
     status = res.build(breq)
-    ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount)
-    return status
+    if status != ServerMsg.complete:
+        return SJson.error(status)
+
+    #ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount)
+    return SJson.success(status)

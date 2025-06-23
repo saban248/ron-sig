@@ -68,6 +68,8 @@ function cancelNewEquipment(){
         document.getElementById("eqitem"+value.code)?.classList.remove("show");
     }
     document.getElementById("addequip").classList.remove("show")
+    document.getElementById("updateequip").classList.remove("show")
+    EQUIPMENT_INFO_INDEX = ''
 }
 
 
@@ -136,15 +138,19 @@ function NewEquipmentCompleteStep(step){
 
 
 function FinishNewEquipment(){
-    document.getElementById("addequip").classList.add("show")
+    if (!EQUIPMENT_INFO_INDEX){
+        document.getElementById("addequip").classList.add("show")
+    }else{
+        document.getElementById('updateequip').classList.add("show")
+    }
 }
 
 function __valid_step1(value){return value.length>3}
 function __valid_step3(value){return !!parseInt(value)}
-function __valid_step6(value){return Boolean(v.files[0])}
+function __valid_step6(v){return Boolean(v.files[0])}
 
 
-function addNewEquipment(){
+function addNewEquipment(mdata=undefined){
     loading(1)
     on_success = (res) =>{
         if (!res.success){
@@ -155,6 +161,7 @@ function addNewEquipment(){
         }
         loading(0)
         popup(1, res.title, res.notice)
+        setTimeout(()=>{location.reload()}, 1000)
     }
     const data_equip = {
         name:document.getElementById("eqname").value,
@@ -163,13 +170,15 @@ function addNewEquipment(){
         crowd:document.getElementById("eqcrowd").value,
         company:document.getElementById("eqcompany").value
     }
+    if (mdata){
+        Object.assign(data_equip, mdata) 
+    }
     const fileinp = document.getElementById("eqimg")
     const file = fileinp.files[0];
     const data = new FormData();
     
     data.append("file", file);
     data.append("params", JSON.stringify(data_equip))
-    console.log(data)
     $.ajax({
     url: RouteApi.addEquip,
     type: 'POST',
@@ -181,6 +190,10 @@ function addNewEquipment(){
         loading(0)
     }
     });
+}
+
+function updateEquipment(){
+    addNewEquipment({eid:EQUIPMENT_INFO_INDEX})
 }
 
 
@@ -215,6 +228,8 @@ function DeleteEquipment(){
             document.getElementById(eid).remove();
         }
         popup(1, res.title, res.notice)
+        setTimeout(()=>{location.reload()}, 1000)
+        
     }
     const data = {
         eid:eid

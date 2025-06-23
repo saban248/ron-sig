@@ -203,6 +203,68 @@
 
 }
 
+.list-rent-boxes{
+    margin-top: 1.75em;
+    display: flex;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+.rent-box{
+    width: 350px;
+    height: 300px;
+    background: #13282e;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.rent-box-empty{
+    text-align: center;
+    width: 300px;
+    height: 150px;
+    border-radius: 5px;
+    border: 1px solid #acc5cc33;
+}
+.rent-box-empty > i{
+    font-size: 1.75em;
+    color: #17323a;
+    padding: 10px;
+}
+.rent-box-empty > span{
+    color: gray;
+    font-size: 1.25em;
+}
+.rent-b-head{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(232, 255, 255, 0.493);
+    padding: 1px 6px;
+}
+.rent-b-title{
+    font-size: 1.75em;
+    color: whitesmoke;
+
+}
+.rent-b-title > span{
+    text-shadow: 0 0 11px rgba(245, 245, 245, 0.651)
+}
+.rent-b-menu > i{
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+    color: cyan;
+    cursor: pointer;
+    transition: 150ms;
+}
+
+.rent-b-menu > i:active,
+.rent-b-menu > i:hover{
+    background: #2a5663a8;
+    box-shadow: 6px 7px 11px #081214;
+
+}
+
+
 
 
 /* Mobile */

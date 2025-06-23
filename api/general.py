@@ -70,9 +70,9 @@ def save_image_equipment(request:Request):
 
 def get_safe_time_by_picker(_time:str) -> float:
     try:
-        datetime.strptime(_time, "%Y.%m.%d %H:%M").timestamp()
+        return datetime.strptime(_time, "%Y.%m.%d %H:%M").timestamp()
     except Exception as error:
-        return time.time()
+        pass
 
     return 0.0
 
