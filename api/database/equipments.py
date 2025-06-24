@@ -33,7 +33,8 @@ class ApiEquipment:
         equip.count = count_equip
         equip.count_people = count_people
         equip.company = company
-        equip.img_name = filename
+        if filename != ServerConfig.DEFAULT_IMAGE:
+            equip.img_name = filename
         equip.eid = secrets.token_hex(16)
         not eid and ron_db.session.add(equip)
         ron_db.session.commit()

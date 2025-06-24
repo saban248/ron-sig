@@ -18,6 +18,7 @@
     position: relative;
     font-family: 'Arial';
     max-width: 500px;
+    min-width: 350px;
     max-height: 400px;
     border-radius: 7px 7px 0 0;
     min-height: 100px;
@@ -31,6 +32,9 @@
     background-size: 500px 70%;
     transition: 150ms box-shadow;
 
+}
+#mtitle-equipmentmenu{
+    font-size: 16px !important;
 }
 .box-equip-menu{
     position: absolute;
@@ -121,6 +125,9 @@
     }
     .box-equipment{
         width: auto;
+        margin-left: 5%;
+        margin-right: 5%;
         max-height: 600px;
+        min-width: 0;
     }
 }

@@ -15,6 +15,7 @@ CONTENT_TYPE_FORM = "application/x-www-form-urlencoded"
 CONTENT_TYPE_JSON = "application/json"
 CONTENT_TYPE_ARGS = "a"
 
+from PIL import Image
 def get_dictionary_http(req:Request, content_type:str = str()) -> dict:
     _ctype = req.content_type or str()
     if CONTENT_TYPE_FORM in _ctype or CONTENT_TYPE_DATA in _ctype:
@@ -42,13 +43,8 @@ class Pages(Enum):
 
 def verify_is_image(filepath) -> int:
     try:
-        with open(filepath, "rb") as f:
-            data = f.read()
-
-        data = data[120::]
-        for i, b in enumerate(data):
-            if not (0 <= b <= 255):
-                return 8
+        with Image.open(filepath) as img:
+            img.verify()
     except Exception as e:
         return 8
 
@@ -84,3 +80,5 @@ def loads_equipments_safe(equips:str):
         pass
 
     return {}
+
+

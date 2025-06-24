@@ -48,7 +48,7 @@ class ApiRentEquipment:
         return True
 
     @staticmethod
-    def get_rents(source: bool = False, **kwargs) -> Union[list[dict], Query[RentEquipment]]:
+    def get_rents(source: bool = False, **kwargs) -> Union[list[dict], Query]:
         __columns__ = RentEquipment.query.filter_by(**kwargs)
         if source:
 

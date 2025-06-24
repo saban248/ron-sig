@@ -94,7 +94,6 @@ function NewEquipmentCompleteStep(step){
     var valid= false;
     key= null;
     v= null
-    console.log(step)
     if (NewEquipmentStep.step1.code == step){
         key = "name"
         v = document.getElementById("eq"+key).value;

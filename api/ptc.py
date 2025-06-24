@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 
+
 class ServerConfig:
     FILE_NAME_DB        = "roni"
     PATH_UPLOAD         = os.path.join(os.path.join("client","static"), "images")
@@ -21,4 +22,6 @@ ron_app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)
 ron_app.secret_key = binascii.hexlify(os.urandom(8)).decode()
 ron_db = SQLAlchemy(ron_app)
 migrate = Migrate(ron_app, ron_db)
+
+
 

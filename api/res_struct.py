@@ -85,9 +85,11 @@ class ResAddEquipment:
         if not breq:return False
         data:dict = json.loads(breq.get("params", "{}"))
         if not data or data.get("file"):return False
-        for key, value in data.items():self.__setattr__(key, value)
+        for key, value in data.items():
+            self.__setattr__(key, value)
+            if key != "eid" and not value:return False
 
-        return all(self.__dict__.keys()) and self.crowd.isdigit() and self.count.isdigit()
+        return self.crowd.isdigit() and self.count.isdigit()
 
 
 @dataclass
