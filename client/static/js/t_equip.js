@@ -138,10 +138,11 @@ function NewEquipmentCompleteStep(step){
 
 
 function FinishNewEquipment(){
-    if (!EQUIPMENT_INFO_INDEX){
-        document.getElementById("addequip").classList.add("show")
-    }else{
+    if (EQUIPMENT_INFO_INDEX.length == 32){
         document.getElementById('updateequip').classList.add("show")
+        
+    }else{
+        document.getElementById("addequip").classList.add("show")
     }
 }
 
@@ -158,10 +159,10 @@ function addNewEquipment(mdata=undefined){
         }
         else{
             cancelNewEquipment()
+            setTimeout(()=>{location.reload()}, 1000)
         }
         loading(0)
         popup(1, res.title, res.notice)
-        setTimeout(()=>{location.reload()}, 1000)
     }
     const data_equip = {
         name:document.getElementById("eqname").value,

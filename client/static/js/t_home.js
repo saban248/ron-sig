@@ -88,7 +88,7 @@ function NewClientCompleteStep(step){
     else if (step == NewClientSteps.step3.code){
         key = "cid"
         v = document.getElementById(key).value;
-        valid = __valid_step3(v)
+        valid = isValidIsraeliID(v)
     }
     else if (step == NewClientSteps.step4.code){
         key = "address"
@@ -118,7 +118,6 @@ function NewClientCompleteStep(step){
  // STEPS VALID
 function __valid_step1(name){return name.split(" ").length >= 2 && name.length > 6}
  function __valid_phone(phone){return phoneRegex.test(phone) && phone.length  >9;}
-function __valid_step3(cid){return isValidIsraeliID(cid)}
 function __valid_step4(address){return address.length > 5}
 function __valid_step5(email){return emailRegex.test(email)}
 function cancelNewClient(){
