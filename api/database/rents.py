@@ -1,10 +1,17 @@
+import json
 import secrets
+from dataclasses import dataclass
 from typing import Union
 
 from flask_sqlalchemy.query import Query
 
+from api.database.contracts import ApiContract
 from api.database.ptc import RentEquipmentStatus
+from api.database.users import ApiClient
+from api.general import RentEventData
 from api.ptc import ron_db
+
+
 
 
 class RentEquipment(ron_db.Model):
@@ -18,22 +25,24 @@ class RentEquipment(ron_db.Model):
     equipments = ron_db.Column(ron_db.String, nullable=False)
     cid = ron_db.Column(ron_db.String, nullable=False)
     status = ron_db.Column(ron_db.Integer, nullable=False, default=0)
-    amount = ron_db.Column(ron_db.Integer, nullable=False)
+    amount = ron_db.Column(ron_db.Float, nullable=False)
+    contract_id = ron_db.Column(ron_db.String(32), nullable=False)
 
 
 
 class ApiRentEquipment:
 
     @staticmethod
-    def add_rent(address:str, s_rent:str, e_rent:str, equipments:str, cid:str, amount:int):
+    def add_rent(address:str, s_rent:str, e_rent:str, equipments:dict, cid:str, amount:int, contract_id:str):
         rent = RentEquipment()
         rent.rid = secrets.token_hex(16)
         rent.address = address
         rent.start_rent = s_rent
         rent.end_rent = e_rent
-        rent.equipments = equipments
+        rent.equipments = json.dumps(equipments)
         rent.cid = cid
         rent.amount = amount
+        rent.contract_id = contract_id
         ron_db.session.add(rent)
         ron_db.session.commit()
         return True
@@ -51,7 +60,6 @@ class ApiRentEquipment:
     def get_rents(source: bool = False, **kwargs) -> Union[list[dict], Query]:
         __columns__ = RentEquipment.query.filter_by(**kwargs)
         if source:
-
             return __columns__
 
         rents = []
@@ -70,5 +78,22 @@ class ApiRentEquipment:
 
         ron_db.session.commit()
         return True
+
+    @staticmethod
+    def build_rents() -> list[RentEventData]:
+        data = []
+        for rent in ApiRentEquipment.get_rents(True):
+            __rent__ = rent.__dict__
+            del __rent__["_sa_instance_state"]
+            __rent__["equipments"] = json.loads(__rent__["equipments"])
+            client = ApiClient.get_clients(cid=rent.cid)
+            if not client: return data
+            contract = ApiContract.get_contracts(client_id=rent.cid, contract_id=rent.contract_id)
+            if not contract: return data
+            data.append(RentEventData(rent=__rent__, client=client[0], contract=contract[0]))
+        return data
+
+
+
 
 

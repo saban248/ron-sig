@@ -2,6 +2,7 @@ from time import sleep
 
 from flask import request, session
 
+from api.database.contracts import ApiContract
 from api.database.equipments import ApiEquipment
 from api.database.rents import ApiRentEquipment
 from api.database.users import ApiManager, ApiClient
@@ -87,7 +88,6 @@ def add_equipment():
     return SJson.success(ServerMsg.complete)
 
 
-
 @ron_app.route(RouteApi.delete_equip.path, methods=RouteApi.delete_equip.methods)
 def delete_equip():
     if not ShortSession.is_admin(session):
@@ -135,5 +135,7 @@ def add_rent():
     if status != ServerMsg.complete:
         return SJson.error(status)
 
-    #ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount)
+    contract_id = ApiContract.add_contract(res.cid)
+    ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount, contract_id)
+
     return SJson.success(status)

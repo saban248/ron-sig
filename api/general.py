@@ -1,12 +1,14 @@
 import os.path
 import time
 from copy import deepcopy
+from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
 from json import loads
 
 from flask import Request
 from numpy.ma.core import filled
+
 
 from api.ptc import ServerConfig
 
@@ -34,6 +36,7 @@ def get_dictionary_http(req:Request, content_type:str = str()) -> dict:
 class Pages(Enum):
     login = "login.html"
     home = "home.html"
+    contract = "contract.html"
 
     @property
     def val(self):
@@ -80,5 +83,30 @@ def loads_equipments_safe(equips:str):
         pass
 
     return {}
+
+
+@dataclass
+class RentEventData:
+    rent: dict          = None
+    client:dict         = None
+    contract:dict       = None
+
+
+
+
+
+def short_time_until(event_ts: float) -> str:
+    delta = event_ts - datetime.now().timestamp()
+    if delta <= 0:
+        return "0D 00H 00MIN"
+
+    days = int(delta // 86400)
+    hours = int((delta % 86400) // 3600)
+    minutes = int((delta % 3600) // 60)
+
+    return f"{days}d {hours:02d}h {minutes:02d}m"
+
+
+
 
 

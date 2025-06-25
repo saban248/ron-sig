@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Union
 
+from api.database.equipments import ApiEquipment
 from api.general import get_safe_time_by_picker, loads_equipments_safe
 from api.msgs import ServerMsg
 
@@ -110,7 +111,7 @@ class ResNewRent:
     stime:str                   = None
     etime:str                   = None
     equipments:Union[dict, str] = None
-    amount:Union[str, int]      = None
+    amount:Union[str, int, float]      = None
     cid:str                     = None
 
     def build(self, breq:dict) -> ServerMsg:
@@ -125,7 +126,11 @@ class ResNewRent:
         if not self.stime:return ServerMsg.invalid_stime
         if not self.etime or not start < end:return ServerMsg.invalid_etime
         if not self.equipments or not equips:return ServerMsg.invalid_equipments
-        if not self.amount or not self.amount.isdigit():return ServerMsg.input_invalid
-        self.amount = int(self.amount)
+        if not self.amount:return ServerMsg.input_invalid
+        self.equipments = ApiEquipment.build_equipments_selected(equips)
+        try:
+            self.amount = float(self.amount)
+        except ValueError:
+            return ServerMsg.input_invalid
         return ServerMsg.complete
 

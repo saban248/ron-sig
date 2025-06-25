@@ -15,29 +15,88 @@
             </button>
         </div>
         <div class="menu-item">
-            <button type="button" class="general-button btn-t-home btn-refersh">
+            <button type="button" class="general-button btn-t-home btn-refersh" onclick="location.reload()">
                 <i class="fa-solid fa-arrows-rotate"></i>
                 <span>עדכון</span>
             </button>
         </div>
     </div>
+
     <div class="list-rent-boxes">
-        <div class="rent-box-empty">
-            <i class="fa-solid fa-hourglass-end fa-bounce"></i>
-            <span>אין אירועים פעילים</span>
-        </div>
-        <!-- <div class="rent-box">
-            <div class="rent-b-head">
-               <div class="rent-b-title">
-                    <span>אברהם סבן</span>
-               </div>
-               <div class="rent-b-menu">
-                    
-               </div>
+        {% if not rents %}
+            <div class="rent-box-empty">
+                    <i class="fa-solid fa-hourglass-end fa-bounce"></i>
+                    <span>אין אירועים פעילים</span>
             </div>
-            <div class="rent-body"></div>
-        </div> -->
+        {%endif %}
+        {% for event in rents%}
+            <div class="rent-box" id="{{event.rent.rid}}">
+                <div class="rent-b-head">
+                    <div class="rent-b-title">
+                        <span>{{event.client.fullname}}</span>
+                    </div>
+                    <div class="rent-money">
+                        <span class="mlow">{{get_float_string(event.rent.amount)[1]}}.</span> 
+                        <span class="mbig">
+                            {{get_number_clearly(get_float_string(event.rent.amount)[0])}}
+                            <i class="fa-solid fa-shekel-sign mbig-icon"></i>
+                        </span>
+                        
+                    </div>
+                    <div class="rent-b-menu">
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </div>
+                </div>
+                <div class="rent-body">
+                    <div class="div-status">
+                        <div class="rent-box-status">
+                            {% if event.contract.client_signature%}
+                            <div class="box-status"><i class="fa-solid fa-file-signature status-v"></i>
+                                <span>הלקוח חתם</span>
+                            </div>
+                            {%else%}
+                            <div class="box-status"><i class="fa-solid fa-file-signature status-x"></i>
+                                <span>ממתין ללקוח</span>
+                            </div>
+                            {%endif%}
+
+                        </div>
+                        <div class="rent-box-status">
+                            {% if is_end_rent_event(event.rent.end_rent)%}    
+                                <div class="box-status">
+                                    <i class="fa-solid fa-clock status-v"></i>
+                                    <span> האירוע הסתיים</span>
+                                </div>                            
+                            {%else%}
+                                <div class="box-status">
+                                    <i class="fa-solid fa-clock status-x"></i>
+                                    <span>{{get_beautiful_until_time(event.rent.end_rent)}}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="rent-box-status">
+                            <div class="box-status">
+                                <i class="fa-solid fa-boxes-stacked status-v"></i>
+                                <span>{{event.rent.equipments.__len__() }} סוגי ציוד</span>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="rent-footer">
+                    <div class="rent-f-item">
+                        <i class="fa-solid fa-link rent-f-i-link"></i>
+                    </div>
+                    <div class="rent-f-item">
+                        <i class="fa-solid fa-trash-can rent-f-i-trash"></i>
+                    </div>
+                    <div class="rent-f-item">
+                        <i class="fa-solid fa-calendar-check rent-f-i-end"></i>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
+
 </div>
         
 

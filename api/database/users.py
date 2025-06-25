@@ -1,5 +1,9 @@
 import secrets
 
+from typing import Union
+
+from flask_sqlalchemy.query import Query
+
 from api.ptc import ron_db
 
 
@@ -102,15 +106,18 @@ class ApiClient:
         return True
 
     @staticmethod
-    def get_clients(source:bool = False, **kwargs):
-        _client = []
-        for client in Client.query.filter_by(**kwargs):
+    def get_clients(source:bool = False, **kwargs) -> Union[list[Client], Query]:
+        __column__ = Client.query.filter_by(**kwargs)
+        if source:
+            return __column__
+        clients = []
+        for client in __column__:
             if not source:
                 __data__ = client.__dict__
                 del __data__["_sa_instance_state"]
-                _client.append(client.__dict__)
+                clients.append(client.__dict__)
                 continue
-            _client.append(client)
+            clients.append(client)
 
-        return _client
+        return clients
 

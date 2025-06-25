@@ -77,5 +77,16 @@ class ApiEquipment:
 
         return equips
 
+    @staticmethod
+    def build_equipments_selected(equipments:dict):
+        equips = []
+        for e in equipments:
+            equip = ApiEquipment.get_equipments(eid=e["eid"])
+            if not equip:continue
+            equip[0]["selected"] = e['count']
+            equips.append(equip)
+        return equips
+
+
 
 

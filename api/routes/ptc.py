@@ -23,6 +23,7 @@ class RoutePagesBase(Enum):
 class RoutePages(RoutePagesBase):
 
     login           = ["GET"],1
+    contract        = ["GET", "POST"],2
 
 
 class RouteApi(RoutePagesBase):

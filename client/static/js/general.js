@@ -263,7 +263,7 @@ document.addEventListener("click", function(event) {
 function getListEquipmentNames(){
     on_success = (res) =>{
         if (!res.success){
-            popup(1, "שגיאה, רענן את העמוד", "המערכת לא טענה את הנתונים")
+            console.log(res)
             return
         }
         EQUIPMENTS = res.equipment
