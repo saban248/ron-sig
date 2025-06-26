@@ -112,6 +112,7 @@ class ResNewRent:
     etime:str                   = None
     equipments:Union[dict, str] = None
     amount:Union[str, int, float]      = None
+    pre_amount:Union[str, int, float] = None
     cid:str                     = None
 
     def build(self, breq:dict) -> ServerMsg:
@@ -130,7 +131,19 @@ class ResNewRent:
         self.equipments = ApiEquipment.build_equipments_selected(equips)
         try:
             self.amount = float(self.amount)
+            self.pre_amount = float(self.pre_amount)
         except ValueError:
             return ServerMsg.input_invalid
         return ServerMsg.complete
 
+
+@dataclass
+class  ResContract:
+    ctid:str                = None
+    cid:str                 = None
+    rid:str                 = None
+    def build(self, breq:dict):
+        [self.__setattr__(key, value) for key, value in breq.items()]
+        if not self.ctid or not self.cid or not self.rid:return ServerMsg.input_invalid
+
+        return ServerMsg.complete

@@ -37,6 +37,8 @@ class Pages(Enum):
     login = "login.html"
     home = "home.html"
     contract = "contract.html"
+    success = "success.html"
+    error = "error.html"
 
     @property
     def val(self):

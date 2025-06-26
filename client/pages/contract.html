@@ -1,0 +1,201 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חוזה השכרה</title>
+    <link rel="stylesheet" href="static/style/contract.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-contract">
+        <div class="head-contract">
+            <div class="title-contract">
+                <span>חוזה השכרת ציוד</span>
+            </div>
+            <div class="two-sides">
+                <div class="side">
+                    <span>בין 
+                        <span class="side-name">רובוטיקה הגברה ותאורה</span>
+                        להלן: "העסק"
+                    </span>
+                    <div class="side-details">
+                        <div class="d-item">ח.פ 
+                            <span>324104173</span></div>
+                        <div class="d-item">כתובת 
+                            <span>ירושלים</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="side">
+                    <span>ובין 
+                        <span class="side-name">הלקוח</span>
+                        להלן: "המזמין"
+                    </span>
+                    <div class="side-details">
+                        <div class="d-item">שם 
+                            <span>{{client.fullname}}</span></div>
+                        <div class="d-item">כתובת 
+                            <span>{{client.address}}</span>
+                        </div>
+                        <div class="d-item">ת.ז 
+                            <span>{{client.identify}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seperator-text">
+             הואיל והעסק הינו עסק למתן שירותי הגברה ותאורה לאירועים והואיל והמזמין מעוניין לשכור את שירותיו של העסק, והעסק מעוניין לספק את שירותיו כמפורט וכמותנה בהסכם זה 
+        </div>
+        <div class="seperator-text-bold">
+            לפיכך הוחלט, הוצהר, הותנה, והוסכם בין הצדדים כדקלמן:
+        </div>
+        <div class="body-contract">
+            <div class="sections">
+                <div class="general-section">
+                    <span class="s-number">1</span>
+                    <span class="s-text">מבוא להסכם זה מהווה חלק בלתי נפרד ממנו</span>
+                </div>
+                <div class="general-section">
+                    <span class="s-number">2</span>
+                    <div>
+                        <span class="s-text">שירותיו של העסק יסופקו למזמין לפי הפירוט להלן:</span>
+                        <div class="sec-d">
+                            <div class="d-item">
+                                בתאריך
+                                <span>{{rent.start_rent}}</span>
+                            </div>
+                            <div class="d-item">
+                                במקום
+                                <span>{{rent.address}}</span>
+                            </div>
+                            <div class="d-item">
+                                תחילת האירוע
+                                <span>{{rent.start_rent}}</span>
+                                <span class="note">
+                                    הקמת והפעלת הציוד מותנה בכך, שהמזמין מאפשר הקמה ועבודה בזמן סביר מראש ללא הפרעה
+                                </span>
+                            </div>
+                            <div class="d-item">
+                                סיום האירוע
+                                <span>{{rent.end_rent}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="general-section">
+                    <span class="s-number">3</span>
+                    <div>
+                        <span class="s-text">בתמורה לשירותיו של העסק, עפ"י הסכם זה ישלם המזמין לחברה</span>
+                        <span class="user-amount">{{get_number_clearly(rent.amount)}}₪</span>
+                        כולל / לפני מע"מ שישולמו באופן הבא
+                        <div class="sec-d">
+                            <div class="d-item">
+                                תשלום מקדמה:
+                                <span>{{rent.pre_amount}}₪</span>
+                                <span class="note">
+                                    בהעברה בנקאית / ביט / מזומן שישולם מיד עם חתימת ההסכם ולא יאוחר מ48 שעות לאחר החתימה, סכום זה לא יוחזר למזמין בשום נסיבה.
+                                </span>
+                            </div>
+                            <div class="d-item">
+                                יתרת תשלום 
+                                <span>{{rent.amount-rent.pre_amount}}₪</span>
+                                <span class="note">
+                                    שישולם בהגעה של נציג מטעם העסק למקום הארוע, כחצי שעה לאחר הפעלת המערכת בתחילת הארוע, או במידה ויש הסכמה של העסק, עד לתאריך 22.05.2025 עבור כל יום פיגור בתשלום כמפורט בסעיף 3 ישלם המזמין קנס בשווי 200 ₪.
+                                </span>
+                            </div>
+                            <div class="d-item">
+                                פרטי חשבון הבנק של העסק
+                                <span>בנק לאומי 10 סניף 789 חשבון 02541492 על שם רוני מושביץ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="general-section">
+                    <span class="s-number">4</span>
+                    <div>
+                        <span class="s-text">
+                            העסק יספק למזמין שירותי הגברה ותאורה בהתאם למפרט הציוד שסוכם בין הצדדים מראש ומפורט להלן:
+                        </span>
+                        <div class="sec-d">
+                            {% for equip in equipments %}
+                            <div class="d-item">
+                                {{equip.name}}
+                                
+                                <span>כמות: {{equip.count}}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="general-section">
+                    <span class="s-number">5</span>
+                    <span class="s-text">המזמין מצהיר כי האירוע חוקי ומאושר ע"י משטרת ישראל וכל הגורמים הרלוונטים, וכי יש בידו כל האישורים הנדרשים לקיום האירוע. </span>
+                </div>
+                <div class="general-section">
+                    <span class="s-number">6</span>
+                    <span class="s-text">
+                        המזמין מצהיר כי ידוע לו ובאחריותו הבלעדית לוודא כי ישנה אפשרות טכנית, הרשאה וזכות ע"פ חוק להעמיד ולהפעיל את הציוד במקום ובמועד המתוכנן על ידו. ידוע לו כי במידה והציוד יוחרם במהלך האירוע, יהיה באחריותו הבלעדית להשיב את הציוד לעסק בזמן הקצר ביותר עד שבועיים ימים.
+מעבר לשבועיים יחוייב על תשלום פלטה פיוניר בלבד (במידה וכלולה בהשכרה זו) בסכום השכרת הפלטה -  700₪ לכל שבוע שהפלטה לא חוזרת לעסק
+
+                    </span>
+                </div>
+                <div class="general-section">
+                    <span class="s-number">7</span>
+                    <span class="s-text"> המזמין נושא באחראיות מלאה עבור כל נזק שיגרם לציוד במהלך האירוע, על ידי המזמין ו/או אורחיו, עובדיו, ספקיו, עוברי אורח וכל גורם אחר כיוצא בזאת, ומתחייב לשאת בעלות התיקון של הציוד וכל נזק ישיר ו/או עקיף שיגרם לעסק, לרבות, המזמין יישא ויחוייב לפי חוזה זה, בעלות רכישה של ציוד זהה חדש במידה והעסק רואה בכך צורך.</span>
+                </div>
+                <div class="general-section">
+                    <span class="s-number">8</span>
+                    <span class="s-text">במידה והאירוע בוטל מכל סיבה שהיא 48 שעות או פחות לפני תחילת האירוע, המזמין מתחייב לשלם את המקדמה + 50% מיתרת התשלום. במידה והאירוע מסתיים ו/או לא מתקיים לאחר התקנת הציוד במקום הארוע מכל סיבה שהיא, לרבות עפ"י הוראת המשטרה,כל גוף מורשה אחר, המזמין מתחייב לשלם את מלוא התמורה בעבור האירוע (לפי ס'3)) </span>
+                </div>
+                <div class="general-section">
+                    <span class="s-number">9</span>
+                    <span class="s-text">במידה והאירוע עולה על 500 איש יצהיר המזמין על העסק כעוסק באירוע לפי דרישת החוק בדין.</span>
+                </div>
+                <div class="general-section">
+                    <span class="s-number">10</span>
+                    <span class="s-text">לעסק ('רובוטיקה הגברה ותאורה') אין צד בהפקת האירוע ו/או המסיבה ואינו נכלל מבין המארגנים שלה. לעסק אין קשר למתרחש באירוע מלבד מתן שירותי הגברה ותאורה שהוסכמו לפי הסכם זה </span>
+            </div>
+        </div>
+        </div>
+        <div class="seperator-text-bold">
+            באו הצדדים על החתום:
+        </div>
+        <div class="contract-signtures">
+            <div class="client">
+                <div class="sig-title side-name">
+                    <span>{{client.identify}}  - המזמין</span>
+                    <button type="button" class="btn-menu-sig" onclick="clearSig()">
+                        <i class="fa-solid fa-trash-can" ></i>
+                    </button>
+                </div>
+                <canvas id="signature" width="300" height="150" style="border:1px solid #ccc;"></canvas>
+            </div>
+            <div class="owner">
+                <div class="sig-title side-name">
+                    העסק - רובוטיקה הגברה ותאורה 
+                </div>
+                <img src="signature" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
+<script>
+  const canvas = document.getElementById("signature");
+  const signaturePad = new SignaturePad(canvas);
+
+  function clearSig() {
+    signaturePad.clear();
+  }
+
+  function saveSig() {
+    if (signaturePad.isEmpty()) {
+      alert("אנא חתום קודם");
+    } else {
+      const dataURL = signaturePad.toDataURL();
+      console.log(dataURL); // Send to server or store
+    }
+  }
+</script>
+</html>

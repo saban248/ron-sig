@@ -16,7 +16,7 @@ function loading(mode, timeout){
 }
 
 
-function popup(mode, title, msg){
+function popup(mode, title, msg, timeout=undefined){
 
     if (mode == 1){
         document.getElementById('popup-title').innerText = title;
@@ -25,6 +25,9 @@ function popup(mode, title, msg){
     }
     else{
         document.getElementById('popup').style.display = 'none';
+    }
+    if (timeout != undefined){
+        setTimeout(()=>{popup(0)}, timeout)
     }
     
 }

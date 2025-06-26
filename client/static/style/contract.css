@@ -1,0 +1,174 @@
+*{
+    direction:rtl;
+}
+
+.main-contract{
+    height: 100hv;
+    padding-bottom: 30px;
+    
+}
+
+.head-contract{
+    display: flex;
+    flex-direction: column;
+}
+.title-contract{
+    font-size: 2em;
+    text-shadow: 0 0 11px #6e6e6e;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #3333339a;
+}
+
+.two-sides{
+    margin-left: 10%;
+    margin-right: 10%;
+    display: grid;
+    row-gap: 20px;
+
+}
+.side{
+
+}
+.side-name{
+    font-weight: bold;
+    background:black;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+}
+.side-details{
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.d-item{
+    color: black;
+    font-weight: bold;
+}
+.d-item > span{
+    text-decoration-line: underline;
+  text-decoration-style:dotted;
+  text-decoration-color: rgb(138, 138, 138);
+  font-weight: normal;
+}
+
+.seperator-text, .seperator-text-bold{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+    border-top: 1px solid #3333331d;
+}
+.seperator-text-bold{
+    font-weight: bold;
+}
+
+.body-contract{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.sections{
+    display: grid;
+    row-gap: 10px;
+}
+.general-section{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.general-section > *{
+    padding: 10px;
+}
+.sec-d{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.sec-d > .d-item{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+.note{
+    grid-column: span 2;
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+    font-size: 13px;
+    font-weight: bold !important;
+    color: gray;
+}
+.user-amount{
+    color: #64f1d3;
+    background: rgb(50, 45, 45);
+}
+
+.contract-signtures{
+    justify-content: center;
+    display: flex;
+    padding: 10x;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+.client, .owner{
+    padding-bottom: 20px;
+    background: white;
+    border-radius: 20px;
+    text-align: center;
+    
+}
+.sig-title{
+    font-weight: bold;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-menu-sig{
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    padding: 0;
+    background: black;
+    cursor: pointer;
+    transition: 200ms;
+}
+.fa-trash-can{
+    padding: 10px;
+    color: rgb(251, 13, 13);
+    background: rgba(205, 20, 20, 0.461) !important;
+    border-radius: 7px;
+
+
+}
+.btn-menu-sig:hover,
+.btn-menu-sig:active{
+    transform: scale(1.1);
+}
+canvas{
+    background: white;
+    border-radius: 5px;
+}
+@media (max-width: 768px) {
+    .head-contract{
+        align-items: start;
+    }
+    .two-sides, .body-contract, .seperator-text, .seperator-text-bold{
+        margin-left: 1px ;
+        margin-right: 1px ;
+    }
+    .two-sides{
+        width: 100%;
+    }
+    .contract-signtures{
+        flex-direction: column;
+    }
+
+}

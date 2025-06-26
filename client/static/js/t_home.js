@@ -129,3 +129,18 @@ function cancelNewClient(){
     }
     document.getElementById("addclient").classList.remove("show")
 }
+
+
+
+function createContractEventLink(contract_id, client_id, rent_id){
+  const link = `${location.origin}/contract?ctid=${contract_id}&cid=${client_id}&rid=${rent_id}`;
+
+  navigator.clipboard.writeText(link)
+    .then(() => {
+      popup(1, "קישור", "הקישור הועתק!", 1000)
+    })
+    .catch(err => {
+      console.error("Clipboard error:", err);
+      alert("שגיאה בהעתקת הקישור");
+    });
+}

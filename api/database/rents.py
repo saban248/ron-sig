@@ -26,6 +26,7 @@ class RentEquipment(ron_db.Model):
     cid = ron_db.Column(ron_db.String, nullable=False)
     status = ron_db.Column(ron_db.Integer, nullable=False, default=0)
     amount = ron_db.Column(ron_db.Float, nullable=False)
+    pre_amount = ron_db.Column(ron_db.Float, nullable=False)
     contract_id = ron_db.Column(ron_db.String(32), nullable=False)
 
 
@@ -33,7 +34,7 @@ class RentEquipment(ron_db.Model):
 class ApiRentEquipment:
 
     @staticmethod
-    def add_rent(address:str, s_rent:str, e_rent:str, equipments:dict, cid:str, amount:int, contract_id:str):
+    def add_rent(address:str, s_rent:str, e_rent:str, equipments:dict, cid:str, amount:float, pre_amount:float, contract_id:str):
         rent = RentEquipment()
         rent.rid = secrets.token_hex(16)
         rent.address = address
@@ -42,6 +43,7 @@ class ApiRentEquipment:
         rent.equipments = json.dumps(equipments)
         rent.cid = cid
         rent.amount = amount
+        rent.pre_amount = pre_amount
         rent.contract_id = contract_id
         ron_db.session.add(rent)
         ron_db.session.commit()

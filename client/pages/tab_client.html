@@ -168,17 +168,35 @@
         <div class="sidebar-item" id="nritem5">
             <div class="item-title">
                 <i class="fa-regular fa-square" id="nriconstep5" onclick="toggleSidebarItem(5)"></i>    
-                <span>סכום עסקה</span>
+                <span>מקדמה</span>
             </div>
             <div class="item-inpus show" id="nrstep5">
                 <div class="inp-step">
                     <label class="label-inp">
                         <i class="fa-solid fa-shekel-sign"></i>
-                        סכום עיסקה סופי
+                        סכום מקדמה
                     </label>
-                    <input type="tel" id="rmoney" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(5)">
+                    <input type="tel" id="rpreamount" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(5)">
                 </div>
                 <button type="button" class="general-button item-button-step" onclick="NewRentShowNextStep(5)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="nritem6">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="nriconstep6" onclick="toggleSidebarItem(6)"></i>    
+                <span>סכום עסקה</span>
+            </div>
+            <div class="item-inpus show" id="nrstep6">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-shekel-sign"></i>
+                        סכום עיסקה סופי
+                    </label>
+                    <input type="tel" id="rmoney" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(6)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="NewRentShowNextStep(6)">
                     <span>לשלב הבא</span>
                 </button>
             </div>

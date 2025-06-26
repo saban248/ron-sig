@@ -29,6 +29,7 @@ function startRentEquipment(){
         document.getElementById("raddress").value = rent.address;
         document.getElementById("rstarttime").value = rent.starttime;
         document.getElementById("rendtime").value = rent.endtime;
+        document.getElementById("rpreamount").value = rent.preamount;
         document.getElementById('rmoney').value = rent.money;
         const checkAll = () =>{
             for (const [key, value] of Object.entries(NewRentSteps)){
@@ -77,6 +78,7 @@ function addNewRent(){
         etime:document.getElementById('rendtime').value,
         equipments:JSON.stringify(EQUIPMENTS_SELECTED),
         amount:document.getElementById('rmoney').value,
+        pre_amount:document.getElementById('rpreamount').value,
         cid:CLIENT_INFO_INDEX
     }
 
@@ -135,6 +137,11 @@ function NewRentCompleteStep(step){
         valid = Boolean(EQUIPMENTS_SELECTED.length)
     }
     else if (NewRentSteps.step5.code == step){
+        key = "preamount"
+        v = document.getElementById("r"+key).value
+        valid = !!parseInt(v)
+    }
+    else if (NewRentSteps.step6.code == step){
         key = "money"
         v = document.getElementById('r'+key).value
         valid = !!parseInt(v)

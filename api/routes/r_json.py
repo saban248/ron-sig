@@ -136,6 +136,7 @@ def add_rent():
         return SJson.error(status)
 
     contract_id = ApiContract.add_contract(res.cid)
-    ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount, contract_id)
+    ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount,
+                              res.pre_amount, contract_id)
 
     return SJson.success(status)

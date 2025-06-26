@@ -30,8 +30,9 @@ const NewRentSteps = {
     step2: {title:"זמן ההשכרה", code:2},
     step3:{title:'סוף השכרה', code:3},
     step4:{title:"ציוד", code:4},
-    step5:{title:"סכום העסקה", code:5},
-    done:{code:6}
+    step5:{title:"סכום מקדמה", code:5},
+    step6:{title:"סכום העסקה", code:6},
+    done:{code:7}
 }
 
 const ErrorCode = {

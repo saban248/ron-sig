@@ -24,6 +24,7 @@ class RoutePages(RoutePagesBase):
 
     login           = ["GET"],1
     contract        = ["GET", "POST"],2
+    success         = ["GET"], 3
 
 
 class RouteApi(RoutePagesBase):
