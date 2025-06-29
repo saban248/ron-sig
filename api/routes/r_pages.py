@@ -11,7 +11,7 @@ from api.database.users import ApiClient, ApiManager
 from api.general import get_dictionary_http, Pages
 from api.msgs import SJson, ServerMsg
 from api.ptc import ron_app
-from api.res_struct import ResContract
+from api.res_struct import ResContract, ResContractUser
 from api.routes.ptc import RoutePages, ShortSession
 
 
@@ -52,7 +52,7 @@ def contract():
         return rerror()
     res = ResContract()
     status = res.build(breq)
-    if status  != ServerMsg.complete:
+    if status != ServerMsg.complete:
         return rerror(status)
 
     client = ApiClient.get_clients(cid=res.cid)
@@ -63,8 +63,3 @@ def contract():
                            equipments=json.loads(rent[0]["equipments"])[0])
 
 
-
-
-string = "sdfsf"
-strign2 = "sfsdf'"
-print(string)

@@ -25,7 +25,7 @@ class RoutePagesBase(Enum):
 class RoutePages(RoutePagesBase):
 
     login           = ["GET"],1
-    contract        = ["GET", "POST"],2
+    contract        = ["GET"],2
     success         = ["GET"], 3
 
 
@@ -40,6 +40,7 @@ class RouteApi(RoutePagesBase):
     get_equip = ["POST"],7
     add_rent = ["POST"], 8,
     settings = ["POST"], 9
+    do_contract     = ["POST"], 10
 
 class SettingsApi(Enum):
 

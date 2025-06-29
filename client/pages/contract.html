@@ -176,11 +176,17 @@
             <div class="client">
                 <div class="sig-title side-name">
                     <span>המזמין - {{client.identify}}</span>
+                    {%if not contract.client_signature %}
                     <button type="button" class="btn-menu-sig" onclick="clearSignature()">
                         <i class="fa-solid fa-trash-can" ></i>
                     </button>
+                    {%endif%}
                 </div>
-                <canvas id="client-signature" width="300" height="150" style="border:1px solid #ccc;"></canvas>
+                {% if not contract.client_signature %}
+                    <canvas id="client-signature" width="300" height="150" style="border:1px solid #ccc;"></canvas>
+                {%else%}
+                    <img src="{{contract.client_signature.decode()}}" alt="">
+                {%endif%}
             </div>
             <div class="owner">
                 <div class="sig-title side-name">
@@ -191,14 +197,27 @@
             </div>
         </div>
         <div class="accept">
+            {% if contract.client_signature %}
+                <div class="accept-signed">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div class="signed-time">
+                        <span class="stitle">החוזה נחתם בתאריך</span>
+                        <span class="time">{{get_as_ctime(contract.time_signed)}}</span>
+                    </div>
+                </div>
+            {%else%}
             <button type="button" class="btn-accept" onclick="AcceptAndSign()">
                 <i class="fa-solid fa-square-check"></i>
                 <span>מאשר את החוזה</span>
             </button>
+            {%endif%}
         </div>
     </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/inputmask/dist/jquery.inputmask.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
+
 <script src="static/js/contract.js"> </script>
 <script src="static/js/general.js"> </script>
 </html>

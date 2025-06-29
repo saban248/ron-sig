@@ -182,6 +182,35 @@ canvas{
     background: white;
     border-radius: 5px;
 }
+
+.accept-signed{
+    display: flex;
+    background: rgb(22, 21, 21);
+    width: 20%;
+    border-radius: 4px;
+
+}
+.accept-signed > i{
+    font-size: 2em;
+    color: cyan;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 11px #0e4445;
+}
+.accept-signed > .signed-time{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #0000001a;
+    color: rgb(199, 201, 202);
+}
+.signed-time > .stitle{
+    padding: 0 10px 10px 10px;
+}
+.signed-time > .time{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
 @media (max-width: 768px) {
     .head-contract{
         align-items: start;
@@ -197,6 +226,9 @@ canvas{
         flex-direction: column;
     }
     .btn-accept{
+        width: 100%;
+    }
+    .accept-signed{
         width: 100%;
     }
 

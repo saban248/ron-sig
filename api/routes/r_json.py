@@ -10,7 +10,7 @@ from api.general import get_dictionary_http, save_image_equipment
 from api.msgs import ServerMsg, SJson
 from api.ptc import ron_app, ron_db
 from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment, ResEquip, \
-    ResNewRent, ResSettings
+    ResNewRent, ResSettings, ResContractUser
 from api.routes.ptc import RouteApi, ShortSession, SettingsApi
 
 
@@ -166,3 +166,17 @@ def settings():
 
 
     return SJson.success(ServerMsg.complete)
+
+
+@ron_app.route(RouteApi.do_contract.path, methods=RouteApi.do_contract.methods)
+def do_contract():
+
+    breq = get_dictionary_http(request)
+    res = ResContractUser()
+    status = res.build(breq)
+    if status != ServerMsg.complete:
+        return SJson.error(status)
+    status = ApiContract.do_sign_client(res.ctid, res.signature.encode())
+    if not status:return SJson.error(ServerMsg.input_invalid)
+
+    return SJson.success(status)

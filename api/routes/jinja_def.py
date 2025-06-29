@@ -25,3 +25,7 @@ def is_end_rent_event(_time:str):
 @ron_app.template_global()
 def get_beautiful_until_time(_time:str):
     return short_time_until(get_safe_time_by_picker(_time))
+
+@ron_app.template_global()
+def get_as_ctime(_time:str):
+    return time.ctime(float(_time))
