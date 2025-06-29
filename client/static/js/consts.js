@@ -10,7 +10,8 @@ const RouteApi = {
     addEquip:"/add_equip",
     deleteEquip:'/delete_equip',
     getEquip:'/get_equip',
-    addRent:'/add_rent'
+    addRent:'/add_rent',
+    Settings:"/settings"
 
 }
 
@@ -51,3 +52,8 @@ const NewEquipmentStep = {
     done:{code:0}
 }
 
+
+
+const SettingsApi = {
+    update_signature:1
+}

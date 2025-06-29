@@ -1,9 +1,11 @@
 import binascii
 import os
+from dataclasses import dataclass
 from enum import Enum
 
 from flask.sessions import SessionMixin
 
+from api.database.users import Manager
 
 
 class RoutePagesBase(Enum):
@@ -36,8 +38,16 @@ class RouteApi(RoutePagesBase):
     add_equip = ["POST"], 5
     delete_equip = ["POST"], 6
     get_equip = ["POST"],7
-    add_rent = ["POST"], 8
+    add_rent = ["POST"], 8,
+    settings = ["POST"], 9
 
+class SettingsApi(Enum):
+
+    update_signature = 1
+
+    @property
+    def code(self):
+        return super().value
 
 
 class ShortSession:
@@ -56,7 +66,15 @@ class ShortSession:
         session["nonce"] = nonce
 
         return nonce
+    @staticmethod
+    def get_admin_details(session:SessionMixin) -> dict:
+        return session.get("details", {})
 
+    @staticmethod
+    def set_admin_details(session:SessionMixin, data:dict):
+        session['details'] = data
     @staticmethod
     def valid_nonce(session:SessionMixin, breq:dict):
         return session.get("nonce", str(None)) == breq.get("nonce")
+
+

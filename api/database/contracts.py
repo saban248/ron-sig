@@ -19,11 +19,12 @@ class Contracts(ron_db.Model):
 class ApiContract:
 
     @staticmethod
-    def add_contract(client_id:str):
+    def add_contract(client_id:str, owner_signature:bytes):
         contract = Contracts()
 
         contract.contract_id = secrets.token_hex(16)
         contract.client_id = client_id
+        contract.owner_signature = owner_signature
 
         ron_db.session.add(contract)
         ron_db.session.commit()

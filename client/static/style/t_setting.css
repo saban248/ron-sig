@@ -1,0 +1,55 @@
+
+
+.settings{
+    border-bottom: none;
+    display: block;
+}
+
+.setting-item{
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    background: #f8f5f5;
+}
+.s-title{
+    font-size: 1.25em;
+}
+.s-body{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-setting{
+    width: 150px;
+    padding: 10px;
+}
+
+.setting-status{
+    padding: 10px;
+}
+.setting-status > i{
+    padding: 10px;
+    border-radius: 10px;
+    background: #e1e1e1;
+}
+
+.setting-status > i.success{
+    color: rgb(32, 159, 32);
+    
+}
+.setting-status > i.invalid{
+    color: rgb(202, 45, 45);
+
+}
+
+#sig-setting{
+    background: white;
+    border:1px solid #000;
+    width: 100%;
+}
+
+
+

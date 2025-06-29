@@ -7,7 +7,7 @@ from flask import session, request, jsonify, render_template, redirect, url_for,
 from api.database.contracts import ApiContract
 from api.database.equipments import ApiEquipment
 from api.database.rents import ApiRentEquipment
-from api.database.users import ApiClient
+from api.database.users import ApiClient, ApiManager
 from api.general import get_dictionary_http, Pages
 from api.msgs import SJson, ServerMsg
 from api.ptc import ron_app
@@ -61,3 +61,10 @@ def contract():
     if not client or not rent or not ct:return rerror(ServerMsg.input_invalid)
     return render_template(Pages.contract.val, client=client[0], rent=rent[0], contract=ct[0],
                            equipments=json.loads(rent[0]["equipments"])[0])
+
+
+
+
+string = "sdfsf"
+strign2 = "sfsdf'"
+print(string)

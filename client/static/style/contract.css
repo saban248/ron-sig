@@ -152,6 +152,32 @@
 .btn-menu-sig:active{
     transform: scale(1.1);
 }
+
+.accept{
+    border-top: 1px solid rgb(138, 138, 138);
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    
+}
+.btn-accept{
+    width: 50%;
+    padding: 10px;
+    border: 0;
+    outline: none;
+    background: #0e4445;
+    color: #f5f0f0;
+    font-weight:bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 200ms;
+}
+.btn-accept:active,
+.btn-accept:hover{
+    transform: scale(1.1);
+}
 canvas{
     background: white;
     border-radius: 5px;
@@ -169,6 +195,9 @@ canvas{
     }
     .contract-signtures{
         flex-direction: column;
+    }
+    .btn-accept{
+        width: 100%;
     }
 
 }

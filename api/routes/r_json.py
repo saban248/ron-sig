@@ -8,9 +8,10 @@ from api.database.rents import ApiRentEquipment
 from api.database.users import ApiManager, ApiClient
 from api.general import get_dictionary_http, save_image_equipment
 from api.msgs import ServerMsg, SJson
-from api.ptc import ron_app
-from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment, ResEquip, ResNewRent
-from api.routes.ptc import RouteApi, ShortSession
+from api.ptc import ron_app, ron_db
+from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment, ResEquip, \
+    ResNewRent, ResSettings
+from api.routes.ptc import RouteApi, ShortSession, SettingsApi
 
 
 @ron_app.route(RouteApi.auth.path, methods=RouteApi.auth.methods)
@@ -25,7 +26,10 @@ def auth():
     elif not ShortSession.valid_nonce(session, breq):
         return SJson.error("תטעין את העמוד מחדש")
 
-    session["is_admin"] = True
+    ShortSession.set_admin(session)
+    manager = ApiManager.get_manager(name=res.user, password=res.password)
+    manager['signature'] = ''
+    ShortSession.set_admin_details(session, manager)
     return SJson.success(ServerMsg.complete)
 
 
@@ -135,8 +139,30 @@ def add_rent():
     if status != ServerMsg.complete:
         return SJson.error(status)
 
-    contract_id = ApiContract.add_contract(res.cid)
+    manager = ApiManager.get_manager(True, mid=ShortSession.get_admin_details(session)["mid"])
+    contract_id = ApiContract.add_contract(res.cid, manager.signature)
     ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount,
                               res.pre_amount, contract_id)
 
     return SJson.success(status)
+
+
+@ron_app.route(RouteApi.settings.path, methods=RouteApi.settings.methods)
+def settings():
+    e_invalid = SJson.error(ServerMsg.input_invalid)
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    breq = get_dictionary_http(request)
+    res = ResSettings()
+    if not res.build(breq):
+        return e_invalid
+
+    if res.action_id is SettingsApi.update_signature.code:
+        manager = ApiManager.get_manager(True, mid=ShortSession.get_admin_details(session).get("mid"))
+        if not manager:return e_invalid
+        manager.signature = res.signature.encode()
+        ron_db.session.commit()
+
+
+    return SJson.success(ServerMsg.complete)

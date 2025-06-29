@@ -1,0 +1,63 @@
+
+<div class="tab-client-home">
+    <div class="tab-menu-equip">
+        <div class="menu-item" onclick="location.reload()">
+            <button type="button" class="general-button btn-t-home btn-t-eq-new">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                עדכון
+            </button>
+        </div>
+    </div>
+    <div class="settings">
+        <div class="setting-item">
+            <div class="s-title">חתימה כללית לחוזים</div>
+            <div class="s-body">
+                <button type="button" class="general-button btn-setting" onclick="openSettingSignature()">
+                    <span>הגדר</span>
+                    <i class="fa-solid fa-signature"></i>
+                </button>
+                <div class="setting-status">
+                    <i class="fa-solid fa-circle-check success"></i>
+                </div>
+            </div>
+            <div class="s-footer">
+                
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="sidebar" id="signature">
+    <div class="sidebar-title">
+        <i class="fa-solid fa-circle-xmark" onclick="closeSettingSignature()"></i>
+        <span>הגדרת חתימה לחוזים</span>
+    </div>
+    <div class="sidebar-items" id="signatures">
+        <div class="sidebar-item" id="sitem1">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="siconstep1" onclick="toggleSidebarItemSetting(1)"></i>    
+                <span>חתימה</span>
+            </div>
+            <div class="item-inpus show" id="sstep1">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-signature"></i>
+                        חתימה שתוצג בחוזה
+                        <div class="equip-selected">
+                            <div class="equip-selected-body" onclick="sOwner.clear()">
+                                <i class="fa-solid fa-trash-can"></i> 
+                            </div>
+                        </div>
+                    </label>
+                    <canvas id="sig-setting"></canvas>
+                </div>
+                <button type="button" class="general-button btn-add-client" onclick="setSignature()">
+                    <span>עדכן חתימה</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>

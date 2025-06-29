@@ -1,6 +1,6 @@
 
 
-.tab-menu-home, .tab-menu-clients, .tab-menu-equip{
+.tab-menu-home, .tab-menu-clients, .tab-menu-equip, .settings{
     margin-top: 2em;
     margin-right: 10%;
     margin-left: 10%;
@@ -373,7 +373,7 @@
 /* Mobile */
 @media (max-width: 768px) {
     
-    .tab-menu-home, .tab-menu-clients, .tab-menu-equip, .list-rent-boxes{
+    .tab-menu-home, .tab-menu-clients, .tab-menu-equip, .list-rent-boxes, .settings{
         margin-left: 1%;
         margin-right: 1%;
         width: auto !important;

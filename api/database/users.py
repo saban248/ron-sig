@@ -20,6 +20,7 @@ class Manager(ron_db.Model):
     ip = ron_db.Column(ron_db.String, nullable=False)
     address = ron_db.Column(ron_db.String, nullable=False)
     company_name = ron_db.Column(ron_db.String, nullable=False)
+    signature   = ron_db.Column(ron_db.LargeBinary, nullable=True)
 
 
 class ApiManager:
@@ -54,6 +55,17 @@ class ApiManager:
     def login(name, password):
         return Manager.query.filter_by(name=name, password=password).first()
 
+    @staticmethod
+    def get_manager(source:bool = False, **kwargs) -> Union[dict, Manager]:
+        manager = Manager.query.filter_by(**kwargs).first()
+        if source:return manager
+        mdict = manager.__dict__
+        del mdict['_sa_instance_state']
+        return mdict
+
+    @staticmethod
+    def get_managers():
+        pass
 
 
 class Client(ron_db.Model):
@@ -120,4 +132,6 @@ class ApiClient:
             clients.append(client)
 
         return clients
+
+
 

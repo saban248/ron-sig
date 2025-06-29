@@ -7,6 +7,7 @@ from typing import Union
 from api.database.equipments import ApiEquipment
 from api.general import get_safe_time_by_picker, loads_equipments_safe
 from api.msgs import ServerMsg
+from api.routes.ptc import SettingsApi
 
 
 @dataclass
@@ -147,3 +148,21 @@ class  ResContract:
         if not self.ctid or not self.cid or not self.rid:return ServerMsg.input_invalid
 
         return ServerMsg.complete
+
+
+@dataclass
+class ResSettings:
+    signature:str               = None
+    action_id:int               = None
+
+    def build(self, breq:dict):
+        action_id:str|int = str(breq.get("action", -1))
+        if action_id == -1 or not action_id.isdigit():
+            return False
+        self.action_id = int(action_id)
+        [self.__setattr__(key, value) for key, value in breq.items()]
+
+        match self.action_id:
+            case SettingsApi.update_signature.code:
+                return self.signature
+        return True

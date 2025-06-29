@@ -4,9 +4,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>חוזה השכרה</title>
     <link rel="stylesheet" href="static/style/contract.css">
+    <link rel="stylesheet" href="static/style/general.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+    </div>
+    <div class="popup-overlay" id="popup">
+        <div class="popup-box">
+            <h2 id="popup-title">Title</h2>
+                <p id="popup-message">Message</p>
+            <button onclick="popup(0)">OK</button>
+        </div>
+    </div>
     <div class="main-contract">
         <div class="head-contract">
             <div class="title-contract">
@@ -164,38 +175,30 @@
         <div class="contract-signtures">
             <div class="client">
                 <div class="sig-title side-name">
-                    <span>{{client.identify}}  - המזמין</span>
-                    <button type="button" class="btn-menu-sig" onclick="clearSig()">
+                    <span>המזמין - {{client.identify}}</span>
+                    <button type="button" class="btn-menu-sig" onclick="clearSignature()">
                         <i class="fa-solid fa-trash-can" ></i>
                     </button>
                 </div>
-                <canvas id="signature" width="300" height="150" style="border:1px solid #ccc;"></canvas>
+                <canvas id="client-signature" width="300" height="150" style="border:1px solid #ccc;"></canvas>
             </div>
             <div class="owner">
                 <div class="sig-title side-name">
-                    העסק - רובוטיקה הגברה ותאורה 
+                    <span>העסק - רובוטיקה הגברה ותאורה</span>
+  
                 </div>
-                <img src="signature" alt="">
+                <img src="{{contract.owner_signature.decode()}}" alt="">
             </div>
+        </div>
+        <div class="accept">
+            <button type="button" class="btn-accept" onclick="AcceptAndSign()">
+                <i class="fa-solid fa-square-check"></i>
+                <span>מאשר את החוזה</span>
+            </button>
         </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js"></script>
-<script>
-  const canvas = document.getElementById("signature");
-  const signaturePad = new SignaturePad(canvas);
-
-  function clearSig() {
-    signaturePad.clear();
-  }
-
-  function saveSig() {
-    if (signaturePad.isEmpty()) {
-      alert("אנא חתום קודם");
-    } else {
-      const dataURL = signaturePad.toDataURL();
-      console.log(dataURL); // Send to server or store
-    }
-  }
-</script>
+<script src="static/js/contract.js"> </script>
+<script src="static/js/general.js"> </script>
 </html>
