@@ -158,7 +158,7 @@ class ResContractUser(ResContract):
         if status != ServerMsg.complete:
             return status
         signature = breq.get("signature", "")
-        if not signature or len(signature) < 7000:
+        if not signature or len(signature) < 500:
             return ServerMsg.input_invalid
 
         return status

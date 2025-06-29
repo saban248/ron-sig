@@ -1,7 +1,7 @@
 const client_canva = document.getElementById("client-signature");
-if (client_canva){
-    const sClient = new SignaturePad(client_canva);
-}
+
+const sClient = new SignaturePad(client_canva);
+
 
 
 
@@ -11,7 +11,7 @@ function clearSignature() {
 
 function AcceptAndSign() {
    const sig = sClient.toDataURL()
-   if (sig.length < 7000){
+   if (sig.length < 4000){
     popup(1, "שם לב", "החתימה קצרה מדיי")
     sClient.clear();
     return
