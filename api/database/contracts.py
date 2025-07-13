@@ -1,4 +1,5 @@
 import secrets
+from time import time
 
 from flask_sqlalchemy.query import Query
 
@@ -43,3 +44,22 @@ class ApiContract:
             contracts.append(contract.__dict__)
 
         return contracts
+
+    @staticmethod
+    def get_contract(source:bool = True, **kwargs) -> Contracts:
+        contract = Contracts.query.filter_by(**kwargs).first()
+        if source:
+            return contract
+        __data__ = contract.__dict__
+        del __data__["_sa_instance_state"]
+        return  __data__
+
+    @staticmethod
+    def do_sign_client(ctid:str, signature:bytes):
+        contract = ApiContract.get_contract(contract_id=ctid)
+        if not contract:return False
+
+        contract.client_signature = signature
+        contract.time_signed = time()
+        ron_db.session.commit()
+        return True

@@ -140,6 +140,7 @@ class ResNewRent:
 
 @dataclass
 class  ResContract:
+    signature:str           = None
     ctid:str                = None
     cid:str                 = None
     rid:str                 = None
@@ -148,6 +149,19 @@ class  ResContract:
         if not self.ctid or not self.cid or not self.rid:return ServerMsg.input_invalid
 
         return ServerMsg.complete
+
+@dataclass
+class ResContractUser(ResContract):
+
+    def build(self, breq:dict):
+        status = super().build(breq)
+        if status != ServerMsg.complete:
+            return status
+        signature = breq.get("signature", "")
+        if not signature or len(signature) < 500:
+            return ServerMsg.input_invalid
+
+        return status
 
 
 @dataclass
