@@ -33,13 +33,10 @@ class ApiEquipment:
         equip.count = count_equip
         equip.count_people = count_people
         equip.company = company
-        if filename != ServerConfig.DEFAULT_IMAGE:
-            if equip.img_name:
-                try:
-                    equip.img_name != ServerConfig.DEFAULT_IMAGE and os.remove(os.path.join(ServerConfig.PATH_UPLOAD, equip.img_name))
-                except OSError:
-                    pass
-        equip.img_name = filename
+        if eid and filename == ServerConfig.DEFAULT_IMAGE:
+            pass
+        else:
+            equip.img_name = filename
         equip.eid = secrets.token_hex(16)
         not eid and ron_db.session.add(equip)
         ron_db.session.commit()

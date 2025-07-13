@@ -19,6 +19,19 @@ class ServerMsg(Enum):
     invalid_etime           = "תאריך סיום האירוע לא תקין", 12
     invalid_equipments      = "רשימת ציוד לא תקינה", 13
     invalid_status_rent     = "תצוגת האירועים השתבשה, רענן את הדף", 14
+    invalid_name_client    = "שם הלקוח לא תקין, רשום שם מלא", 15
+    invalid_phone           = "מספר הפאלפון לא תקין", 16
+    invalid_identify        = "ת.ז לא תקין", 17
+    invalid_address         = "כתובת לא תקינה", 18
+    invalid_cid_param       = "מזהה לקוח לא תקין", 19
+    invalid_amount          = "סכום עיסקה לא תקין", 20
+    invalid_pre_amount      = "מקדמה לא תקינה", 21
+    invalid_name_equipment  = "שם הציוד לא תקין", 22
+    invalid_equip_type      = "שם סוג הציוד לא תקין", 23
+    invalid_equip_count     = "כמות הציודים לא תקין", 24
+    invalid_equip_crowd     = "התאמת כמות האנשים לציוד לא תקינה", 25
+    invalid_equip_company   = "שם חברת הציוד לא תקין", 26
+
 
     @property
     def code(self):

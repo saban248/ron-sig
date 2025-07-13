@@ -40,8 +40,10 @@ def add_client():
     res = ReqAddClient()
     if not ShortSession.is_admin(session):
         return SJson.error(ServerMsg.access_denied)
-    if not res.build(breq):
-        return SJson.error(ServerMsg.add_client_failed)
+
+    msg = res.build(breq)
+    if msg != ServerMsg.complete:
+        return SJson.error(msg)
 
     if ApiClient.exist(res.phone, res.identify):
         return SJson.error(ServerMsg.user_exist)
@@ -82,15 +84,16 @@ def add_equipment():
 
     breq = get_dictionary_http(request)
     res = ResAddEquipment()
-    if not res.build(breq):
-        return SJson.error(ServerMsg.add_equip_failed)
+    msg = res.build(breq)
+    if msg != ServerMsg.complete:
+        return SJson.error(msg)
 
     filename = save_image_equipment(request)
     if not filename:
         return SJson.error(ServerMsg.upload_failed)
     completed = ApiEquipment.add_equipment(res.name, res.equip_type, int(res.count),
                                            int(res.crowd),res.company, filename, eid=res.eid)
-    return SJson.success(ServerMsg.complete)
+    return SJson.success(msg)
 
 
 @ron_app.route(RouteApi.delete_equip.path, methods=RouteApi.delete_equip.methods)

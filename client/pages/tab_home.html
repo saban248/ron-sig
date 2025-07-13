@@ -19,9 +19,9 @@
     <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
         <span id="mtitle-linkmenu" style="opacity: 0.6;"></span>
     </div>
-    <div class="general-menu-item" onclick="copyLink()">
+    <div class="general-menu-item" onclick="sendToClientWhatsApp()">
         <i class="fa-solid fa-link"></i>
-        <span>העתק</span>
+        <span>שלח ללקוח</span>
     </div>
     <div class="general-menu-item" onclick="window.open(LINK_CONTRACT)">
         <i class="fa-solid fa-arrow-up-right-from-square" style="color: #63E6BE;"></i>
@@ -54,7 +54,7 @@
         {% if not rents %}
             <div class="rent-box-empty">
                     <i class="fa-solid fa-hourglass-end fa-bounce"></i>
-                    <span>אין אירועים פעילים</span>
+                    <span>אין אירועים להצגה</span>
             </div>
         {%endif %}
         {% for event in rents%}
@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <div class="rent-footer">
-                    <div class="rent-f-item" onclick="showMenuLink('linkmenu', event, '{{event.rent.contract_id}}', '{{event.client.cid}}', '{{event.rent.rid}}')">
+                    <div class="rent-f-item" onclick="showMenuLink('linkmenu', event, '{{event.rent.contract_id}}', '{{event.client.cid}}', '{{event.rent.rid}}', '{{event.client.phone}}')">
                         <i class="fa-solid fa-link rent-f-i-link"></i>
                     </div>
                     <div class="rent-f-item" onclick="showMenuDeleteRent('deleterentmenu', '{{event.rent.rid}}', event)">

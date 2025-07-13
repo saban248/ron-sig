@@ -38,23 +38,20 @@ class ReqAddClient:
     address:str     = None
     email:str       = None
 
-    def build(self, breq:dict) -> bool:
+    def build(self, breq:dict) -> ServerMsg:
         self.name:str = breq.get("name")
         self.phone = breq.get("phone")
         self.identify = breq.get("cid")
         self.address = breq.get("address", "Unknown")
-        self.email = breq.get("email")
-        if not all((self.name, self.phone, self.identify)):
-            return False
-        elif not self.name.split(" ").__len__() >= 2:
-            return False
+        self.email = breq.get("email", "unknown@gmail.com")
+        if not self.name or not self.name.split(" ").__len__() >= 2:
+            return ServerMsg.invalid_name_client
         elif not self.phone.__len__() >= 10 and self.phone.isdigit():
-            return False
-        elif not self.identify.__len__() == 9 and self.identify.isdigit():
-            return False
+            return ServerMsg.invalid_phone
+        elif not self.identify.__len__() == 9 or not self.identify.isdigit():
+            return ServerMsg.invalid_identify
 
-
-        return True
+        return ServerMsg.complete
 
 
 @dataclass
@@ -78,20 +75,30 @@ class ResDeleteClient:
 class ResAddEquipment:
     name:str            = None
     equip_type:str      = None
-    count:str           = None
-    crowd:str           = None
+    count:Union[str, int]           = None
+    crowd:Union[str, int]           = None
     company:str         = None
     eid:str             = None
 
-    def build(self, breq:dict) -> bool:
-        if not breq:return False
+    def build(self, breq:dict) -> ServerMsg:
+        if not breq:return ServerMsg.input_invalid
         data:dict = json.loads(breq.get("params", "{}"))
-        if not data or data.get("file"):return False
-        for key, value in data.items():
-            self.__setattr__(key, value)
-            if key != "eid" and not value:return False
+        if not data:
+            return ServerMsg.input_invalid
 
-        return self.crowd.isdigit() and self.count.isdigit()
+        for key, value in data.items(): self.__setattr__(key, value)
+        if not self.name or not self.name.__len__() > 3:
+            return ServerMsg.invalid_name_equipment
+        elif not self.equip_type or not self.equip_type.__len__() > 3:
+            return ServerMsg.invalid_equip_type
+        elif not is_int(self.count):
+            self.count = 0
+        elif not is_int(self.crowd):
+            self.crowd = 0
+        elif not self.company:
+            return ServerMsg.invalid_equip_company
+
+        return ServerMsg.complete
 
 
 @dataclass
@@ -119,22 +126,32 @@ class ResNewRent:
     def build(self, breq:dict) -> ServerMsg:
         if not breq:return ServerMsg.input_invalid
         [self.__setattr__(key, value) for key, value in breq.items()]
-        if not self.address:return ServerMsg.input_invalid
-
+        self.amount = breq.get("amount", 0)
+        self.pre_amount = breq.get("pre_amount", 0) or 0
+        if not self.address:
+            return ServerMsg.invalid_address
         start = get_safe_time_by_picker(self.stime)
         end = get_safe_time_by_picker(self.etime)
         equips = loads_equipments_safe(self.equipments)
-        if not self.cid:return ServerMsg.input_invalid
-        if not self.stime:return ServerMsg.invalid_stime
-        if not self.etime or not start < end:return ServerMsg.invalid_etime
-        if not self.equipments or not equips:return ServerMsg.invalid_equipments
-        if not self.amount:return ServerMsg.input_invalid
+        if not start:
+            return ServerMsg.invalid_stime
+        elif not self.cid:
+            return ServerMsg.invalid_cid_param
+        elif not end:
+            return ServerMsg.invalid_etime
+        elif not self.stime < self.etime:
+            return ServerMsg.invalid_stime
+        elif not self.equipments or not equips:
+            return ServerMsg.invalid_equipments
+        elif not is_int(self.amount) or is_int(self.amount) and not int(self.amount):
+            return ServerMsg.invalid_amount
+        elif not is_int(self.pre_amount):
+            return ServerMsg.invalid_pre_amount
+
         self.equipments = ApiEquipment.build_equipments_selected(equips)
-        try:
-            self.amount = float(self.amount)
-            self.pre_amount = float(self.pre_amount)
-        except ValueError:
-            return ServerMsg.input_invalid
+        self.amount = float(self.amount)
+        self.pre_amount = float(self.pre_amount)
+
         return ServerMsg.complete
 
 

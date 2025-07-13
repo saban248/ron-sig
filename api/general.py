@@ -65,7 +65,6 @@ def verify_is_image(filepath) -> int:
     return 0
 
 
-
 def save_image_equipment(request:Request):
     file = request.files.get('file')
     if not file or file.filename == '':return ServerConfig.DEFAULT_IMAGE

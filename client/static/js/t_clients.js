@@ -147,7 +147,6 @@ function NewRentCompleteStep(step){
         valid = !!parseInt(v)
     }
     if (valid){
-        ManagerCache.addStepRent(key, v)
         icon.classList.add("done");
         icon.classList.add("fa-square-check")
         icon.classList.remove("fa-square"); 
@@ -156,6 +155,7 @@ function NewRentCompleteStep(step){
         icon.classList.remove("fa-square-check")
         icon.classList.add("fa-square"); 
     }
+    ManagerCache.addStepRent(key, v)
 }
 
 function __valid_step2(value){return value && !isNaN(new Date(value).getTime())}

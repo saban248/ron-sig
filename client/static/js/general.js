@@ -2,6 +2,7 @@ var CLIENT_INFO_INDEX = -1
 var EQUIPMENT_INFO_INDEX = -1
 var RENT_ID             = -1
 var LINK_CONTRACT = -1
+var PHONE_CLIENT = -1
 var EQUIPMENTS = [
 
 ]
@@ -257,19 +258,18 @@ function toggleSearch(search_id){
 }
 
 
-function toggleGeneralMenu(id, event, title){
-    event.stopPropagation(); 
-    document.getElementById('mtitle-'+id).textContent = title;
+function toggleGeneralMenu(id, event, title) {
+    event.stopPropagation();
+    document.getElementById('mtitle-' + id).textContent = title;
     const menu = document.getElementById(id);
-
     const trigger = event.currentTarget;
     const rect = trigger.getBoundingClientRect();
     const menuHeight = menu.offsetHeight;
-    console.log(menuHeight)
+    const menuWidth = menu.offsetWidth;
     const spaceBelow = window.innerHeight - rect.bottom;
     const spaceAbove = rect.top;
 
-    // Decide whether to show below or above
+    // Set vertical position (above or below)
     if (spaceBelow < menuHeight && spaceAbove > menuHeight) {
         // Show above
         menu.style.top = (window.scrollY + rect.top - menuHeight) + "px";
@@ -278,9 +278,26 @@ function toggleGeneralMenu(id, event, title){
         menu.style.top = (window.scrollY + rect.bottom) + "px";
     }
 
-    menu.style.left = (window.scrollX + rect.left) + "px";
+    // Default horizontal position (align left)
+    let left = window.scrollX + rect.left;
+
+    // Check for right overflow
+    const rightEdge = left + menuWidth;
+    if (rightEdge > window.innerWidth) {
+        // Shift left so it fits on screen
+        left = window.innerWidth - menuWidth - 10; // 10px padding from edge
+    }
+
+    // Check for left overflow (in case menuWidth is larger than screen)
+    if (left < 0) {
+        left = 10;
+    }
+
+    menu.style.left = left + "px";
+
     menu.classList.toggle("menu-visible");
 }
+
 
 document.addEventListener("click", function(event) {
   // Check if the click is on any menu or toggle

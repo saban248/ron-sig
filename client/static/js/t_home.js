@@ -78,7 +78,7 @@ function NewClientCompleteStep(step){
     if (step == NewClientSteps.step1.code){
         key = "name"
         v = document.getElementById("c"+key).value;
-        valid = __valid_step1(v)
+        valid = v.split(" ").length >= 2 && v.length > 6
     }
     else if (step == NewClientSteps.step2.code){
         key = "phone"
@@ -98,11 +98,9 @@ function NewClientCompleteStep(step){
     else if (step == NewClientSteps.step5.code){
         key = "email"
         v = document.getElementById("c"+key).value;
-        console.log(v)
         valid = __valid_step5(v)
     }
     if (valid){
-        ManagerCache.addStepClient(key, v)
         icon.classList.add("done");
         icon.classList.add("fa-square-check")
         icon.classList.remove("fa-square"); 
@@ -111,12 +109,12 @@ function NewClientCompleteStep(step){
         icon.classList.remove("fa-square-check")
         icon.classList.add("fa-square"); 
     }
+    ManagerCache.addStepClient(key, v)
     
 }
 
 
  // STEPS VALID
-function __valid_step1(name){return name.split(" ").length >= 2 && name.length > 6}
  function __valid_phone(phone){return phoneRegex.test(phone) && phone.length  >9;}
 function __valid_step4(address){return address.length > 5}
 function __valid_step5(email){return emailRegex.test(email)}
@@ -246,13 +244,21 @@ function selectHomeView(code, href = true){
 }
 
 
-function showMenuLink(id, event, ctid, cid, rid){
+function showMenuLink(id, event, ctid, cid, rid, phone){
     toggleGeneralMenu(id, event, "חוזה ללקוח - קישורים")
     LINK_CONTRACT = `${location.origin}/contract?ctid=${ctid}&cid=${cid}&rid=${rid}`;
-
+    PHONE_CLIENT = phone
 
 }
 
+function sendToClientWhatsApp(){
+    var phone = PHONE_CLIENT
+    const link = encodeURIComponent(LINK_CONTRACT)
+    if (phone.substring(0, 1) == "0")
+        phone = phone.substring(1, 2222)
+    window.open("https://wa.me/972"+phone+"?text="+link)
+}
+    
 function onDocumentReloadSelectHView(){
     selectHomeView(location.href.substring(location.href.indexOf('status=')+7), false)
 }
