@@ -18,6 +18,7 @@ class ServerMsg(Enum):
     invalid_stime           = "תאריך תחילת האירוע לא תקין", 11
     invalid_etime           = "תאריך סיום האירוע לא תקין", 12
     invalid_equipments      = "רשימת ציוד לא תקינה", 13
+    invalid_status_rent     = "תצוגת האירועים השתבשה, רענן את הדף", 14
 
     @property
     def code(self):

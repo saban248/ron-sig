@@ -1,5 +1,33 @@
 
+<div id="deleterentmenu" class="general-menu">
+    <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
+        <span id="mtitle-deleterentmenu" style="opacity: 0.6;"></span>
+    </div>
+    <div class="general-menu-item" onclick="deleteRent()">
+        <i class="fa-solid fa-trash-can" style="color: #b6354f;"></i>
+        <span>מחיקה</span>
+    </div>
+</div>
 
+<div id="homeviewmenu" class="general-menu">
+    <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
+        <span id="mtitle-homeviewmenu" style="opacity: 0.6;"></span>
+    </div>
+</div>
+
+<div id="linkmenu" class="general-menu">
+    <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
+        <span id="mtitle-linkmenu" style="opacity: 0.6;"></span>
+    </div>
+    <div class="general-menu-item" onclick="copyLink()">
+        <i class="fa-solid fa-link"></i>
+        <span>העתק</span>
+    </div>
+    <div class="general-menu-item" onclick="window.open(LINK_CONTRACT)">
+        <i class="fa-solid fa-arrow-up-right-from-square" style="color: #63E6BE;"></i>
+        <span>פתח</span>
+    </div>
+</div>
 <div class="tab-list-home">
     <div class="tab-menu-home">
         <div class="menu-item">
@@ -9,9 +37,9 @@
             </button>
         </div>
         <div class="menu-item">
-            <button type="button" class="general-button btn-t-home btn-theme">
+            <button type="button" class="general-button btn-t-home btn-theme" onclick="showMenuSelectHomeView('homeviewmenu', event)">
                 <i class="fa-solid fa-list-ol"></i>
-                <span>תצוגה</span>
+                <span id="nameview">אירועים</span>
             </button>
         </div>
         <div class="menu-item">
@@ -83,14 +111,17 @@
                     </div>
                 </div>
                 <div class="rent-footer">
-                    <div class="rent-f-item" onclick="createContractEventLink('{{event.rent.contract_id}}', '{{event.client.cid}}', '{{event.rent.rid}}')">
+                    <div class="rent-f-item" onclick="showMenuLink('linkmenu', event, '{{event.rent.contract_id}}', '{{event.client.cid}}', '{{event.rent.rid}}')">
                         <i class="fa-solid fa-link rent-f-i-link"></i>
                     </div>
-                    <div class="rent-f-item">
+                    <div class="rent-f-item" onclick="showMenuDeleteRent('deleterentmenu', '{{event.rent.rid}}', event)">
                         <i class="fa-solid fa-trash-can rent-f-i-trash"></i>
                     </div>
-                    <div class="rent-f-item">
+                    <div class="rent-f-item" onclick="completeRent('{{event.rent.rid}}')">
                         <i class="fa-solid fa-calendar-check rent-f-i-end"></i>
+                    </div>
+                    <div class="rent-f-item" onclick="canceledRent('{{event.rent.rid}}')">
+                        <i class="fa-solid fa-ban rent-f-i-cancel"></i>
                     </div>
                 </div>
             </div>

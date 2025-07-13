@@ -11,8 +11,11 @@ const RouteApi = {
     deleteEquip:'/delete_equip',
     getEquip:'/get_equip',
     addRent:'/add_rent',
-    Settings:"/settings"
-
+    Settings:"/settings",
+    DeleteRent:"/delete_rent",
+    RemoveRent:"/remove_rent",
+    CompleteRent:"/complete_rent",
+    CanceledRent:"/canceled_rent"
 }
 
 
@@ -57,3 +60,16 @@ const NewEquipmentStep = {
 const SettingsApi = {
     update_signature:1
 }
+
+
+const HomeView = {
+    LIVE:{name:"אירועים פעילים", code: 0, key:"LIVE"},
+    COMPLETE:{name:"אירועים שהסתיימו", code:1, key:"COMPLETE"},
+    DELETED:{name:"אשפה", code:2, key:"DELETED"},
+    CANCELED:{name:"בוטלו", code:3, key:"CANCELED"},
+}
+
+const getHomeViewByCode = (code)=>{
+    for (const [key, item] of Object.entries(HomeView)){if (code == item.code){return item}}
+}
+const DEFAULT_HVIEW = HomeView.LIVE

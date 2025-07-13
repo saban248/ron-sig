@@ -45,6 +45,7 @@ class ApiRentEquipment:
         rent.amount = amount
         rent.pre_amount = pre_amount
         rent.contract_id = contract_id
+        rent.status = RentEquipmentStatus.LIVE.code
         ron_db.session.add(rent)
         ron_db.session.commit()
         return True
@@ -74,7 +75,7 @@ class ApiRentEquipment:
 
     @staticmethod
     def set_flag(cid:str, flag:RentEquipmentStatus):
-        rent:RentEquipment = ApiRentEquipment.get_rents(True, cid=cid).first()
+        rent:RentEquipment = ApiRentEquipment.get_rents(True, rid=cid).first()
         if not rent:return False
         rent.status = flag.code
 
@@ -82,16 +83,16 @@ class ApiRentEquipment:
         return True
 
     @staticmethod
-    def build_rents() -> list[RentEventData]:
+    def build_rents(status:int = RentEquipmentStatus.LIVE.code) -> list[RentEventData]:
         data = []
-        for rent in ApiRentEquipment.get_rents(True):
+        for rent in ApiRentEquipment.get_rents(True, status=status):
             __rent__ = rent.__dict__
             del __rent__["_sa_instance_state"]
             __rent__["equipments"] = json.loads(__rent__["equipments"])
             client = ApiClient.get_clients(cid=rent.cid)
-            if not client: return data
+            if not client: continue
             contract = ApiContract.get_contracts(client_id=rent.cid, contract_id=rent.contract_id)
-            if not contract: return data
+            if not contract: continue
             data.append(RentEventData(rent=__rent__, client=client[0], contract=contract[0]))
         return data
 

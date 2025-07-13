@@ -6,12 +6,13 @@ from flask import session, request, jsonify, render_template, redirect, url_for,
 
 from api.database.contracts import ApiContract
 from api.database.equipments import ApiEquipment
+from api.database.ptc import RentEquipmentStatus
 from api.database.rents import ApiRentEquipment
 from api.database.users import ApiClient, ApiManager
 from api.general import get_dictionary_http, Pages
 from api.msgs import SJson, ServerMsg
 from api.ptc import ron_app
-from api.res_struct import ResContract
+from api.res_struct import ResContract, ResHomeRents
 from api.routes.ptc import RoutePages, ShortSession
 
 
@@ -29,10 +30,17 @@ def main():
     if not ShortSession.is_admin(session):
         return redirect(url_for("login"))
     #[ApiRentEquipment.remove_rent(cid.rid) for cid in ApiRentEquipment.get_rents(True)]
+    breq = get_dictionary_http(request)
+    print(breq)
+    res = ResHomeRents()
+    res.build(breq)
+    if res.build(breq) != ServerMsg.complete:
+        res.status = RentEquipmentStatus.LIVE.code
+
     return render_template(Pages.home.val,
                            clients=ApiClient.get_clients(),
                            equipments=ApiEquipment.get_equipments(),
-                           rents=ApiRentEquipment.build_rents())
+                           rents=ApiRentEquipment.build_rents(res.status))
 
 
 @ron_app.route(RoutePages.login.path, methods=RoutePages.login.methods)

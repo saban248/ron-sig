@@ -6,6 +6,7 @@ from enum import Enum
 from flask.sessions import SessionMixin
 
 from api.database.users import Manager
+from api.msgs import ServerMsg
 
 
 class RoutePagesBase(Enum):
@@ -38,8 +39,13 @@ class RouteApi(RoutePagesBase):
     add_equip = ["POST"], 5
     delete_equip = ["POST"], 6
     get_equip = ["POST"],7
-    add_rent = ["POST"], 8,
+    add_rent = ["POST"], 8
     settings = ["POST"], 9
+    delete_rent = ["POST"], 10
+    complete_rent = ["POST"], 11
+    remove_rent = ["POST"], 12
+    canceled_rent = ["POST"], 13
+
 
 class SettingsApi(Enum):
 

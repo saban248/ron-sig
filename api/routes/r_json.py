@@ -4,13 +4,14 @@ from flask import request, session
 
 from api.database.contracts import ApiContract
 from api.database.equipments import ApiEquipment
+from api.database.ptc import RentEquipmentStatus
 from api.database.rents import ApiRentEquipment
 from api.database.users import ApiManager, ApiClient
 from api.general import get_dictionary_http, save_image_equipment
 from api.msgs import ServerMsg, SJson
 from api.ptc import ron_app, ron_db
 from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment, ResEquip, \
-    ResNewRent, ResSettings
+    ResNewRent, ResSettings, ResActionRent
 from api.routes.ptc import RouteApi, ShortSession, SettingsApi
 
 
@@ -166,3 +167,25 @@ def settings():
 
 
     return SJson.success(ServerMsg.complete)
+
+
+@ron_app.route(RouteApi.delete_rent.path, methods=RouteApi.delete_rent.methods)
+@ron_app.route(RouteApi.remove_rent.path, methods=RouteApi.delete_rent.methods)
+@ron_app.route(RouteApi.complete_rent.path, methods=RouteApi.delete_rent.methods)
+@ron_app.route(RouteApi.canceled_rent.path, methods=RouteApi.delete_rent.methods)
+def delete_rent():
+
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    breq = get_dictionary_http(request)
+    res = ResActionRent()
+    status = res.build(breq)
+    flag = RentEquipmentStatus.get(res.status)
+    if status != ServerMsg.complete or flag == RentEquipmentStatus.UNKNOWN:
+        return SJson.error(status)
+
+    print(res.rid, flag)
+    print(ApiRentEquipment.set_flag(res.rid, flag))
+
+    return SJson.success(status)

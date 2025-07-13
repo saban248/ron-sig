@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Union
 
 from api.database.equipments import ApiEquipment
-from api.general import get_safe_time_by_picker, loads_equipments_safe
+from api.general import get_safe_time_by_picker, loads_equipments_safe, is_int
 from api.msgs import ServerMsg
 from api.routes.ptc import SettingsApi
 
@@ -166,3 +166,33 @@ class ResSettings:
             case SettingsApi.update_signature.code:
                 return self.signature
         return True
+
+
+@dataclass
+class ResActionRent:
+    rid:str                 = None
+    status:int              = None
+    def build(self, breq:dict):
+        rid = breq.get("rid")
+        status = breq.get("status", -1)
+        if status == -1 or not is_int(status):
+            return ServerMsg.input_invalid
+        if not rid:
+            return ServerMsg.input_invalid
+
+        self.rid = rid
+        self.status = status
+        return ServerMsg.complete
+
+@dataclass
+class ResHomeRents:
+
+    status: int = None
+
+    def build(self, breq: dict):
+        status = breq.get("status", -1)
+        if status == -1 or not is_int(status):
+            return ServerMsg.invalid_status_rent
+
+        self.status = int(status)
+        return ServerMsg.complete

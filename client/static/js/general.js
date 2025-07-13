@@ -1,5 +1,7 @@
 var CLIENT_INFO_INDEX = -1
 var EQUIPMENT_INFO_INDEX = -1
+var RENT_ID             = -1
+var LINK_CONTRACT = -1
 var EQUIPMENTS = [
 
 ]
@@ -188,6 +190,40 @@ class ManagerCache{
     static getListClients(){
         const clients = localStorage.getItem("list_clients");
         return JSON.parse(clients);
+    }
+    /* HOME VIEW */
+    // recursive
+    static getHomeViewData(){
+        const cache = localStorage.getItem("homeview")
+        if (!cache){
+            var data = {}
+            for (const [d] of Object.entries(HomeView)){data[d] = null}
+            localStorage.setItem("homeview", JSON.stringify(data))
+            return this.getHomeViewData()
+        }
+        return JSON.parse(cache);
+    }
+    static setHomeViewData(vname, data){
+        const cache = localStorage.getItem("homeview")
+        const hview_json = JSON.parse(cache);
+        hview_json[vname] = data
+    }
+    static getHViewLive(){
+        const c_hview = ManagerCache.getHomeViewData()
+        return c_hview[HomeView.LIVE.key]
+        
+    }
+    static getHViewComplete(){
+        const c_hview = ManagerCache.getHomeViewData()
+        return c_hview[HomeView.COMPLETE.key]
+    }
+    static getHViewCanceled(){
+        const c_hview = ManagerCache.getHomeViewData()
+        return c_hview[HomeView.CANCELED.key]
+    }
+    static getHViewDeleted(){
+        const c_hview = ManagerCache.getHomeViewData()
+        return c_hview[HomeView.DELETED.key] 
     }
 }
 

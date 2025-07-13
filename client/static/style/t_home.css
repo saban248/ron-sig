@@ -211,6 +211,7 @@
     column-gap: 2em;
     row-gap: 2em;
     flex-wrap: wrap;
+    margin-bottom: 100px;
 
 }
 .rent-box{
@@ -370,6 +371,10 @@
     background:rgba(182, 18, 18, 0.21);
 }
 
+.rent-f-i-cancel{
+    color: #FFD43B;
+    background: #ffd53b3f;;
+}
 /* Mobile */
 @media (max-width: 768px) {
     

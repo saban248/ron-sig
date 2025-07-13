@@ -16,8 +16,17 @@ CONTENT_TYPE_DATA = "multipart/form-data"
 CONTENT_TYPE_FORM = "application/x-www-form-urlencoded"
 CONTENT_TYPE_JSON = "application/json"
 CONTENT_TYPE_ARGS = "a"
-
 from PIL import Image
+
+
+def is_int(some):
+    try:
+        int(some)
+    except ValueError:
+        return False
+    return True
+
+
 def get_dictionary_http(req:Request, content_type:str = str()) -> dict:
     _ctype = req.content_type or str()
     if CONTENT_TYPE_FORM in _ctype or CONTENT_TYPE_DATA in _ctype:

@@ -135,12 +135,127 @@ function cancelNewClient(){
 function createContractEventLink(contract_id, client_id, rent_id){
   const link = `${location.origin}/contract?ctid=${contract_id}&cid=${client_id}&rid=${rent_id}`;
 
+  try{
   navigator.clipboard.writeText(link)
     .then(() => {
       popup(1, "קישור", "הקישור הועתק!", 1000)
     })
     .catch(err => {
       console.error("Clipboard error:", err);
-      alert("שגיאה בהעתקת הקישור");
     });
+
+    }catch{
+            popup(1, "בעיה", "משהו השתבש")
+    }
 }
+
+function showMenuDeleteRent(id, rent_id, event){
+    toggleGeneralMenu(id, event, "למחוק את האירוע?")
+    RENT_ID = rent_id
+
+}
+
+function removeRent(){
+    on_success = (res) => {
+        if (!res.success){ }else{location.reload()}
+
+        popup(1, res.title, res.notice)
+        
+    }
+    data = {rid:RENT_ID, status:HomeView.DELETED.code}
+    do_api(RouteApi.RemoveRent, data, on_success)
+}
+
+function deleteRent(){
+    on_success = (res) => {
+        if (!res.success){ }else{location.reload()}
+
+        popup(1, res.title, res.notice)
+        
+    }
+    data = {rid:RENT_ID, status:HomeView.DELETED.code}
+    do_api(RouteApi.DeleteRent, data, on_success)
+}
+
+
+function completeRent(rid){
+    on_success = (res) => {
+        if (!res.success){ }else{location.reload()}
+
+        popup(1, res.title, res.notice)
+        
+    }
+    data = {rid:rid, status:HomeView.COMPLETE.code}
+    do_api(RouteApi.CompleteRent, data, on_success)
+}
+
+function canceledRent(rid){
+    on_success = (res) => {
+        if (!res.success){ }else{location.reload()}
+
+        popup(1, res.title, res.notice)
+        
+    }
+    data = {rid:rid, status:HomeView.CANCELED.code}
+    do_api(RouteApi.CanceledRent, data, on_success)
+}
+
+function showMenuSelectHomeView(id, event){
+    toggleGeneralMenu(id, event, "בחר סוג אירועים")
+    if (document.getElementById("homeviewmenu").children.length> 1){return}
+    for (const [key, item] of Object.entries(HomeView)){
+        __createViewMenu(item)
+    }
+
+}
+function __createViewMenu(item){
+    const parent = document.getElementById("homeviewmenu")
+    const div = document.createElement("div");
+    div.className = "general-menu-item";
+
+    const icon = document.createElement("i");
+    icon.className = "fa-solid fa-users-viewfinder";
+    icon.style.color = "#74C0FC";
+
+    const span = document.createElement("span");
+    span.textContent = item.name;
+
+    div.appendChild(icon);
+    div.appendChild(span);
+
+    div.onclick = () => {selectHomeView(item.code)}
+
+    // Append to body (or wherever you want)
+    parent.appendChild(div);
+}
+
+function selectHomeView(code, href = true){
+    if (!parseInt(code+1)){return}
+    let view = undefined
+    if (!code){
+        view = DEFAULT_HVIEW
+    }
+    else{
+        view = getHomeViewByCode(code)
+    }
+    const namev = document.getElementById("nameview")
+    namev.textContent = view.name
+    
+    if (!href){return}
+    location.href = '/home?status='+code
+}
+
+
+function showMenuLink(id, event, ctid, cid, rid){
+    toggleGeneralMenu(id, event, "חוזה ללקוח - קישורים")
+    LINK_CONTRACT = `${location.origin}/contract?ctid=${ctid}&cid=${cid}&rid=${rid}`;
+
+
+}
+
+function onDocumentReloadSelectHView(){
+    selectHomeView(location.href.substring(location.href.indexOf('status=')+7), false)
+}
+
+
+onDocumentReloadSelectHView()
