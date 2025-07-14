@@ -33,7 +33,7 @@ function setSignature(){
         }
         popup(1, res.title, res.notice);
     }
-    if (signature.length < 7000){
+    if (signature.length < 5000){
         popup(1, "שם לב", "החתימה קצרה מדיי")
         sOwner.clear();
         return

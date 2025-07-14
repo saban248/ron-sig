@@ -200,11 +200,12 @@ function updateEquipment(){
 
 function toggleEquipmentMenu(id, event, title, equip_id){
     toggleGeneralMenu(id, event, title)
-    EQUIPMENT_INFO_INDEX = equip_id
+    document.getElementById('editequipmenu').onclick = function(){
+        EditEquipment(equip_id)
+    }
 }
 
-function EditEquipment(){
-    const eid = EQUIPMENT_INFO_INDEX
+function EditEquipment(eid){
     on_success = (res)=>{
         if (!res.success || !res.equipment){
             return
@@ -214,6 +215,7 @@ function EditEquipment(){
         
     }
     const data = {eid:eid}
+    EQUIPMENT_INFO_INDEX = eid
     do_api(RouteApi.getEquip, data, on_success)
 }
 

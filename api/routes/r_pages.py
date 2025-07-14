@@ -72,7 +72,3 @@ def contract():
 
 
 
-
-string = "sdfsf"
-strign2 = "sfsdf'"
-print(string)

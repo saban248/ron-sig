@@ -11,7 +11,7 @@ function clearSignature() {
 
 function AcceptAndSign() {
    const sig = sClient.toDataURL()
-   if (sig.length < 4000){
+   if (sig.length < 3000){
     popup(1, "שם לב", "החתימה קצרה מדיי")
     sClient.clear();
     return

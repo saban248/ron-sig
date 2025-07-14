@@ -186,17 +186,14 @@ class ResSettings:
     signature:str               = None
     action_id:int               = None
 
-    def build(self, breq:dict):
+    def build(self, breq:dict) -> ServerMsg:
         action_id:str|int = str(breq.get("action", -1))
         if action_id == -1 or not action_id.isdigit():
-            return False
+            return ServerMsg.input_invalid
         self.action_id = int(action_id)
         [self.__setattr__(key, value) for key, value in breq.items()]
 
-        match self.action_id:
-            case SettingsApi.update_signature.code:
-                return self.signature
-        return True
+        return  ServerMsg.complete
 
 
 @dataclass

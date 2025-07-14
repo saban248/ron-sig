@@ -58,7 +58,7 @@ class ApiContract:
     def do_sign_client(ctid:str, signature:bytes):
         contract = ApiContract.get_contract(contract_id=ctid)
         if not contract:return False
-
+        if contract.client_signature:return False
         contract.client_signature = signature
         contract.time_signed = time()
         ron_db.session.commit()

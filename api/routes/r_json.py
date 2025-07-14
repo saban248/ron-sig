@@ -11,7 +11,7 @@ from api.general import get_dictionary_http, save_image_equipment
 from api.msgs import ServerMsg, SJson
 from api.ptc import ron_app, ron_db
 from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment, ResEquip, \
-    ResNewRent, ResSettings, ResActionRent
+    ResNewRent, ResSettings, ResActionRent, ResContractUser
 from api.routes.ptc import RouteApi, ShortSession, SettingsApi
 
 
@@ -159,8 +159,9 @@ def settings():
 
     breq = get_dictionary_http(request)
     res = ResSettings()
-    if not res.build(breq):
-        return e_invalid
+    msg = res.build(breq)
+    if msg != ServerMsg.complete:
+        return SJson.error(msg)
 
     if res.action_id is SettingsApi.update_signature.code:
         manager = ApiManager.get_manager(True, mid=ShortSession.get_admin_details(session).get("mid"))
@@ -168,15 +169,14 @@ def settings():
         manager.signature = res.signature.encode()
         ron_db.session.commit()
 
-
-    return SJson.success(ServerMsg.complete)
+    return SJson.success(msg)
 
 
 @ron_app.route(RouteApi.delete_rent.path, methods=RouteApi.delete_rent.methods)
 @ron_app.route(RouteApi.remove_rent.path, methods=RouteApi.delete_rent.methods)
 @ron_app.route(RouteApi.complete_rent.path, methods=RouteApi.delete_rent.methods)
 @ron_app.route(RouteApi.canceled_rent.path, methods=RouteApi.delete_rent.methods)
-def delete_rent():
+def rent_api():
 
     if not ShortSession.is_admin(session):
         return SJson.error(ServerMsg.access_denied)
@@ -188,7 +188,21 @@ def delete_rent():
     if status != ServerMsg.complete or flag == RentEquipmentStatus.UNKNOWN:
         return SJson.error(status)
 
-    print(res.rid, flag)
-    print(ApiRentEquipment.set_flag(res.rid, flag))
+    ApiRentEquipment.set_flag(res.rid, flag)
+
+    return SJson.success(status)
+
+
+
+@ron_app.route(RouteApi.do_contract.path, methods=RouteApi.do_contract.methods)
+def do_contract():
+
+    breq = get_dictionary_http(request)
+    res = ResContractUser()
+    status = res.build(breq)
+    if status != ServerMsg.complete:
+        return SJson.error(status)
+    status = ApiContract.do_sign_client(res.ctid, res.signature.encode())
+    if not status:return SJson.error(ServerMsg.input_invalid)
 
     return SJson.success(status)
