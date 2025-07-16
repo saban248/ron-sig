@@ -203,6 +203,9 @@ function toggleEquipmentMenu(id, event, title, equip_id){
     document.getElementById('editequipmenu').onclick = function(){
         EditEquipment(equip_id)
     }
+    document.getElementById('deleteequipmenu').onclick = function(){
+        DeleteEquipment(equip_id)
+    }
 }
 
 function EditEquipment(eid){
@@ -220,8 +223,7 @@ function EditEquipment(eid){
 }
 
 
-function DeleteEquipment(){
-    const eid = EQUIPMENT_INFO_INDEX
+function DeleteEquipment(eid){
 
     on_success =(res) =>{
         if (!res.success){
