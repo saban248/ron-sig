@@ -176,26 +176,48 @@ function deleteRent(){
 }
 
 
-function completeRent(rid){
+function completeRent(){
     on_success = (res) => {
         if (!res.success){ }else{location.reload()}
 
         popup(1, res.title, res.notice)
+        RENT_ID = ''
         
     }
-    data = {rid:rid, status:HomeView.COMPLETE.code}
+    data = {rid:RENT_ID, status:HomeView.COMPLETE.code}
     do_api(RouteApi.CompleteRent, data, on_success)
 }
 
-function canceledRent(rid){
+function showMenuCompleteRent(id, rent_id, event){
+    toggleGeneralMenu(id, event, "הסתיים האירוע?")
+    RENT_ID = rent_id
+}
+
+function canceledRent(){
     on_success = (res) => {
         if (!res.success){ }else{location.reload()}
 
         popup(1, res.title, res.notice)
         
     }
-    data = {rid:rid, status:HomeView.CANCELED.code}
+    data = {rid:RENT_ID, status:HomeView.CANCELED.code}
     do_api(RouteApi.CanceledRent, data, on_success)
+}
+function showMenuCanceledRent(id, rent_id, event){
+    toggleEquipmentMenu(id, event, "להשהות את אירוע?")
+    RENT_ID = rent_id;
+}
+
+function restoreRent(rid){
+    on_success = (res) =>{
+        if (!res.success){}
+        else{
+            location.reload()
+        }
+        popup(1, res.title, res.notice)
+    }
+    data = {rid:rid, status:HomeView.LIVE.code}
+    do_api(RouteApi.RestoreRent, data, on_success)
 }
 
 function showMenuSelectHomeView(id, event){

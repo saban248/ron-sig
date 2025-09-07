@@ -1,13 +1,10 @@
 import json
-import time
 from dataclasses import dataclass
-from datetime import datetime
 from typing import Union
 
 from api.database.equipments import ApiEquipment
 from api.general import get_safe_time_by_picker, loads_equipments_safe, is_int
 from api.msgs import ServerMsg
-from api.routes.ptc import SettingsApi
 
 
 @dataclass
@@ -224,3 +221,31 @@ class ResHomeRents:
 
         self.status = int(status)
         return ServerMsg.complete
+
+
+@dataclass
+class ResUpdateManagerSettings:
+    fullname:str        = None
+    identify:str        = None
+    he_name:str         = None
+    email:str           = None
+    phone:str           = None
+    mid:str             = None
+
+    def build(self, breq:dict, mid:str =None):
+        [setattr(self, k, v) for k,v in breq.items()]
+        if not self.mid:
+            if not mid:return False
+            self.mid = mid
+        if self.fullname:
+            if not self.fullname.split(" ").__len__() > 1:return False
+        if self.identify:
+            if not self.identify.__len__() == 9 or not self.identify.isdigit():return False
+        if self.he_name:
+            if not self.he_name.split(" ").__len__() > 1:return False
+        if self.email:
+            if "@" not in self.email or "." not in self.email:return False
+        if self.phone:
+            pass
+
+        return True

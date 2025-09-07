@@ -45,7 +45,9 @@ class RouteApi(RoutePagesBase):
     complete_rent = ["POST"], 11
     remove_rent = ["POST"], 12
     canceled_rent = ["POST"], 13
+    restore_rent    = ["POST"], 15
     do_contract = ["POST"], 14
+    update_manager_settings = ["POST"],16
 
 
 class SettingsApi(Enum):

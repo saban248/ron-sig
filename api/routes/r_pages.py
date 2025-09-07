@@ -36,11 +36,12 @@ def main():
     res.build(breq)
     if res.build(breq) != ServerMsg.complete:
         res.status = RentEquipmentStatus.LIVE.code
-
+    print(ShortSession.get_admin_details(session))
     return render_template(Pages.home.val,
                            clients=ApiClient.get_clients(),
                            equipments=ApiEquipment.get_equipments(),
-                           rents=ApiRentEquipment.build_rents(res.status))
+                           rents=ApiRentEquipment.build_rents(res.status),
+                           settings=ShortSession.get_admin_details(session))
 
 
 @ron_app.route(RoutePages.login.path, methods=RoutePages.login.methods)

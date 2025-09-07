@@ -47,3 +47,33 @@ function setSignature(){
     do_api(RouteApi.Settings, data, on_success)
 
 }
+
+
+function updateManagerSetting(manager_id){
+    identify = document.getElementById("setting-id").value
+    name_he = document.getElementById("setting-name_he").value
+    name_en = document.getElementById("setting-name_en").value
+    email = document.getElementById("setting-email").value
+    phone = document.getElementById("setting-phone").value
+
+    data = {identify:identify,
+            fullname:name_en,
+            he_name:name_he,
+            email:email,
+            phone:phone,
+            mid:manager_id
+    }
+
+    on_success = (res)=>{
+        if (res.success){
+            popup(1, res.title, res.notice, 1000)
+        }
+        else{
+            popup(1, res.title, res.notice, 10000)
+        }
+        
+    }
+    do_api(RouteApi.UpdateManager, data, on_success);
+
+
+}

@@ -4,7 +4,9 @@ from typing import Union
 
 from flask_sqlalchemy.query import Query
 
+from api.msgs import ServerMsg
 from api.ptc import ron_db
+from api.res_struct import ResUpdateManagerSettings
 
 
 class Manager(ron_db.Model):
@@ -62,6 +64,19 @@ class ApiManager:
         mdict = manager.__dict__
         del mdict['_sa_instance_state']
         return mdict
+
+    @staticmethod
+    def update_manager(settings:ResUpdateManagerSettings) -> ServerMsg:
+        manager = ApiManager.get_manager(True, mid=settings.mid)
+        if not manager:return ServerMsg.access_denied
+        manager.he_name = settings.he_name or manager.he_name
+        manager.fullname = settings.fullname or manager.fullname
+        manager.email = settings.email or manager.email
+        manager.identify = settings.identify or manager.identify
+        manager.phone = settings.phone or manager.phone
+        print(settings)
+        ron_db.session.commit()
+        return ServerMsg.complete
 
     @staticmethod
     def get_managers():

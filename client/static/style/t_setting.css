@@ -3,11 +3,17 @@
 .settings{
     border-bottom: none;
     display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
 }
 
 .setting-item{
+    width: 100%;
     border-radius: 4px;
     display: flex;
+    padding: 10px;
     flex-direction: column;
     row-gap: 15px;
     background: #f8f5f5;
@@ -32,12 +38,18 @@
 }
 .setting-status > i{
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     background: #e1e1e1;
+    cursor: pointer;
+    transition: box-shadow 200ms;
+}
+.setting-status > i:hover{
+    box-shadow: 0 0 15px rgb(116, 116, 116);
 }
 
 .setting-status > i.success{
-    color: rgb(32, 159, 32);
+    color: rgb(126, 224, 126);
+    background: rgb(14, 75, 14);
     
 }
 .setting-status > i.invalid{

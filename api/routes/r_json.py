@@ -11,7 +11,7 @@ from api.general import get_dictionary_http, save_image_equipment
 from api.msgs import ServerMsg, SJson
 from api.ptc import ron_app, ron_db
 from api.res_struct import ReqAuth, ReqAddClient, ResListClients, ResDeleteClient, ResAddEquipment, ResEquip, \
-    ResNewRent, ResSettings, ResActionRent, ResContractUser
+    ResNewRent, ResSettings, ResActionRent, ResContractUser, ResUpdateManagerSettings
 from api.routes.ptc import RouteApi, ShortSession, SettingsApi
 
 
@@ -29,7 +29,7 @@ def auth():
 
     ShortSession.set_admin(session)
     manager = ApiManager.get_manager(name=res.user, password=res.password)
-    manager['signature'] = ''
+    manager['signature'] = bool(manager['signature'])
     ShortSession.set_admin_details(session, manager)
     return SJson.success(ServerMsg.complete)
 
@@ -172,10 +172,33 @@ def settings():
     return SJson.success(msg)
 
 
+@ron_app.route(RouteApi.update_manager_settings.path, methods=RouteApi.update_manager_settings.methods)
+def update_manager_setting():
+    e_invalid = SJson.error(ServerMsg.input_invalid)
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    breq = get_dictionary_http(request)
+    res_update = ResUpdateManagerSettings()
+    print(breq)
+    status = res_update.build(breq, ShortSession.get_admin_details(session)['mid'])
+    if not status:
+        return SJson.error(status)
+
+    msg = ApiManager.update_manager(res_update)
+    manager = ApiManager.get_manager(mid=res_update.mid)
+    manager['signature'] = bool(manager['signature'])
+    ShortSession.set_admin_details(session, manager)
+
+    return SJson.success(msg)
+
+
+
 @ron_app.route(RouteApi.delete_rent.path, methods=RouteApi.delete_rent.methods)
 @ron_app.route(RouteApi.remove_rent.path, methods=RouteApi.delete_rent.methods)
 @ron_app.route(RouteApi.complete_rent.path, methods=RouteApi.delete_rent.methods)
 @ron_app.route(RouteApi.canceled_rent.path, methods=RouteApi.delete_rent.methods)
+@ron_app.route(RouteApi.restore_rent.path, methods=RouteApi.delete_rent.methods)
 def rent_api():
 
     if not ShortSession.is_admin(session):

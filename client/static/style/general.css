@@ -252,6 +252,39 @@
   text-align: center;
 }
 
+
+.box-fly{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #10242b;
+    border-radius: 6px;
+
+}
+.bf-body{
+    display: flex;
+    align-items: center;
+
+
+}
+.bf-body>span{
+    padding: 10px;
+    color: white;
+}
+.bf-body>i{
+    font-size: large;
+    padding: 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    color: #4fb4e7;
+    background: #143140;
+    transition: 200ms;
+    
+}
+.bf-body>i:hover{
+    transform: scale(1.2);
+}
+
 @keyframes popup-fade {
     from { transform: scale(0.8); opacity: 0; }
     to   { transform: scale(1); opacity: 1; }

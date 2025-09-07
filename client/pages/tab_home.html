@@ -28,6 +28,28 @@
         <span>פתח</span>
     </div>
 </div>
+
+<div id="rentcomplete" class="general-menu">
+    <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
+        <span id="mtitle-rentcomplete" style="opacity: 0.6;"></span>
+    </div>
+        <div class="general-menu-item" onclick="completeRent()">
+        <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>
+        <span >סיום!</span>
+    </div>
+</div>
+
+<div id="rentcancel" class="general-menu">
+    <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
+        <span id="mtitle-rentcancel" style="opacity: 0.6;"></span>
+    </div>
+        <div class="general-menu-item" onclick="canceledRent()">
+            <i class="fa-solid fa-circle-pause" style="color: goldenrod;"></i>
+        <span >השהה</span>
+    </div>
+</div>
+
+
 <div class="tab-list-home">
     <div class="tab-menu-home">
         <div class="menu-item">
@@ -61,7 +83,7 @@
             <div class="rent-box" id="{{event.rent.rid}}">
                 <div class="rent-b-head">
                     <div class="rent-b-title">
-                        <span>{{event.client.fullname}}</span>
+                        <span>{{limit_text(event.client.fullname)}}</span>
                     </div>
                     <div class="rent-money">
                         <span class="mlow">{{get_float_string(event.rent.amount)[1]}}.</span> 
@@ -114,15 +136,27 @@
                     <div class="rent-f-item" onclick="showMenuLink('linkmenu', event, '{{event.rent.contract_id}}', '{{event.client.cid}}', '{{event.rent.rid}}', '{{event.client.phone}}')">
                         <i class="fa-solid fa-link rent-f-i-link"></i>
                     </div>
+                    {% if event.rent.status == 0 %}
                     <div class="rent-f-item" onclick="showMenuDeleteRent('deleterentmenu', '{{event.rent.rid}}', event)">
                         <i class="fa-solid fa-trash-can rent-f-i-trash"></i>
                     </div>
-                    <div class="rent-f-item" onclick="completeRent('{{event.rent.rid}}')">
+                    <div class="rent-f-item" onclick="showMenuCompleteRent('rentcomplete', '{{event.rent.rid}}', event)">
                         <i class="fa-solid fa-calendar-check rent-f-i-end"></i>
                     </div>
-                    <div class="rent-f-item" onclick="canceledRent('{{event.rent.rid}}')">
-                        <i class="fa-solid fa-ban rent-f-i-cancel"></i>
+                    <div class="rent-f-item" onclick="showMenuCanceledRent('rentcancel','{{event.rent.rid}}', event)">
+                        <i class="fa-solid fa-circle-pause rent-f-i-cancel" style="color: goldenrod;"></i>
+                    </div> 
+
+                    {% elif event.rent.status == 1%}
+
+                    {% elif event.rent.status == 3%}
+                    <div class="rent-f-item" onclick="restoreRent('{{event.rent.rid}}')">
+                        <i class="fa-solid fa-clock-rotate-left rent-f-i-restore"></i>
                     </div>
+                    {% endif %}
+   
+ 
+
                 </div>
             </div>
         {% endfor %}
@@ -130,6 +164,14 @@
 
 </div>
         
+
+<div class="sidebar" id="editclient">
+    <div class="sidebar-title">
+        <i class="fa-solid fa-circle-xmark" onclick="cancelEditClient()"></i>
+        <span>עריכת פרטי לקוח</span>
+    </div>
+
+</div>
 
 <div class="sidebar" id="newclient">
     <div class="sidebar-title">

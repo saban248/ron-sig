@@ -363,8 +363,8 @@
     background: rgba(0, 255, 255, 0.151);
 }
 .rent-f-i-end{
-    color: rgb(210, 133, 241);
-    background: rgba(210, 133, 241, 0.267);
+    color: rgb(79, 251, 136);
+    background: rgba(51, 216, 106, 0.267);
 }
 .rent-f-i-trash{
     color: rgb(212, 55, 55);
@@ -373,7 +373,12 @@
 
 .rent-f-i-cancel{
     color: #FFD43B;
-    background: #ffd53b3f;;
+    background: #ffd53b3f;
+}
+.rent-f-i-restore{
+    color: #b9d77b;
+    background: #363f25;
+    
 }
 /* Mobile */
 @media (max-width: 768px) {

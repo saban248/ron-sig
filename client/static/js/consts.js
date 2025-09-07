@@ -15,7 +15,9 @@ const RouteApi = {
     DeleteRent:"/delete_rent",
     RemoveRent:"/remove_rent",
     CompleteRent:"/complete_rent",
-    CanceledRent:"/canceled_rent"
+    CanceledRent:"/canceled_rent",
+    RestoreRent:"/restore_rent",
+    UpdateManager:"/update_manager_settings"
 }
 
 

@@ -29,3 +29,10 @@ def get_beautiful_until_time(_time:str):
 @ron_app.template_global()
 def get_as_ctime(_time:str):
     return time.ctime(float(_time))
+
+
+@ron_app.template_global()
+def limit_text(text:str):
+    if text.__len__() > 11:
+        return text[0:10]+".."
+    return text

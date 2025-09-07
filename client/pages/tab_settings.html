@@ -17,6 +17,70 @@
                     <i class="fa-solid fa-signature"></i>
                 </button>
                 <div class="setting-status">
+                    {% if settings.signature %}
+                        <i class="fa-solid fa-circle-check success"></i>
+                    {%else%}
+                    <i class="fa-solid fa-close invalid"></i>
+                    {%endif%}
+                </div>
+            </div>
+            <div class="s-footer">
+                
+            </div>
+        </div>
+        <div class="setting-item">
+            <div class="s-title"> מספר עוסק/תז </div>
+            <div class="s-body">
+               <input id="setting-id" placeholder="{{settings.identify}}" class="general-input input-step">
+                <div class="setting-status" onclick="">
+                    <i class="fa-solid fa-circle-check success"></i>
+                </div>
+            </div>
+            <div class="s-footer">
+                
+            </div>
+        </div>
+        <div class="setting-item">
+            <div class="s-title">שם מלא (עברית)</div>
+            <div class="s-body">
+               <input id="setting-name_he" placeholder="{{settings.he_name}}" class="general-input input-step">
+                <div class="setting-status" onclick="">
+                    <i class="fa-solid fa-circle-check success"></i>
+                </div>
+            </div>
+            <div class="s-footer">
+                
+            </div>
+        </div>
+        <div class="setting-item">
+            <div class="s-title">שם מלא (אנגלית)</div>
+            <div class="s-body">
+               <input id="setting-name_en" placeholder="{{settings.fullname}}" class="general-input input-step">
+                <div class="setting-status" onclick="">
+                    <i class="fa-solid fa-circle-check success"></i>
+                </div>
+            </div>
+            <div class="s-footer">
+                
+            </div>
+        </div>
+        <div class="setting-item">
+            <div class="s-title">חשבון מייל</div>
+            <div class="s-body">
+               <input id="setting-email" placeholder="{{settings.email}}" class="general-input input-step">
+                <div class="setting-status" onclick="">
+                    <i class="fa-solid fa-circle-check success"></i>
+                </div>
+            </div>
+            <div class="s-footer">
+                
+            </div>
+        </div>
+        <div class="setting-item">
+            <div class="s-title">מספר פאלפון</div>
+            <div class="s-body">
+               <input id="setting-phone" placeholder="{{settings.phone}}" class="general-input input-step">
+                <div class="setting-status" onclick="">
                     <i class="fa-solid fa-circle-check success"></i>
                 </div>
             </div>
@@ -61,3 +125,11 @@
     </div>
     
 </div>
+
+<div class="box-fly">
+    <div class="bf-body">
+        <span class="box-fly-name" id="boxflyname">שמירת שינויים</span>  
+        <i class="fa-solid fa-circle-check" id="boxflyicon" onclick='updateManagerSetting("{{settings.mid}}")'></i>
+    </div>
+</div>
+
