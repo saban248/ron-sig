@@ -49,6 +49,16 @@
     </div>
 </div>
 
+<div id="editrentmenu" class="general-menu">
+    <div class="general-menu-title" style="background: rgb(11, 13, 16);text-align: center;border-radius:6px;">
+        <span id="mtitle-editrentmenu" style="opacity: 0.6;"></span>
+    </div>
+        <div class="general-menu-item" onclick="EditRentClient()">
+            <i class="fa-solid fa-pencil" style="color: rgb(71, 231, 225);"></i>
+        <span >שינוי פרטי האירוע</span>
+    </div>
+</div>
+
 
 <div class="tab-list-home">
     <div class="tab-menu-home">
@@ -93,7 +103,7 @@
                         </span>
                         
                     </div>
-                    <div class="rent-b-menu">
+                    <div class="rent-b-menu" onclick="showMenuEditRentClient('editrentmenu', '{{event.rent.rid}}', event, '{{event.client.cid}}')">
                         <i class="fa-solid fa-ellipsis"></i>
                     </div>
                 </div>
@@ -278,5 +288,153 @@
                 <span>הוסף לקוח</span>
             </button>
         </div>
+    </div>
+</div>
+
+
+
+<div class="sidebar" id="editrent">
+    <div class="sidebar-title">
+        <i class="fa-solid fa-circle-xmark" onclick="cancelEditRent()"></i>
+        <span>עריכת פרטי אירוע</span>
+    </div>
+    <div class="sidebar-items" id="editrent_items">
+        <div class="sidebar-item" id="enritem1">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="enriconstep1" onclick="toggleSidebarItemEditRent(1)"></i>    
+                <span>כתובת האירוע</span>
+            </div>
+            <div class="item-inpus show" id="enrstep1">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        כתובת האירוע (אופציונלי)
+                    </label>
+                    <input type="text" id="eraddress" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(1)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="EditRentShowNextStep(1)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="enritem2">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="enriconstep2" onclick="toggleSidebarItemEditRent(2)"></i>    
+                <span>תאריך תחילת השכרה</span>
+            </div>
+            <div class="item-inpus show" id="enrstep2">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        תאריך מלא
+                    </label>
+                    <input type="text" id="erstarttime" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(2)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="EditRentShowNextStep(2)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="enritem3">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="enriconstep3" onclick="toggleSidebarItemEditRent(3)"></i>    
+                <span>תאריך סיום השכרה</span>
+            </div>
+            <div class="item-inpus show" id="enrstep3">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                        תאריך מלא
+                    </label>
+                    <input type="text" id="erendtime" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(3)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="EditRentShowNextStep(3)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="enritem4">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="enriconstep4" onclick="toggleSidebarItemEditRent(4)"></i>    
+                <span>ציוד</span>
+            </div>
+            <div class="item-inpus show" id="enrstep4">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-map-location"></i>
+                         ציוד שיושכר 
+                        <div class="equip-selected">
+                            <div class="equip-selected-body" onclick="showSelectedEquipmentsEditRent('eequipments-selected','eequipslectedtitle', 'eequip-selected-items')">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="equip-selected-count" id="eequipcount">0</span>  
+                            </div>
+                        </div>
+                    </label>
+                    <div>
+                        <input type="text" id="erequipment" placeholder="חפש ציוד" class="general-input input-step" required onclick="this.value='';NewRentCompleteStep(4)" oninput="ShowMenuSelectEquipment('erequipment','emenuequip')">
+                        <div id="emenuequip" class="suggestions-box"></div>
+                    </div>
+                                     
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="EditRentShowNextStep(4)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="enritem5">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="enriconstep5" onclick="toggleSidebarItemEditRent(5)"></i>    
+                <span>מקדמה</span>
+            </div>
+            <div class="item-inpus show" id="enrstep5">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-shekel-sign"></i>
+                        סכום מקדמה
+                    </label>
+                    <input type="tel" id="erpreamount" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(5)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="EditRentShowNextStep(5)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+        </div>
+        <div class="sidebar-item" id="enritem6">
+            <div class="item-title">
+                <i class="fa-regular fa-square" id="enriconstep6" onclick="toggleSidebarItemEditRent(6)"></i>    
+                <span>סכום עסקה</span>
+            </div>
+            <div class="item-inpus show" id="enrstep6">
+                <div class="inp-step">
+                    <label class="label-inp">
+                        <i class="fa-solid fa-shekel-sign"></i>
+                        סכום עיסקה סופי
+                    </label>
+                    <input type="tel" id="ermoney" placeholder="..." class="general-input input-step" required oninput="NewRentCompleteStep(6)">
+                </div>
+                <button type="button" class="general-button item-button-step" onclick="EditRentShowNextStep(6)">
+                    <span>לשלב הבא</span>
+                </button>
+            </div>
+            <div class="addclient" id="updaterent">
+                <button type="button" class="general-button btn-add-client" onclick="updateRentClient()">
+                    <span>עדכון</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="sidebar" id="eequipments-selected">
+    <div class="sidebar-title">
+        <i class="fa-solid fa-circle-xmark" onclick="closeEquipemtsSelectedEditRent()"></i>
+        <span id="eequipslectedtitle"></span>
+    </div>
+    <div class="client-info-items" id="eequip-selected-items">
+        <div class="client-info-seperator">
+            <span>הציוד שיושכר </span>
+        </div>
+
     </div>
 </div>

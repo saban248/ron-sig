@@ -4,10 +4,10 @@ import os
 
 from flask import session, request, jsonify, render_template, redirect, url_for, abort
 
-from api.database.contracts import ApiContract
+from api.database.contracts import ApiContract, Contracts
 from api.database.equipments import ApiEquipment
 from api.database.ptc import RentEquipmentStatus
-from api.database.rents import ApiRentEquipment
+from api.database.rents import ApiRentEquipment, RentEquipment
 from api.database.users import ApiClient, ApiManager
 from api.general import get_dictionary_http, Pages
 from api.msgs import SJson, ServerMsg
@@ -53,6 +53,8 @@ def login():
     return render_template(Pages.login.val, nonce=nonce)
 
 
+
+
 @ron_app.route(RoutePages.contract.path, methods=RoutePages.contract.methods)
 def contract():
     rerror = lambda err=ServerMsg.access_denied:render_template(Pages.error.val, error=err.msg)
@@ -64,12 +66,13 @@ def contract():
     if status  != ServerMsg.complete:
         return rerror(status)
 
-    client = ApiClient.get_clients(cid=res.cid)
-    rent = ApiRentEquipment.get_rents(rid=res.rid)
-    ct = ApiContract.get_contracts(contract_id=res.ctid)
+    client = ApiClient.get_clients(True, cid=res.cid).first()
+    rent:RentEquipment = ApiRentEquipment.get_rents(True, rid=res.rid).first()
+    ct:Contracts = ApiContract.get_contracts(True, contract_id=res.ctid).first()
+    manager = ApiManager.get_manager(True, signature=ct.owner_signature)
     if not client or not rent or not ct:return rerror(ServerMsg.input_invalid)
-    return render_template(Pages.contract.val, client=client[0], rent=rent[0], contract=ct[0],
-                           equipments=json.loads(rent[0]["equipments"])[0])
+    return render_template(Pages.contract.val, client=client, rent=rent, contract=ct,
+                           equipments=json.loads(rent.equipments), manager=manager)
 
 
 

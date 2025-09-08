@@ -281,9 +281,112 @@ function sendToClientWhatsApp(){
     window.open("https://wa.me/972"+phone+"?text="+link)
 }
     
+
+
+
+function showMenuEditRentClient(id, rid, event, cid){
+    toggleGeneralMenu(id, event, "תפריט פעולות")
+    RENT_ID = rid
+    CLIENT_INFO_INDEX = cid;
+}
+
+function EditRentShowNextStep(index){
+    document.getElementById("enrstep"+index)?.classList.remove("show");
+    document.getElementById("enritem"+(index+1))?.classList.add("show");
+    document.getElementById("enrstep"+(index+1))?.classList.add("show");
+        if ((index+1) == NewRentSteps.done.code){
+        finishNewRent('updaterent')
+        return
+    }
+}
+function EditRentClient(){
+    const sidebar = document.getElementById('editrent');
+    sidebar.classList.add('show');
+    on_success = (res) => {
+        if (!res.success){
+            popup(1, res.title, res.notice);
+            return
+        }
+        EQUIPMENTS_SELECTED = []
+        for (item of JSON.parse(res.equipments)){
+            setSelectEquip(item.eid, item.selected, 'eequipcount')
+        }
+        document.getElementById("eraddress").value = res.address
+        document.getElementById("erstarttime").value = res.start_rent;
+        document.getElementById("erendtime").value = res.end_rent;
+        document.getElementById("erequipment").value = '';
+        document.getElementById("erpreamount").value = res.pre_amount;
+        document.getElementById('ermoney').value = res.amount;
+        document.getElementById("enrstep"+1)?.classList.add("show");
+        document.getElementById("enritem"+1)?.classList.add("show");
+    }
+    data = {rid:RENT_ID}
+    do_api(RouteApi.GetRentClient, data, on_success)
+}
+
+function toggleSidebarItemEditRent(index){
+    document.getElementById("enrstep"+index).classList.toggle("show");
+}
+
+
+function cancelEditRent(){
+    const sidebar = document.getElementById("editrent");
+    sidebar.classList.remove("show")
+}
+
+
+function closeEquipemtsSelectedEditRent(){
+    const sidebar = document.getElementById("eequipments-selected");
+    sidebar.classList.remove("show")
+    document.getElementById('eequip-selected-items').innerHTML = ''
+}
+
+
+function showSelectedEquipmentsEditRent(x1,x2, x3){
+    showSelectedEquipments(x1, x2, x3)
+}
+
 function onDocumentReloadSelectHView(){
     selectHomeView(location.href.substring(location.href.indexOf('status=')+7), false)
 }
+
+
+
+function updateRentClient(){
+    on_success = (res) =>{
+        if (!res.success){
+            
+        }
+        else{
+            location.reload()
+        }
+        popup(1, res.title, res.notice)
+        
+    }
+
+    address = document.getElementById("eraddress").value
+    start_rent = document.getElementById("erstarttime").value
+    end_rent = document.getElementById("erendtime").value
+    equipment = JSON.stringify(EQUIPMENTS_SELECTED)
+    pre_amount = document.getElementById("erpreamount").value
+    amount = document.getElementById('ermoney').value
+
+        const data = {
+        address:address,
+        stime:start_rent,
+        etime:end_rent,
+        equipments:equipment,
+        amount:amount,
+        pre_amount:pre_amount,
+        cid:CLIENT_INFO_INDEX,
+        rid:RENT_ID
+    }
+
+    do_api(RouteApi.addRent, data, on_success)
+}
+
+
+
 
 
 onDocumentReloadSelectHView()

@@ -86,7 +86,7 @@ class ApiEquipment:
             equip = ApiEquipment.get_equipments(eid=e["eid"])
             if not equip:continue
             equip[0]["selected"] = e['count']
-            equips.append(equip)
+            equips.append(equip[0])
         return equips
 
 

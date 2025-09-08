@@ -55,8 +55,8 @@ function startRentEquipment(){
 }
 
 
-function finishNewRent(){
-    document.getElementById('addrent').classList.add("show")
+function finishNewRent(id='addrent'){
+    document.getElementById(id).classList.add("show")
 }
 
 function addNewRent(){
@@ -247,9 +247,9 @@ function deleteClient(){
 }
 
 
-function ShowMenuSelectEquipment(){
-    const menu = document.getElementById('menuequip')
-    const input = document.getElementById('requipment')
+function ShowMenuSelectEquipment(id='requipment', menu_id='menuequip'){
+    const menu = document.getElementById(menu_id)
+    const input = document.getElementById(id)
     const text = input.value.toLowerCase();
     menu.innerHTML = "";
     if (!text) {
@@ -260,7 +260,6 @@ function ShowMenuSelectEquipment(){
     const matches = EQUIPMENTS.filter(item =>
       item.name.toLowerCase().includes(text)
     );
-
     if (matches.length === 0) {
       menu.style.display = "none";
       return;
@@ -323,7 +322,7 @@ function ShowMenuSelectEquipment(){
 }
 
 
-function setSelectEquip(eid, value){
+function setSelectEquip(eid, value, id='equipcount'){
     const equipment = EQUIPMENTS_SELECTED.find(item => item.eid === eid)
     if (!equipment){
         EQUIPMENTS_SELECTED.push({eid:eid, count:1})
@@ -332,12 +331,12 @@ function setSelectEquip(eid, value){
         EQUIPMENTS_SELECTED = EQUIPMENTS_SELECTED.filter(item => item.count)
     }
 
-    updateCountEquipSelected()
+    updateCountEquipSelected(id)
 }
 
 
-function updateCountEquipSelected(){
-    const counter = document.getElementById("equipcount")
+function updateCountEquipSelected(id='equipcount'){
+    const counter = document.getElementById(id)
     counter.textContent = EQUIPMENTS_SELECTED.reduce((sum, item) => sum + item.count, 0)
 }
 
@@ -350,22 +349,22 @@ function resetEquipmentSelected(){
 
 
 
-function showSelectedEquipments() {
-    const sidebar = document.getElementById('equipments-selected');
+function showSelectedEquipments(side_id='equipments-selected', title_id='equipslectedtitle', more='equip-selected-items') {
+    const sidebar = document.getElementById(side_id);
     if (sidebar.classList.contains("show"))return
     sidebar.classList.add('show');
 
-    document.getElementById("equipslectedtitle").textContent = `${EQUIPMENTS_SELECTED.reduce((sum, item) => sum + item.count, 0)} פריטים`
+    document.getElementById(title_id).textContent = `${EQUIPMENTS_SELECTED.reduce((sum, item) => sum + item.count, 0)} פריטים`
     for (const [index, item] of Object.entries(EQUIPMENTS_SELECTED)  ){
-        createEquipmentSelectedRow(item.eid ,item.count)
+        createEquipmentSelectedRow(item.eid ,item.count, more)
     }
     
 }
 
-function createEquipmentSelectedRow(equip_id, count) {
+function createEquipmentSelectedRow(equip_id, count, ele_id='equip-selected-items') {
   const equip = EQUIPMENTS.find(e => e.eid === equip_id);
   if (!equip) return null;
-    const parent = document.getElementById('equip-selected-items')
+    const parent = document.getElementById(ele_id)
   const row = document.createElement("div");
 
   row.className = "client-info-item";

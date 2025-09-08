@@ -119,6 +119,7 @@ class ResNewRent:
     amount:Union[str, int, float]      = None
     pre_amount:Union[str, int, float] = None
     cid:str                     = None
+    rid:str                 = None
 
     def build(self, breq:dict) -> ServerMsg:
         if not breq:return ServerMsg.input_invalid
@@ -198,15 +199,13 @@ class ResActionRent:
     rid:str                 = None
     status:int              = None
     def build(self, breq:dict):
-        rid = breq.get("rid")
-        status = breq.get("status", -1)
-        if status == -1 or not is_int(status):
+        [setattr(self, k, v) for k, v in breq.items()]
+        self.status = self.status or -1
+        if self.status == -1 or not is_int(self.status):
             return ServerMsg.input_invalid
-        if not rid:
+        if not self.rid:
             return ServerMsg.input_invalid
 
-        self.rid = rid
-        self.status = status
         return ServerMsg.complete
 
 @dataclass

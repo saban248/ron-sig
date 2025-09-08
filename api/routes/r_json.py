@@ -146,7 +146,7 @@ def add_rent():
     manager = ApiManager.get_manager(True, mid=ShortSession.get_admin_details(session)["mid"])
     contract_id = ApiContract.add_contract(res.cid, manager.signature)
     ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount,
-                              res.pre_amount, contract_id)
+                              res.pre_amount, contract_id,res.rid)
 
     return SJson.success(status)
 
@@ -200,7 +200,6 @@ def update_manager_setting():
 @ron_app.route(RouteApi.canceled_rent.path, methods=RouteApi.delete_rent.methods)
 @ron_app.route(RouteApi.restore_rent.path, methods=RouteApi.delete_rent.methods)
 def rent_api():
-
     if not ShortSession.is_admin(session):
         return SJson.error(ServerMsg.access_denied)
 
@@ -215,6 +214,21 @@ def rent_api():
 
     return SJson.success(status)
 
+@ron_app.route(RouteApi.get_rent_client.path, methods=RouteApi.get_rent_client.methods)
+def get_rent_client():
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    breq = get_dictionary_http(request)
+    res = ResActionRent()
+    res.build(breq)
+    if not res.rid:
+        return SJson.error(ServerMsg.input_invalid)
+    rent = ApiRentEquipment.get_rents(rid=res.rid)
+    if not rent:
+        return SJson.error(ServerMsg.access_denied)
+
+    return SJson.success(ServerMsg.complete,**rent[0])
 
 
 @ron_app.route(RouteApi.do_contract.path, methods=RouteApi.do_contract.methods)

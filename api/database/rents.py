@@ -34,8 +34,12 @@ class RentEquipment(ron_db.Model):
 class ApiRentEquipment:
 
     @staticmethod
-    def add_rent(address:str, s_rent:str, e_rent:str, equipments:dict, cid:str, amount:float, pre_amount:float, contract_id:str):
-        rent = RentEquipment()
+    def add_rent(address:str, s_rent:str, e_rent:str, equipments:dict, cid:str, amount:float, pre_amount:float, contract_id:str
+                 ,rid:str = None):
+        if not rid:
+            rent = RentEquipment()
+        else:
+             rent:RentEquipment = ApiRentEquipment.get_rents(True, rid=rid).first()
         rent.rid = secrets.token_hex(16)
         rent.address = address
         rent.start_rent = s_rent
@@ -60,7 +64,7 @@ class ApiRentEquipment:
         return True
 
     @staticmethod
-    def get_rents(source: bool = False, **kwargs) -> Union[list[dict], Query]:
+    def get_rents(source: bool = False, **kwargs) -> Union[list[dict], RentEquipment]:
         __columns__ = RentEquipment.query.filter_by(**kwargs)
         if source:
             return __columns__

@@ -1,5 +1,6 @@
 import secrets
 from time import time
+from typing import Union
 
 from flask_sqlalchemy.query import Query
 
@@ -32,7 +33,7 @@ class ApiContract:
         return contract.contract_id
 
     @staticmethod
-    def get_contracts(source:bool = False, **kwargs):
+    def get_contracts(source:bool = False, **kwargs) -> Union[list[dict], Contracts]:
         __column__ = Contracts.query.filter_by(**kwargs)
         if source:
             return __column__
