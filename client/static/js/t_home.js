@@ -295,7 +295,7 @@ function EditRentShowNextStep(index){
     document.getElementById("enritem"+(index+1))?.classList.add("show");
     document.getElementById("enrstep"+(index+1))?.classList.add("show");
         if ((index+1) == NewRentSteps.done.code){
-        finishNewRent('updaterent')
+        
         return
     }
 }
@@ -309,6 +309,7 @@ function EditRentClient(){
         }
         EQUIPMENTS_SELECTED = []
         for (item of JSON.parse(res.equipments)){
+            console.log(item)
             setSelectEquip(item.eid, item.selected, 'eequipcount')
         }
         document.getElementById("eraddress").value = res.address
@@ -319,6 +320,7 @@ function EditRentClient(){
         document.getElementById('ermoney').value = res.amount;
         document.getElementById("enrstep"+1)?.classList.add("show");
         document.getElementById("enritem"+1)?.classList.add("show");
+        finishNewRent('updaterent')
     }
     data = {rid:RENT_ID}
     do_api(RouteApi.GetRentClient, data, on_success)
@@ -332,6 +334,7 @@ function toggleSidebarItemEditRent(index){
 function cancelEditRent(){
     const sidebar = document.getElementById("editrent");
     sidebar.classList.remove("show")
+    EQUIPMENTS_SELECTED = []
 }
 
 
@@ -342,8 +345,8 @@ function closeEquipemtsSelectedEditRent(){
 }
 
 
-function showSelectedEquipmentsEditRent(x1,x2, x3){
-    showSelectedEquipments(x1, x2, x3)
+function showSelectedEquipmentsEditRent(x1,x2, x3, x4){
+    showSelectedEquipments(x1, x2, x3, x4)
 }
 
 function onDocumentReloadSelectHView(){

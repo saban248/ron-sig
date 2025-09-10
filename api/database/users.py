@@ -74,7 +74,7 @@ class ApiManager:
         manager.email = settings.email or manager.email
         manager.identify = settings.identify or manager.identify
         manager.phone = settings.phone or manager.phone
-        print(settings)
+        manager.company_name = settings.company_name or manager.company_name
         ron_db.session.commit()
         return ServerMsg.complete
 

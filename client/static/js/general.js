@@ -302,7 +302,8 @@ function toggleGeneralMenu(id, event, title) {
 document.addEventListener("click", function(event) {
   // Check if the click is on any menu or toggle
     const clickedInsideMenu = event.target.closest('.general-menu');
-    const suggestionsBox = document.getElementById('menuequip')
+    const suggestionsBox1 = document.getElementById('menuequip')
+    const suggestionsBox2 = document.getElementById('emenuequip')
     if (!clickedInsideMenu) {
         // Close all menus with class "menu-visible"
         document.querySelectorAll('.menu-visible').forEach(menu => {
@@ -310,8 +311,11 @@ document.addEventListener("click", function(event) {
         });
     }
     
-    if (suggestionsBox){
-        suggestionsBox.style.display = 'none'
+    if (suggestionsBox1){
+        suggestionsBox1.style.display = 'none'
+    }
+    if (suggestionsBox2){
+        suggestionsBox2.style.display = 'none'
     }
 });
 

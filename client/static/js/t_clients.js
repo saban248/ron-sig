@@ -247,7 +247,7 @@ function deleteClient(){
 }
 
 
-function ShowMenuSelectEquipment(id='requipment', menu_id='menuequip'){
+function ShowMenuSelectEquipment(id='requipment', menu_id='menuequip', select_id='equipcount'){
     const menu = document.getElementById(menu_id)
     const input = document.getElementById(id)
     const text = input.value.toLowerCase();
@@ -292,14 +292,14 @@ function ShowMenuSelectEquipment(id='requipment', menu_id='menuequip'){
     plusBtn.onclick = (e) => {
       e.stopPropagation();
       count++;
-      setSelectEquip(item.eid, 1)
+      setSelectEquip(item.eid, 1,select_id)
       countDisplay.textContent = count;
     };
 
     minusBtn.onclick = (e) => {
       e.stopPropagation();
       if (count>0)count--;
-      setSelectEquip(item.eid, -1)
+      setSelectEquip(item.eid, -1, select_id)
       countDisplay.textContent = count;
     };
 
@@ -325,18 +325,22 @@ function ShowMenuSelectEquipment(id='requipment', menu_id='menuequip'){
 function setSelectEquip(eid, value, id='equipcount'){
     const equipment = EQUIPMENTS_SELECTED.find(item => item.eid === eid)
     if (!equipment){
-        EQUIPMENTS_SELECTED.push({eid:eid, count:1})
+        EQUIPMENTS_SELECTED.push({eid:eid, count:value})
     }else{
-        equipment.count+=value
+        if (!value){
+            equipment.count = 0
+        }
+        else{
+            equipment.count+=value}
         EQUIPMENTS_SELECTED = EQUIPMENTS_SELECTED.filter(item => item.count)
     }
-
     updateCountEquipSelected(id)
 }
 
 
 function updateCountEquipSelected(id='equipcount'){
     const counter = document.getElementById(id)
+    console.log(counter)
     counter.textContent = EQUIPMENTS_SELECTED.reduce((sum, item) => sum + item.count, 0)
 }
 
@@ -349,28 +353,29 @@ function resetEquipmentSelected(){
 
 
 
-function showSelectedEquipments(side_id='equipments-selected', title_id='equipslectedtitle', more='equip-selected-items') {
+function showSelectedEquipments(side_id='equipments-selected', title_id='equipslectedtitle', more='equip-selected-items', idcount='equipcount') {
     const sidebar = document.getElementById(side_id);
     if (sidebar.classList.contains("show"))return
     sidebar.classList.add('show');
 
     document.getElementById(title_id).textContent = `${EQUIPMENTS_SELECTED.reduce((sum, item) => sum + item.count, 0)} פריטים`
     for (const [index, item] of Object.entries(EQUIPMENTS_SELECTED)  ){
-        createEquipmentSelectedRow(item.eid ,item.count, more)
+        createEquipmentSelectedRow(item.eid ,item.count, more, idcount)
     }
     
 }
 
-function createEquipmentSelectedRow(equip_id, count, ele_id='equip-selected-items') {
+function createEquipmentSelectedRow(equip_id, count, ele_id='equip-selected-items', idcount='equipcount') {
   const equip = EQUIPMENTS.find(e => e.eid === equip_id);
   if (!equip) return null;
     const parent = document.getElementById(ele_id)
   const row = document.createElement("div");
-
+  row.id = 'selected-'+equip_id
   row.className = "client-info-item";
-
+  
   const icon = document.createElement("i");
-  icon.className = "fa-solid fa-box";
+  icon.onclick = function(){deleteEquipmentSelectedRow(equip_id, idcount)}
+  icon.className = "fa-solid fa-trash";
     const parent_span = document.createElement("div")
   const nameSpan = document.createElement("span");
   nameSpan.textContent = equip.name;
@@ -390,6 +395,12 @@ function createEquipmentSelectedRow(equip_id, count, ele_id='equip-selected-item
   parent.appendChild(row)
 }
 
+function deleteEquipmentSelectedRow(eid, id='equipcount'){
+    const ele = document.getElementById('selected-'+eid);
+    if (!ele){return}
+    setSelectEquip(eid, 0, id)
+    ele.remove();
+}
 
 function closeEquipemtsSelected(){
     const sidebar = document.getElementById("equipments-selected");

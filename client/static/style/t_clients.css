@@ -104,11 +104,17 @@ select {
 }
 .client-info-item > i{
     text-align: center;
-   background: rgb(31, 44, 45);
-   color: #62bcba;
-   transform: scaleY(1.2);
-   box-shadow: 0 0 11px #62bcba8f;
+   background: rgb(35, 21, 21);
+   color: #ee6363;
+   cursor: pointer;
+   box-shadow: 0 0 11px #bc62628f;
+   transition: 200ms;
 }
+.client-info-item>i:hover,
+.client-info-item>i:active{
+    transform:scale(1.2);
+}
+
 
 .search-box-lclient-open{
     flex: 1;

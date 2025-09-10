@@ -22,7 +22,7 @@ from PIL import Image
 def is_int(some):
     try:
         int(some)
-    except ValueError:
+    except (ValueError, TypeError):
         return False
     return True
 

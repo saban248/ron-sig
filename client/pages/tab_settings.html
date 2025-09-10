@@ -22,6 +22,7 @@
                     {%else%}
                     <i class="fa-solid fa-close invalid"></i>
                     {%endif%}
+                    <i class="fa-solid fa-eye" id="openBtn"></i>
                 </div>
             </div>
             <div class="s-footer">
@@ -32,6 +33,18 @@
             <div class="s-title"> מספר עוסק/תז </div>
             <div class="s-body">
                <input id="setting-id" placeholder="{{settings.identify}}" class="general-input input-step">
+                <div class="setting-status" onclick="">
+                    <i class="fa-solid fa-circle-check success"></i>
+                </div>
+            </div>
+            <div class="s-footer">
+                
+            </div>
+        </div>
+        <div class="setting-item">
+            <div class="s-title">שם העסק</div>
+            <div class="s-body">
+               <input id="setting-company-name" placeholder="{{settings.company_name}}" class="general-input input-step">
                 <div class="setting-status" onclick="">
                     <i class="fa-solid fa-circle-check success"></i>
                 </div>
@@ -133,3 +146,40 @@
     </div>
 </div>
 
+
+
+<!-- Overlay modal -->
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal" role="document">
+    <div class="modal-header">
+      <div class="modal-title">Signature preview</div>
+      <button class="close-btn" id="closeBtn" aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- loading / error -->
+      <div id="status" class="center" style="min-height:56px;">
+        <!-- spinner or error will appear here -->
+      </div>
+
+      <!-- signature display area -->
+      <div class="sig-wrap" id="sigWrap" style="display:none;">
+        <img id="sigImg" class="sig-img" alt="signature image"/>
+      </div>
+
+      <!-- editable canvas (hidden by default) -->
+      <div id="editWrap" style="display:none;">
+        <canvas id="sigCanvas" class="sig-canvas"></canvas>
+        <div style="margin-top:8px; display:flex; gap:8px; justify-content:flex-end;">
+          <button id="clearBtn" class="btn">Clear</button>
+          <button id="saveBtn" class="btn primary">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button id="downloadBtn" class="btn">Download</button>
+      <button id="closeFooterBtn" class="btn">Close</button>
+    </div>
+  </div>
+</div>

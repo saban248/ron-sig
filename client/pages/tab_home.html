@@ -364,14 +364,14 @@
                         <i class="fa-solid fa-map-location"></i>
                          ציוד שיושכר 
                         <div class="equip-selected">
-                            <div class="equip-selected-body" onclick="showSelectedEquipmentsEditRent('eequipments-selected','eequipslectedtitle', 'eequip-selected-items')">
+                            <div class="equip-selected-body" onclick="showSelectedEquipmentsEditRent('eequipments-selected','eequipslectedtitle', 'eequip-selected-items', 'eequipcount')">
                                 <i class="fa-solid fa-cart-shopping"></i>
                                 <span class="equip-selected-count" id="eequipcount">0</span>  
                             </div>
                         </div>
                     </label>
                     <div>
-                        <input type="text" id="erequipment" placeholder="חפש ציוד" class="general-input input-step" required onclick="this.value='';NewRentCompleteStep(4)" oninput="ShowMenuSelectEquipment('erequipment','emenuequip')">
+                        <input type="text" id="erequipment" placeholder="חפש ציוד" class="general-input input-step" required onclick="this.value='';NewRentCompleteStep(4)" oninput="ShowMenuSelectEquipment('erequipment','emenuequip', 'eequipcount')">
                         <div id="emenuequip" class="suggestions-box"></div>
                     </div>
                                      
@@ -416,11 +416,11 @@
                     <span>לשלב הבא</span>
                 </button>
             </div>
-            <div class="addclient" id="updaterent">
+        </div>
+        <div class="addclient" id="updaterent">
                 <button type="button" class="general-button btn-add-client" onclick="updateRentClient()">
                     <span>עדכון</span>
                 </button>
-            </div>
         </div>
     </div>
 </div>

@@ -7,6 +7,10 @@ from api.general import get_safe_time_by_picker, loads_equipments_safe, is_int
 from api.msgs import ServerMsg
 
 
+def is_html_entities(_str:str)-> bool:
+    return "<" in _str or ">" in _str or "</" in _str
+
+
 @dataclass
 class ReqAuth:
     user:str        = None
@@ -200,8 +204,8 @@ class ResActionRent:
     status:int              = None
     def build(self, breq:dict):
         [setattr(self, k, v) for k, v in breq.items()]
-        self.status = self.status or -1
-        if self.status == -1 or not is_int(self.status):
+        self.status = -1 if not is_int(self.status) else self.status
+        if self.status == -1:
             return ServerMsg.input_invalid
         if not self.rid:
             return ServerMsg.input_invalid
@@ -230,6 +234,7 @@ class ResUpdateManagerSettings:
     email:str           = None
     phone:str           = None
     mid:str             = None
+    company_name:str    = None
 
     def build(self, breq:dict, mid:str =None):
         [setattr(self, k, v) for k,v in breq.items()]
@@ -246,5 +251,7 @@ class ResUpdateManagerSettings:
             if "@" not in self.email or "." not in self.email:return False
         if self.phone:
             pass
+        if is_html_entities(self.company_name or "str"):
+            return False
 
         return True

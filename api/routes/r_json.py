@@ -142,7 +142,7 @@ def add_rent():
     status = res.build(breq)
     if status != ServerMsg.complete:
         return SJson.error(status)
-
+    print(res.equipments)
     manager = ApiManager.get_manager(True, mid=ShortSession.get_admin_details(session)["mid"])
     contract_id = ApiContract.add_contract(res.cid, manager.signature)
     ApiRentEquipment.add_rent(res.address, res.stime, res.etime,res.equipments, res.cid,res.amount,
@@ -229,6 +229,17 @@ def get_rent_client():
         return SJson.error(ServerMsg.access_denied)
 
     return SJson.success(ServerMsg.complete,**rent[0])
+
+
+@ron_app.route('/get_signature', methods=['POST'])
+def get_signature():
+    if not ShortSession.is_admin(session):
+        return SJson.error(ServerMsg.access_denied)
+
+    manager = ApiManager.get_manager(True, mid=ShortSession.get_admin_details(session)['mid'])
+    if not manager:
+        return SJson.error(ServerMsg.access_denied)
+    return SJson.success(ServerMsg.complete, sig=manager.signature.decode())
 
 
 @ron_app.route(RouteApi.do_contract.path, methods=RouteApi.do_contract.methods)
