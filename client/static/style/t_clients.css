@@ -18,11 +18,20 @@ select {
 
 .client-box{
     display: flex;
-    border-radius: 5px;
-    box-shadow: 0 0 11px #bababa5d;
+    background: #ffffff;
+    border: 1px solid #d9e8ea;
+    border-radius: 6px;
+    box-shadow: 0 8px 18px rgba(34, 73, 82, 0.09);
     column-gap: 10px;
     padding: 10px;
     align-items: center;
+    transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.client-box:hover {
+    transform: translateY(-1px);
+    border-color: #8bc8c7;
+    box-shadow: 0 12px 24px rgba(34, 73, 82, 0.14);
 }
 .client-box-deleted{
     animation: fadeScaleOut 0.4s ease forwards;
@@ -59,7 +68,8 @@ select {
     
 }
 .client-item > span{
-    opacity: 0.6;
+    color: #60777d;
+    opacity: 1;
     text-decoration: underline dotted rgb(31, 44, 45);
 }
 

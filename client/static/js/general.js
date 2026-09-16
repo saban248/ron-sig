@@ -206,8 +206,10 @@ class ManagerCache{
     }
     static setHomeViewData(vname, data){
         const cache = localStorage.getItem("homeview")
+        if (!cache)return
         const hview_json = JSON.parse(cache);
         hview_json[vname] = data
+        localStorage.setItem("homeview", JSON.stringify(hview_json));
     }
     static getHViewLive(){
         const c_hview = ManagerCache.getHomeViewData()

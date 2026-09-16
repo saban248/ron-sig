@@ -1,7 +1,6 @@
 
 
 *{
-    font-family: "Roboto Slab", serif;
     font-optical-sizing: auto;
     font-style: normal;
 }
@@ -10,18 +9,31 @@
 .general-input{
     width: 90%;
     outline: none;
-    border: 1px solid #c4a5ff63;
+    border: 1px solid #2d6977;
+    background: #f9feff;
+    color: #17323a;
     padding: 10px;
-    border-radius: 7px;
+    border-radius: 6px;
     font-size: medium;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.general-input::placeholder,
+.search-input::placeholder {
+    color: #71878b;
+}
+
+.general-input:focus {
+    border-color: #50cac8;
+    box-shadow: 0 0 0 3px rgba(80, 202, 200, 0.12);
 }
 
 .general-button{
     outline: none;
     border: none;
-    border-radius: 7px;
-    transition: 200ms;
-    background:#205f7e;
+    border-radius: 6px;
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    background:#176b79;
     width: 100%;
     cursor: pointer;
     color: white;
@@ -30,8 +42,9 @@
 
 .general-button:active,
 .general-button:hover{
-    transform: scale(1.1) skewX(-3deg);
-    background: #3083ad;
+    transform: translateY(-1px);
+    background: #0f8a8a;
+    box-shadow: 0 6px 16px rgba(23, 73, 82, 0.18);
 
 }
 
@@ -43,7 +56,7 @@
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(225, 239, 241, 0.78);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,8 +66,8 @@
 
 /* Spinner */
 .spinner {
-    border: 8px solid rgba(255, 255, 255, 0.1);
-    border-top: 8px solid cyan;
+    border: 8px solid rgba(23, 107, 121, 0.14);
+    border-top: 8px solid #0f8a8a;
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -73,7 +86,7 @@
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(26, 53, 61, 0.32);
     display: none;
     align-items: center;
     justify-content: center;
@@ -82,10 +95,12 @@
 
 /* Popup box */
 .popup-box {
-    background: white;
+    background: #ffffff;
+    color: #18323c;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    border: 1px solid #d4e3e6;
+    border-radius: 6px;
+    box-shadow: 0 16px 40px rgba(34, 73, 82, 0.18);
     max-width: 90%;
     width: 320px;
     text-align: center;
@@ -100,12 +115,13 @@
 
 .popup-box p {
     margin: 0 0 20px;
-    color: #444;
+    color: #60777d;
 }
 
 .popup-box button {
     padding: 10px 20px;
-    background-color: cyan;
+    background-color: #0f8a8a;
+    color: #ffffff;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -126,27 +142,28 @@
     width: 100%;
     padding: 11px 10px;
     outline: none;
-    color: white;
-    background: #17323a;
-    border: none;
+    color: #18323c;
+    background: #ffffff;
+    border: 1px solid #d4e3e6;
     flex-grow: 1;
     border-radius: 0px 7px 7px 0px ;
 
 }
 .search-input:hover,
 .search-input:focus{
-    background: #10242b !important;
+    background: #ffffff !important;
+    border-color: #8bc8c7;
 }
 .search-input-closed{
     width: 50%;
 }
 
 .close-search {
-    color: white;
+    color: #176b79;
     outline: none;
     border: none;
     padding: 10px;
-    background: #17323a;
+    background: #e8f4f3;
     cursor: pointer;
     border-radius: 7px 0px 0px 7px;
 }
@@ -160,13 +177,13 @@
     position: absolute;
     background-color: white;
     border: 1px solid #ccc;
-    box-shadow: 0px 0px 11px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 24px rgba(34, 73, 82, 0.18);
     z-index: 1000;
     min-width: 120px;
     border-radius: 6px;
     visibility: hidden;
-    background: #17323a;
-    color: white;
+    background: #ffffff;
+    color: #18323c;
     padding: 5px;
 }
 
@@ -185,13 +202,13 @@
 
 }
 .general-menu-item > span{
-    color: #ccc;
+    color: #49636b;
     font-size: 14px;
 }
 
 .general-menu-item:hover,
 .general-menu-item:active{
-    background: #294c56;
+    background: #e8f4f3;
     cursor: pointer;
 }
 .menu-seperate{
@@ -208,8 +225,10 @@
 
 .suggestions-box {
   position: absolute;
-  background: white;
-  border: 1px solid #ccc;
+    background: #ffffff;
+    color: #18323c;
+    border: 1px solid #c9dfe1;
+    border-radius: 6px;
   max-height: 150px;
   overflow-y: auto;
   display: none;
@@ -223,7 +242,7 @@
   padding: 8px;
   column-gap: 13px;
   font-size: 16px;
-  border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #e5eef0;
 }
 
 .equipment-name {

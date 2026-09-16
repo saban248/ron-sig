@@ -7,6 +7,7 @@ function getAllClients(force){
     on_success = (res) =>{
         if (!res.success){
             popup(1, res.title, res.notice);
+            return
         }
 
         const clients = res.clients;
@@ -190,14 +191,13 @@ async function showClientDetails(){
 
 function searchClient(){
     const input = document.getElementById('inputsclient')
-    csid = input.value
+    const csid = input.value.toLowerCase()
     
-    clients = ManagerCache.getListClients();
+    const clients = ManagerCache.getListClients() ?? [];
     for (const [index, client] of Object.entries(clients)){
-        if ((client.fullname.includes(csid) || 
-            client.phone.includes(csid)    ||
-            client.address.includes(csid)  ||
-            client.identify.includes(csid))){
+        const searchableFields = [client.fullname, client.phone, client.address, client.identify]
+            .map(value => String(value ?? '').toLowerCase())
+        if (searchableFields.some(value => value.includes(csid))){
                 document.getElementById(client.cid).style.display='flex';
 
         }

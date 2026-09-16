@@ -9,20 +9,21 @@
     justify-content:right;
     column-gap: 1.75em;
     padding: 10px;
-    border-bottom: 1px solid #b8b8b8;
+    border-bottom: 1px solid #d9e8ea;
 }
 
 .btn-t-home{
     width: auto!important;
     padding: 10px;
     font-weight: light;
-    box-shadow: 0 0 11px #706e6e;
+    box-shadow: 0 5px 14px rgba(34, 73, 82, 0.12);
 }
 .btn-new-client{
     animation: shadow-circle 2s infinite;
 }
 .btn-theme, .btn-refersh{
-    background: #17323a !important;
+    background: #e8f4f3 !important;
+    color: #176b79;
 }
 .btn-t-home > i{
     border-left: 2px solid #ded5d5;
@@ -38,9 +39,9 @@
     top: 0px;
     opacity: 0;
     width: 450px;
-    background: #f9f9f9;
-    border-left: 2px solid #ccc;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    border-left: 1px solid #d9e8ea;
+    box-shadow: -8px 0 24px rgba(34, 73, 82, 0.12);
     padding: 10px;
     z-index: 1000;
     height: 100vh;
@@ -88,7 +89,7 @@
     margin-bottom: 100px;
 }
 .item-title{
-    background: #e6ebeb;
+    background: #eef6f6;
     color:#17323a;
     border-radius: 0;
 }
@@ -114,7 +115,7 @@
     display: block;
 }
 .item-inpus{
-    background-color: #f2f4f4;
+    background-color: #f7fbfb;
     padding: 10px;
     flex-direction: column;
     row-gap: 10px;
@@ -219,12 +220,21 @@
 .rent-box{
     min-width: 350px;
     min-height: 300px;
-    background: #232b2d;
-    border-radius: 15px;
+    background: #ffffff;
+    border: 1px solid rgba(80, 202, 200, 0.12);
+    border-radius: 6px;
     padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
+    box-shadow: 0 10px 22px rgba(34, 73, 82, 0.1);
+    transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.rent-box:hover {
+    transform: translateY(-2px);
+    border-color: rgba(80, 202, 200, 0.38);
+    box-shadow: 0 14px 28px rgba(34, 73, 82, 0.16);
 }
 
 .rent-box-empty{
@@ -251,7 +261,7 @@
 }
 .rent-b-title{
     font-size: 1.75em;
-    color: whitesmoke;
+    color: #18323c;
 
 }
 .rent-b-title > span{
@@ -281,7 +291,7 @@
     margin-top: 1em;
     display: flex;
     flex-direction: column;
-    justify-content: space-betweenc !important;
+    justify-content: space-between !important;
 }
 
 
@@ -335,7 +345,7 @@
 }
 .box-status > span{
     flex: 1;
-    color: white;
+    color: #49636b;
     font-size: .90em;
 }
 
@@ -351,7 +361,7 @@
 .rent-f-item > i{
     font-size: 1.1em;
     padding: 10px 20px;
-    border-radius: 7px 15px;
+    border-radius: 6px;
     transition: all 200ms;
 }
 .rent-f-item>i:active,

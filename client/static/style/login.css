@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f1eff7;
+    background: #f3f8f9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,12 +8,12 @@ body {
 }
 
 .login {
-    background: rgb(29, 25, 25);
+    background: #ffffff;
     padding: .75em;
     border-radius: 8px;
     width: 400px;
-    box-shadow: 5px 0 35px 2px #3b6ca0;
-    border: 1px solid #b0bfcf64;
+    box-shadow: 0 18px 42px rgba(34, 73, 82, 0.14);
+    border: 1px solid #d9e8ea;
     direction: rtl;
     animation: shadow-circle 4s infinite;
 }
@@ -23,15 +23,15 @@ body {
     font-size: 1.80em;
     display: flex;
     align-items: end;
-    border-bottom: 1px solid #88888855;
+    border-bottom: 1px solid #d9e8ea;
     margin-bottom: 2em;
     padding: .75em;
 }
 .login-head{
-    color: aliceblue;
+    color: #18323c;
 }
 .login-head >  i{
-    color: #8db5f9;
+    color: #0f8a8a;
     font-size: 1.70em;
 }
 .login-head> p{
@@ -58,10 +58,10 @@ body {
 }
 
 .box-label{
-    color: #888;
+    color: #60777d;
 }
 .box-label > i{
-    color: rgba(0, 255, 255, 0.731);
+    color: #0f8a8a;
     padding-left: 10px;
 }
 
@@ -76,13 +76,14 @@ body {
 }
 
 .login-input{
-    background: #28282c;
-    color: rgb(255, 255, 255);
+    background: #f7fbfb;
+    color: #18323c;
+    border-color: #c9dfe1;
 }
 
 .box-button{
     margin-top: 1em;
-    border-top: 1px solid #88888820;
+    border-top: 1px solid #d9e8ea;
     padding-top: 15px;
 }
 .login-button{

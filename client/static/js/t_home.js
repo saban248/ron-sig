@@ -47,6 +47,7 @@ function addNewClient(){
     const data = ManagerCache.newClientExist();
     if (!data){
         popup(1, "שגיאה", "בעיה בהוספת הלקוח")
+        return
     }
 
     do_api(RouteApi.addClient,data,on_success)

@@ -1,10 +1,13 @@
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>חוזה השכרה</title>
     <link rel="stylesheet" href="static/style/contract.css">
     <link rel="stylesheet" href="static/style/general.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -133,7 +136,7 @@
                             <div class="d-item">
                                 {{equip.name}}
                                 
-                                <span>כמות: {{equip.count}}</span>
+                                <span>כמות: {{equip.selected}}</span>
                             </div>
                             {% endfor %}
                         </div>
@@ -193,7 +196,7 @@
                     <span>העסק - רובוטיקה הגברה ותאורה</span>
   
                 </div>
-                <img src="{{contract.owner_signature.decode()}}" alt="">
+                <img src="{{contract.owner_signature.decode() }}" alt="">
             </div>
         </div>
         <div class="accept">
