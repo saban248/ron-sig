@@ -2,12 +2,12 @@
 
 
 .btn-t-eq-new{
-    background: rgb(23, 50, 58);
-    color:#50cac8;
+    background: #245266;
+    color:#ffffff;
 }
 .btn-t-eq-new:hover,
 .btn-t-eq-new:active{
-    background: rgb(11, 24, 27);
+    background: #173d50;
 }
 .list-equips{
     display: flex;
@@ -114,11 +114,11 @@
 }
 
 .equip-info > i{
-    color: rgb(54, 225, 225);
+    color: #176b79;
     border-radius: 4px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.171);
-    border-bottom:1px solid rgba(255, 255, 255, 0.171);
+    border: 1px solid #c9dfe1;
+    border-bottom:1px solid #c9dfe1;
 }
 
 

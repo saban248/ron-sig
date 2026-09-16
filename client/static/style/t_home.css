@@ -23,7 +23,12 @@
 }
 .btn-theme, .btn-refersh{
     background: #e8f4f3 !important;
-    color: #176b79;
+    color: #245266 !important;
+    border: 1px solid #b9d9d8;
+}
+.btn-theme:hover, .btn-refersh:hover {
+    background: #d4e9e8 !important;
+    color: #173d50 !important;
 }
 .btn-t-home > i{
     border-left: 2px solid #ded5d5;
@@ -200,7 +205,8 @@
     display: block;
 }
 .btn-add-client{
-    background: #41d8b8 !important;
+    background: #19786f !important;
+    color: #ffffff !important;
     margin-left: 25%;
     margin-right: 25%;
 
@@ -220,21 +226,21 @@
 .rent-box{
     min-width: 350px;
     min-height: 300px;
-    background: #ffffff;
+    background: #232b2d;
     border: 1px solid rgba(80, 202, 200, 0.12);
     border-radius: 6px;
     padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
-    box-shadow: 0 10px 22px rgba(34, 73, 82, 0.1);
+    box-shadow: 0 10px 22px rgba(13, 31, 35, 0.24);
     transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .rent-box:hover {
     transform: translateY(-2px);
     border-color: rgba(80, 202, 200, 0.38);
-    box-shadow: 0 14px 28px rgba(34, 73, 82, 0.16);
+    box-shadow: 0 14px 28px rgba(13, 31, 35, 0.34);
 }
 
 .rent-box-empty{
@@ -256,12 +262,12 @@
 .rent-b-head{
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(232, 255, 255, 0.493);
+    border-bottom: 1px solid rgba(232, 255, 255, 0.18);
     padding: 1px 6px;
 }
 .rent-b-title{
     font-size: 1.75em;
-    color: #18323c;
+    color: #f2ffff;
 
 }
 .rent-b-title > span{
@@ -345,7 +351,7 @@
 }
 .box-status > span{
     flex: 1;
-    color: #49636b;
+    color: #d6e5e6;
     font-size: .90em;
 }
 

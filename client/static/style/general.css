@@ -33,7 +33,7 @@
     border: none;
     border-radius: 6px;
     transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-    background:#176b79;
+    background:#245266;
     width: 100%;
     cursor: pointer;
     color: white;
@@ -43,7 +43,7 @@
 .general-button:active,
 .general-button:hover{
     transform: translateY(-1px);
-    background: #0f8a8a;
+    background: #173d50;
     box-shadow: 0 6px 16px rgba(23, 73, 82, 0.18);
 
 }
@@ -120,7 +120,7 @@
 
 .popup-box button {
     padding: 10px 20px;
-    background-color: #0f8a8a;
+    background-color: #245266;
     color: #ffffff;
     border: none;
     border-radius: 6px;
@@ -128,6 +128,16 @@
     font-weight: bold;
 }
 
+.popup-box button:hover {
+    background-color: #173d50;
+}
+
+.popup-box button:focus-visible,
+.general-button:focus-visible,
+.close-search:focus-visible {
+    outline: 3px solid rgba(15, 138, 138, 0.28);
+    outline-offset: 2px;
+}
 
 
 /* SEARCH INPUT*/
